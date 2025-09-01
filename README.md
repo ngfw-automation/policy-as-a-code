@@ -1,8 +1,3 @@
-# policy-as-a-code
-This is a dummy repository for documentation purposes
-
-update 1
-test 2
-
-test 3
-test 4
+# Palo Alto Networks from Policy to Code
+This repository will be populated with the actual code on 1 Sept 2025
+(it's only docs for now)
