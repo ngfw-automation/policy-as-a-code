@@ -893,3 +893,82 @@ The width of the connections represents the number of subcategories with each ac
        print(f"Warning: Could not save HTML: {e}")
 
    fig
+
+
+Naming Conventions
+------------------
+
+This section describes the naming conventions used for all objects referenced by the security or decryption policy:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Object Type
+     - Prefix
+     - Example
+   * - Address (network)
+     - ``N-``
+     - ``N-rfc_1918-10.0.0.0_8``
+   * - Address (host)
+     - ``H-``
+     - ``H-open_dns-208.67.222.222_32``
+   * - Address (FQDN)
+     - ``FQDN-``
+     - ``FQDN-time.apple.com``
+   * - Address group
+     - ``AG-``
+     - ``AG-rfc_1918``
+   * - Dynamic address group
+     - ``DAG-``
+     - ``DAG-domain-controllers``
+   * - Service object
+     - ``SVC-``
+     - ``SVC-udp-53``
+   * - Application group
+     - ``APG-``
+     - ``APG-web-browsing``
+   * - Custom application
+     - ``APP-``
+     - ``APP-windows-conn-check``
+   * - External dynamic list
+     - ``EDL-``
+     - ``EDL-URL-no_decryption_dst``
+   * - Custom URL category (list)
+     - ``UCL-``
+     - ``UCL-acme-generic-app``
+   * - Custom URL category (match)
+     - ``UCM-``
+     - ``UCM-comp-inet-info_low-risk``
+   * - Security profile group
+     - ``PG-``
+     - ``PG-apps-risky``
+   * - Antivirus profile
+     - ``AVP-``
+     - ``AVP-default``
+   * - Anti-spyware profile
+     - ``ASP-``
+     - ``ASP-strict``
+   * - Vulnerability profile
+     - ``VPP-``
+     - ``VPP-default``
+   * - File blocking profile
+     - ``FBP-``
+     - ``FBP-log-only``
+   * - URL filtering profile
+     - ``UFP-``
+     - ``UFP-log-only``
+   * - WildFire profile
+     - ``WFP-``
+     - ``WFP-default``
+   * - Data filtering profile
+     - ``DFP-``
+     - ``DFP-default``
+   * - Decryption profile
+     - ``DP-``
+     - ``DP-no_decryption``
+   * - Log forwarding profile
+     - ``LFP-``
+     - ``LFP-default``
+   * - User group
+     - ``UG-``
+     - ``UG-decryption_break-glass``
