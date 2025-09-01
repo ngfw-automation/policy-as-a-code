@@ -110,7 +110,7 @@ For EDLs that need to be environment-specific, use the ``<target_environment>`` 
 
 .. code-block:: text
 
-   EDL-INT-IP-DST-break_glass,Internal EDL - IP DST - break-glass,ip,five-minute,,,,,https://edls.example.local/edl/<target_environment>/ip-dst-break-glass.txt,Internal EDL for break-glass scenarios
+   EDL-IP-break_glass_dst,Internal EDL - IP DST - break-glass,ip,five-minute,,,,,https://edls.example.local/edl/<target_environment>/ip-dst-break-glass.txt,Internal EDL for break-glass scenarios
 
 Implementation Details
 ~~~~~~~~~~~~~~~~~~~~~~
