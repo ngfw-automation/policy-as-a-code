@@ -49,12 +49,19 @@ After installation, you need to configure the project:
 5. Modify Jinja templates for response pages. The templates are in the ``ngfw/device/response pages`` folder.
 
 
-External dependencies
+External Dependencies
 ---------------------
 
-- Create required workflows in the Service Desk system (not covered by this project). As you go through customizing the response pages, you will discover all use cases you need to create service desk workflows for.
-- An infrastructure hosting the EDL files referenced by the firewall policy
-- The certificate of the root certificate authority (CA) that issued the certificate of the CA that in turn issued the Forward Trust certificate must be distributed to all clients
+- **Service Desk workflows** – You’ll need to create the necessary workflows in your Service Desk system.
+  This project doesn’t cover that part, but as you customize the response pages, you’ll identify the use cases
+  that require workflow integration.
+
+- **EDL hosting infrastructure** – The firewall policy can reference external dynamic lists (EDLs).
+  These must be hosted somewhere in your environment. While you can choose not to use EDLs at all,
+  doing so will make it much harder to handle policy exceptions quickly.
+
+- **Root CA distribution** – The root certificate authority (CA) that issued the CA certificate used
+  for the Forward Trust certificate must be installed on all client devices.
 
 
 Advanced Customization Topics
