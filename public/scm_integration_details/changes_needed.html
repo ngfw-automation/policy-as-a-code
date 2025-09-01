@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Changes Needed to Support SCM &#8212; NGFW from Policy to Code 1.0.10 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/external-links.css?v=abeb5452" />
+    <link rel="stylesheet" type="text/css" href="../_static/navigation-fix.css?v=c2446d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=f08afc62"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scm_integration_details/changes_needed';</script>
+    <script src="../_static/open-external-links.js?v=d6647550"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Integration Strategy (Panorama + SCM)" href="integration_strategy.html" />
+    <link rel="prev" title="Current Panorama-Focused Deployment Components" href="current_components.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://www.packtpub.com/en-gb/product/palo-alto-networks-from-policy-to-code-9781835881293">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/book-cover.png" class="logo__image only-light" alt="This project has a companion book published by Packt Publishing in August, 2025. Click here for more details (opens in the same window)."/>
+    <script>document.write(`<img src="../_static/book-cover.png" class="logo__image only-dark" alt="This project has a companion book published by Packt Publishing in August, 2025. Click here for more details (opens in the same window)."/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../customization.html">Customization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../defaults.html">Defaults</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../input_data_formats.html">Input Data Formats</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/service_objects.html">Service Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/edls.html">External Dynamic Lists (EDLs)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/address_objects.html">Address Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/custom_url_categories.html">Custom URL Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/application_groups.html">Application Groups</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../object_types/security_profiles.html">Security Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../object_types/security_profiles/antivirus_profiles.html">Antivirus Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object_types/security_profiles/anti_spyware_profiles.html">Anti-spyware Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object_types/security_profiles/vulnerability_protection_profiles.html">Vulnerability Protection Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object_types/security_profiles/url_filtering_profiles.html">URL Filtering Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object_types/security_profiles/file_blocking_profiles.html">File Blocking Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object_types/security_profiles/data_filtering_profiles.html">Data Filtering Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../object_types/security_profiles/wildfire_analysis_profiles.html">WildFire Analysis Profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/tags.html">Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/decryption_profiles.html">Decryption Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/custom_applications.html">Custom Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/custom_vulnerability_signatures.html">Custom Vulnerability Signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/custom_spyware_signatures.html">Custom Spyware Signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../object_types/data_patterns.html">Data Patterns</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../response_pages.html">Response Pages</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">How to Use</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../scm_integration.html">Strata Cloud Manager (SCM)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../scm_api_comparison/index.html">Comparative Analysis: API Capabilities of Strata Cloud Manager vs Panorama</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/feature_parity.html">Feature Parity in Policy Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/api_structure.html">API Structure and Endpoint Differences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/authentication.html">Authentication and Access Control Differences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/deployment_model.html">Deployment Model: Commit vs Push Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/sdk_support.html">SDK Support and Tooling Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/migration_considerations.html">Migration Considerations and Code Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scm_api_comparison/references.html">References</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">SCM Integration Details</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="current_components.html">Current Panorama-Focused Deployment Components</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Changes Needed to Support SCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="integration_strategy.html">Integration Strategy (Panorama + SCM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_differences.html">Key Differences to Address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../code.html">Source Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lib/auxiliary_functions.html">Auxiliary Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lib/build_policy.html">Build Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lib/category_parser.html">Category Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lib/security_policy_pre.html">Security Policy Pre</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lib/security_policy_post.html">Security Policy Post</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/scm_integration_details/changes_needed.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Changes Needed to Support SCM</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="changes-needed-to-support-scm">
+<h1>Changes Needed to Support SCM<a class="headerlink" href="#changes-needed-to-support-scm" title="Link to this heading">#</a></h1>
+<p>Strata Cloud Manager introduces a different interface for managing policies, so several parts of the above
+workflow will need adaptation or extension:</p>
+<ul>
+<li><p><strong>Target Definition and CLI:</strong> A new <strong>deployment type</strong>
+(e.g. <code class="docutils literal notranslate"><span class="pre">&quot;scm&quot;</span></code>) should be introduced for SCM targets in the
+<code class="docutils literal notranslate"><span class="pre">policy_targets.json</span></code>. Instead of Panorama IP, device group, and
+template, an SCM target entry would likely include information like
+the cloud <strong>tenant/TSG identifier</strong> and perhaps a target <strong>folder</strong>
+or context. The CLI in <code class="docutils literal notranslate"><span class="pre">main.py</span></code> would need to recognize an SCM
+target and gather appropriate credentials. Unlike Panorama’s admin
+username/password, SCM uses an <strong>OAuth2 authentication flow</strong> –
+e.g. client ID and client secret for a service account, which yield
+an access token. The tool may prompt for these or (more securely)
+read them from environment variables or a config file (since client
+secret is not something to type every run). Once credentials are
+obtained, the code would not instantiate a <code class="docutils literal notranslate"><span class="pre">Panorama</span></code> object, but
+rather initialize an <strong>SCM API client</strong>. For example, Palo Alto
+provides a Python SDK (<code class="docutils literal notranslate"><span class="pre">pan-scm-sdk</span></code>) where you create an
+<code class="docutils literal notranslate"><span class="pre">ScmClient</span></code> or <code class="docutils literal notranslate"><span class="pre">Scm</span></code> instance with the client ID/secret and TSG
+(tenant service group) ID. The menu and <code class="docutils literal notranslate"><span class="pre">deploy_policy()</span></code> logic
+should be extended to handle this path
+(e.g. <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">deployment_type</span> <span class="pre">==</span> <span class="pre">&quot;scm&quot;:</span> <span class="pre">...</span></code>).</p></li>
+<li><p><strong>Authentication &amp; Session Management:</strong> The current code uses the
+PAN-OS XML API (via pan-os-python), logging in with username/password
+to the Panorama device (which the SDK internally exchanges for an API
+key). In SCM, authentication is entirely different: the code must
+obtain a <strong>Bearer token</strong> via OAuth2. This likely means adding a step
+to request an OAuth token from the <strong>SCM Authentication Service</strong>
+using client credentials, or leveraging the SCM SDK which handles
+token retrieval internally. The token then needs to be used in all
+subsequent API calls to SCM. This is a significant change – the code
+can no longer use <code class="docutils literal notranslate"><span class="pre">panos_device</span> <span class="pre">=</span> <span class="pre">Panorama(host,</span> <span class="pre">user,</span> <span class="pre">pass)</span></code>;
+instead, it might do something like
+<code class="docutils literal notranslate"><span class="pre">scm_client</span> <span class="pre">=</span> <span class="pre">Scm(client_id,</span> <span class="pre">client_secret,</span> <span class="pre">tsg_id)</span></code> (using the
+SDK) or manually call the OAuth endpoint and store the token. The
+<strong>credential flow</strong> thus shifts from interactive user login to
+non-interactive service auth. (If interactive login to the cloud UI
+were required, that would be complex – but typically we’d use a
+service account for automation in SCM.)</p></li>
+<li><p><strong>API Interface:</strong> The tool’s core operations must be reworked to use
+<strong>SCM’s REST APIs</strong> in place of the Panorama XML API. Panorama’s
+<code class="docutils literal notranslate"><span class="pre">Panorama</span></code> object and associated classes won’t directly work
+against SCM, because SCM is not just “Panorama in the cloud” – it’s a
+new SaaS with a <strong>unified API framework</strong>. Concretely, instead of
+constructing XML and calling <code class="docutils literal notranslate"><span class="pre">xapi.multi_config</span></code>, the code should
+invoke REST endpoints (likely HTTPS calls to
+<code class="docutils literal notranslate"><span class="pre">api.strata.paloaltonetworks.com</span></code>). For example, to create security
+rules on SCM, one would call the <strong>“security rules”</strong> endpoint
+(e.g. <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/config/security/v1/security-rules</span></code>) with a JSON
+payload. If using the <strong>SCM Python SDK</strong>, many of these are available
+as high-level methods. For instance, you could call
+<code class="docutils literal notranslate"><span class="pre">client.security_rule.create({...})</span></code> or use model objects provided
+by the SDK (e.g. <code class="docutils literal notranslate"><span class="pre">SecurityRuleModel</span></code>) and then call an <code class="docutils literal notranslate"><span class="pre">update()</span></code>
+or <code class="docutils literal notranslate"><span class="pre">push()</span></code> method. Each rule or object type (addresses, tags,
+profiles, etc.) has a corresponding REST API in SCM, so the code
+needs to translate the configuration data into the appropriate JSON
+format and send it via the token-authenticated HTTPS calls.</p></li>
+<li><p><strong>Policy Scope (Device Group vs. Folder/Snippet):</strong> In Panorama, the
+script targets a specific device-group and template (passed in as
+<code class="docutils literal notranslate"><span class="pre">policy_container</span></code> and <code class="docutils literal notranslate"><span class="pre">policy_template</span></code>) to know where to place
+the config. In Strata Cloud Manager, the analogous concept is the
+<strong>Tenant and Folder</strong> hierarchy. The SCM config is organized by
+<em>Folders</em> (and possibly <em>Snippets</em> for templates/config context). The
+code will need to specify the target folder (akin to a device group)
+when creating objects or rules. For example, using the SCM SDK,
+operations often require a <code class="docutils literal notranslate"><span class="pre">folder=&quot;XYZ&quot;</span></code> parameter to indicate
+where the object lives. The <em>folder</em> might represent a group of
+firewalls or a section of the config (e.g. “Texas” or “Datacenter” in
+the SDK examples). The tool must be adjusted to either take a folder
+name in the target config or derive it (perhaps the Panorama device
+group name corresponds to a folder in SCM after migration).
+Additionally, rules in SCM likely require specifying whether they are
+<strong>pre-rule or post-rule</strong> (global vs. local precedence) via a field
+or URL parameter (Panorama had separate Pre vs Post rulebases) – the
+SCM API uses a query parameter or field <code class="docutils literal notranslate"><span class="pre">position:</span> <span class="pre">&quot;pre&quot;</span> <span class="pre">|</span> <span class="pre">&quot;post&quot;</span></code>
+for rule creation. The code that currently splits rules into pre/post
+lists can be reused, but when calling the SCM API we must include the
+correct position indicator instead of adding to separate containers.
+There may not be a concept of a “Template” in the same way; network
+settings might be handled via <em>Snippets</em>, but for pure policy
+(security and decryption rules) the main concern is the folder
+(device group equivalent) and rule order.</p></li>
+<li><p><strong>Building and Pushing Config:</strong> The existing architecture constructs
+all rules and objects in-memory using pan-os SDK objects, then pushes
+them in one giant transaction (multi-config XML). With SCM, there are
+two possible approaches:</p>
+<ol class="arabic simple">
+<li><p><strong>Incremental API Calls:</strong> After connecting to SCM, the script
+could individually create/delete objects and rules using a
+sequence of REST calls. For example: call <code class="docutils literal notranslate"><span class="pre">DELETE</span> <span class="pre">/addresses</span></code>
+for each stale address, then <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/addresses</span></code> to create each
+new address, etc., and similarly for rules. This would mirror what
+the current code does but via REST. The SCM SDK can simplify this
+by allowing Pythonic creation of objects
+(e.g. <code class="docutils literal notranslate"><span class="pre">client.address.create({...})</span></code> returns an Address object)
+rather than manual HTTP requests. One challenge is performance –
+dozens or hundreds of sequential API calls might be slow. However,
+the SCM API is designed for automation, so this is a viable
+approach (perhaps using bulk endpoints if available).</p></li>
+<li><p><strong>Candidate Config and Commit:</strong> SCM also supports the concept of
+a <strong>candidate configuration push</strong> and commit jobs. We could
+prepare a batch of changes and then invoke a commit operation. For
+instance, the SDK provides a <code class="docutils literal notranslate"><span class="pre">candidate_push</span></code> or similar
+mechanism (as hinted by “Candidate Push Models” in the docs). A
+potential strategy is to use the SDK to stage all changes to the
+candidate config (similar to how we build a multi-config XML) and
+then execute a single “push” job to apply them. This would achieve
+a transaction-like update, akin to Panorama’s multi-config. The
+existing code’s logic of generating the entire policy first (rules
+list, objects list) could be repurposed to stage multiple SDK
+calls and then one commit at end.</p></li>
+</ol>
+<p>Regardless of approach, the <strong>commit and locking model</strong> differs: On
+Panorama, we explicitly took locks on the device group/template,
+pushed config, and then required a manual Commit in the Panorama UI.
+In SCM, when using the API, one would typically call a <strong>commit job</strong>
+via API to activate the changes (or the SDK’s equivalent). There is
+no concept of per-device “config lock” that the script manages – the
+cloud service likely handles concurrency globally with its own
+transaction system. So the sections of code dealing with
+<code class="docutils literal notranslate"><span class="pre">panos_device.op(&quot;...&quot;)</span></code> for setting
+targets and locks can be dropped or replaced. Instead, after pushing
+config via the SCM API, the script might call an endpoint to
+<strong>commit</strong> the changes (or the SDK might auto-commit, depending on
+design). This commit would publish the policy to the cloud-managed
+firewalls. The tool could poll a <strong>Job</strong> API to wait for commit
+completion, analogous to how one might wait for a Panorama commit
+job.</p>
+</li>
+<li><p><strong>Reusing vs. Refactoring Architecture:</strong> A lot of the existing
+policy generation logic can be <strong>reused</strong> – the code that reads
+requirement CSVs and JSON, computes which rules and objects to
+create, etc., remains valid. The main refactor is needed at the
+<strong>point of deployment</strong> (i.e., the interface between the computed
+policy and the API calls). To minimize disruption, one approach is to
+<strong>abstract the deployment backend</strong>: for example, define a generic
+interface or set of functions for “create address object”, “create
+tag”, “create security rule”, etc., with one implementation for
+Panorama (current) and one for SCM. Initially, it could be done with
+simple <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">deployment_type</span> <span class="pre">==</span> <span class="pre">&quot;scm&quot;</span></code> conditionals around the
+existing code paths. For instance, in <code class="docutils literal notranslate"><span class="pre">build_policy()</span></code>, instead of
+calling Panorama-specific routines directly, have it call a wrapper
+that checks the target type and either (a) uses pan-os SDK + XAPI
+(current flow) or (b) calls the new SCM methods. Over time, it would
+be cleaner to encapsulate these into separate classes (e.g. a
+<code class="docutils literal notranslate"><span class="pre">PanoramaDeployer</span></code> vs an <code class="docutils literal notranslate"><span class="pre">ScmDeployer</span></code>) so that the main flow
+chooses the appropriate deployment handler. This abstraction will
+prevent cluttering the code with many <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">scm</span> <span class="pre">vs</span> <span class="pre">panorama</span></code>
+branches. It also allows extending to other deployment targets in the
+future if needed (cloud NGFW services, etc.).</p></li>
+<li><p><strong>SDKs and Libraries:</strong> As noted, the <strong>Panorama XML API</strong> is handled
+by the <code class="docutils literal notranslate"><span class="pre">pan-os-python</span></code> SDK today. For SCM, Palo Alto has introduced
+new SDKs/tools (the <code class="docutils literal notranslate"><span class="pre">pan-scm-sdk</span></code> for Python is one option)
+designed to interact with the Strata Cloud Manager API. Adopting this
+SDK would expedite development: it provides Python classes for things
+like addresses, rules, profiles, with data validation, and handles
+the low-level REST calls internally. This avoids manually crafting
+HTTP requests and parsing responses. The team would need to include
+this SDK in the project’s requirements (e.g.,
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pan-scm-sdk</span></code>) and adjust the code to use its
+<code class="docutils literal notranslate"><span class="pre">ScmClient</span></code>. If not using the SDK, the alternative is to use
+Python’s <code class="docutils literal notranslate"><span class="pre">requests</span></code> to call the REST API endpoints directly, manage
+tokens, construct JSON payloads, etc. That is doable but would result
+in more custom code. Given the complexity of full policy push (lots
+of object types), leveraging the official SDK is recommended. It also
+will handle <strong>exceptions and error messages</strong> in a structured way
+(similar to how <code class="docutils literal notranslate"><span class="pre">PanDeviceXapiError</span></code> is used now).</p></li>
+</ul>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="current_components.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Current Panorama-Focused Deployment Components</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="integration_strategy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Integration Strategy (Panorama + SCM)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nikolay Matveev
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Nikolay Matveev; Companion book copyright 2025, Packt Publishing Ltd. - All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

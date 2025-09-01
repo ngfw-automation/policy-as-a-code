@@ -1,0 +1,619 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lib.security_policy_pre &#8212; NGFW from Policy to Code 1.0.10 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/external-links.css?v=abeb5452" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=f08afc62"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/lib/security_policy_pre';</script>
+    <script src="../../_static/open-external-links.js?v=d6647550"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://www.packtpub.com/en-gb/product/palo-alto-networks-from-policy-to-code-9781835881293">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/book-cover.png" class="logo__image only-light" alt="This project has a companion book published by Packt Publishing in August, 2025. Click here for more details (opens in the same window)."/>
+    <script>document.write(`<img src="../../_static/book-cover.png" class="logo__image only-dark" alt="This project has a companion book published by Packt Publishing in August, 2025. Click here for more details (opens in the same window)."/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../customization.html">Customization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../defaults.html">Defaults</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../input_data_formats.html">Input Data Formats</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/service_objects.html">Service Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/edls.html">External Dynamic Lists (EDLs)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/address_objects.html">Address Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_url_categories.html">Custom URL Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/application_groups.html">Application Groups</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../object_types/security_profiles.html">Security Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/antivirus_profiles.html">Antivirus Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/anti_spyware_profiles.html">Anti-spyware Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/vulnerability_protection_profiles.html">Vulnerability Protection Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/url_filtering_profiles.html">URL Filtering Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/file_blocking_profiles.html">File Blocking Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/data_filtering_profiles.html">Data Filtering Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/wildfire_analysis_profiles.html">WildFire Analysis Profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/tags.html">Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/decryption_profiles.html">Decryption Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_applications.html">Custom Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_vulnerability_signatures.html">Custom Vulnerability Signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_spyware_signatures.html">Custom Spyware Signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/data_patterns.html">Data Patterns</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../response_pages.html">Response Pages</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">How to Use</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../scm_integration.html">Strata Cloud Manager (SCM)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../scm_api_comparison/index.html">Comparative Analysis: API Capabilities of Strata Cloud Manager vs Panorama</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/feature_parity.html">Feature Parity in Policy Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/api_structure.html">API Structure and Endpoint Differences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/authentication.html">Authentication and Access Control Differences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/deployment_model.html">Deployment Model: Commit vs Push Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/sdk_support.html">SDK Support and Tooling Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/migration_considerations.html">Migration Considerations and Code Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/references.html">References</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../scm_integration_details/index.html">SCM Integration Details</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/current_components.html">Current Panorama-Focused Deployment Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/changes_needed.html">Changes Needed to Support SCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/integration_strategy.html">Integration Strategy (Panorama + SCM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/key_differences.html">Key Differences to Address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/summary.html">Summary</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../code.html">Source Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/auxiliary_functions.html">Auxiliary Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/build_policy.html">Build Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/category_parser.html">Category Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/security_policy_pre.html">Security Policy Pre</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/security_policy_post.html">Security Policy Post</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for lib.security_policy_pre</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Functions for creating and managing pre-rulebase security policies in PAN-OS.</span>
+
+<span class="sd">This module provides functionality to:</span>
+
+<span class="sd">- Create security rules for the pre-rulebase section of the policy</span>
+<span class="sd">- Import rule definitions from external files</span>
+<span class="sd">- Process and apply security profiles to rules</span>
+<span class="sd">- Support domain prefixing for user identities</span>
+<span class="sd">- Preserve rule UUIDs for consistent policy management</span>
+<span class="sd">- Create custom application-specific rules (e.g., GitHub Git access)</span>
+<span class="sd">- Handle different rule attributes for standalone firewalls vs. Panorama</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ngfw.objects.tags.group_tags</span><span class="w"> </span><span class="kn">import</span> <span class="n">group_tags</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.policies</span><span class="w"> </span><span class="kn">import</span> <span class="n">SecurityRule</span> <span class="k">as</span> <span class="n">R</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.firewall</span><span class="w"> </span><span class="kn">import</span> <span class="n">Firewall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.auxiliary_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_and_import_rules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rich.console</span><span class="w"> </span><span class="kn">import</span> <span class="n">Console</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rich.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Table</span>
+
+<div class="viewcode-block" id="security_policy_pre">
+<a class="viewcode-back" href="../../lib/security_policy_pre.html#lib.security_policy_pre.security_policy_pre">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">security_policy_pre</span><span class="p">(</span><span class="n">app_categories</span><span class="p">,</span> <span class="n">security_rules_uuids</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of rules for the PRE section of the policy by parsing and processing rule definitions from &#39;rules.py&#39; files.</span>
+<span class="sd">    The parsing is done by the external function find_and_import_rules().</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        app_categories: A list of application categories, each represented as a dictionary containing details like &quot;Category&quot; and &quot;UserID&quot;.</span>
+<span class="sd">        security_rules_uuids: A dictionary mapping rule names to their UUIDs.</span>
+<span class="sd">        panos_device: The PAN-OS device object (Firewall or Panorama).</span>
+<span class="sd">        target_environment: The target environment for the policy (e.g., &quot;lab&quot; or &quot;prod&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing two elements:</span>
+<span class="sd">            - A list of security rule objects constructed based on the provided policy rules.</span>
+<span class="sd">            - A set of deduplicated group tags used in the PRE section of the policy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Determine domain prefix based on target environment</span>
+    <span class="k">if</span> <span class="n">target_environment</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;lab&quot;</span> <span class="ow">and</span> <span class="n">settings</span><span class="o">.</span><span class="n">ADD_DOMAIN_PREFIX_FOR_LAB</span><span class="p">:</span>
+        <span class="n">domain_prefix</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">AD_DOMAIN_NAME</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span>
+    <span class="k">elif</span> <span class="n">target_environment</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;prod&quot;</span> <span class="ow">and</span> <span class="n">settings</span><span class="o">.</span><span class="n">ADD_DOMAIN_PREFIX_FOR_PROD</span><span class="p">:</span>
+        <span class="n">domain_prefix</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">AD_DOMAIN_NAME</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">domain_prefix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="n">rules</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Import security rules from [ngfw/policies/security/PRE]</span>
+    <span class="n">complete_list_of_pre_rules</span><span class="p">,</span> <span class="n">all_group_tags</span> <span class="o">=</span> <span class="n">find_and_import_rules</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">SECURITY_RULES_PRE_FOLDER</span><span class="p">)</span>
+
+    <span class="c1"># Create a table for displaying rules</span>
+    <span class="n">console</span> <span class="o">=</span> <span class="n">Console</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Security Policy Pre-Rules&quot;</span><span class="p">)</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">&quot;Group Tag&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;cyan&quot;</span><span class="p">)</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">add_column</span><span class="p">(</span><span class="s2">&quot;Rule Name&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">rule</span><span class="p">,</span> <span class="n">group_tag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">complete_list_of_pre_rules</span><span class="p">,</span> <span class="n">all_group_tags</span><span class="p">):</span>
+        <span class="c1"># go through all imported rules and add domain prefix to the username if required</span>
+        <span class="c1"># (unless it&#39;s one of the predefined PAN-OS values)</span>
+        <span class="k">if</span> <span class="n">rule</span><span class="p">[</span><span class="s1">&#39;source_user&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;known-user&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;pre-logon&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="ow">and</span> <span class="n">domain_prefix</span><span class="p">:</span>
+            <span class="n">source_user</span> <span class="o">=</span> <span class="n">domain_prefix</span> <span class="o">+</span> <span class="n">rule</span><span class="p">[</span><span class="s1">&#39;source_user&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">source_user</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="s1">&#39;source_user&#39;</span><span class="p">]</span>
+
+        <span class="c1"># set UUID to what it was set in the policy that existed prior to the script</span>
+        <span class="c1"># (thus UUID will be preserved provided the old policy had a rule with identical name)</span>
+        <span class="n">uuid</span> <span class="o">=</span> <span class="n">security_rules_uuids</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Add rule to the table if verbose output is enabled</span>
+        <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span>
+                <span class="n">rule</span><span class="p">[</span><span class="s1">&#39;group_tag&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">settings</span><span class="o">.</span><span class="n">USE_FOLDER_NAMES_AS_GROUP_TAGS</span> <span class="k">else</span> <span class="n">group_tag</span><span class="p">,</span>
+                <span class="n">rule</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="c1"># 1st step: construct the rule object based on the data</span>
+        <span class="c1">#</span>
+        <span class="c1"># for standalone firewalls we exclude Target-related attributes</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Firewall</span><span class="p">):</span>
+            <span class="n">rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">R</span><span class="p">(</span>
+                <span class="n">name</span>                <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>                     <span class="c1"># Name of the rule</span>
+                <span class="n">uuid</span>                <span class="o">=</span><span class="n">uuid</span><span class="p">,</span>                             <span class="c1"># rule UUID</span>
+                <span class="nb">type</span>                <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>                     <span class="c1"># Rule type (universal|interzone|intrazone)</span>
+                <span class="n">description</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>              <span class="c1"># Description</span>
+                <span class="n">tag</span>                 <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">],</span>                      <span class="c1"># Tag(s)</span>
+                <span class="n">group_tag</span>           <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;group_tag&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">settings</span><span class="o">.</span><span class="n">USE_FOLDER_NAMES_AS_GROUP_TAGS</span> <span class="k">else</span> <span class="n">group_tag</span><span class="p">,</span>  <span class="c1"># Group Tag</span>
+
+                <span class="n">fromzone</span>            <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;fromzone&#39;</span><span class="p">],</span>                 <span class="c1"># Source Zone(s)</span>
+                <span class="n">source</span>              <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>                   <span class="c1"># Source Address(es)</span>
+                <span class="n">negate_source</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;negate_source&#39;</span><span class="p">],</span>            <span class="c1"># Negate Source</span>
+                <span class="n">source_user</span>         <span class="o">=</span><span class="n">source_user</span><span class="p">,</span>                       <span class="c1"># Source User (with optional prefix)</span>
+
+                <span class="n">tozone</span>              <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;tozone&#39;</span><span class="p">],</span>                   <span class="c1"># Destination Zone(s)</span>
+                <span class="n">destination</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;destination&#39;</span><span class="p">],</span>              <span class="c1"># Destination Address(es)</span>
+                <span class="n">negate_destination</span>  <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;negate_destination&#39;</span><span class="p">],</span>       <span class="c1"># Negate destination</span>
+                <span class="n">application</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;application&#39;</span><span class="p">],</span>              <span class="c1"># Application(s)</span>
+                <span class="n">service</span>             <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">],</span>                  <span class="c1"># Service(s)</span>
+                <span class="n">category</span>            <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">],</span>                 <span class="c1"># URL categories</span>
+
+                <span class="n">action</span>              <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">],</span>                   <span class="c1"># Action</span>
+
+                <span class="n">group</span>               <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">],</span>                    <span class="c1"># Profile Group</span>
+                <span class="n">virus</span>               <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;virus&#39;</span><span class="p">],</span>                    <span class="c1"># Antivirus Security Profile</span>
+                <span class="n">spyware</span>             <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;spyware&#39;</span><span class="p">],</span>                  <span class="c1"># Anti-Spyware Security Profile</span>
+                <span class="n">vulnerability</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;vulnerability&#39;</span><span class="p">],</span>            <span class="c1"># Vulnerability Protection Security Profile</span>
+                <span class="n">url_filtering</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;url_filtering&#39;</span><span class="p">],</span>            <span class="c1"># URL Filtering Security Profile</span>
+                <span class="n">file_blocking</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;file_blocking&#39;</span><span class="p">],</span>            <span class="c1"># File Blocking Security Profile</span>
+                <span class="n">wildfire_analysis</span>   <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;wildfire_analysis&#39;</span><span class="p">],</span>        <span class="c1"># Wildfire Analysis Security Profile</span>
+                <span class="n">data_filtering</span>      <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;data_filtering&#39;</span><span class="p">],</span>           <span class="c1"># Data Filtering Security Profile</span>
+
+                <span class="n">log_setting</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;log_setting&#39;</span><span class="p">],</span>              <span class="c1"># Log Forwarding Profile</span>
+                <span class="n">log_start</span>           <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;log_start&#39;</span><span class="p">],</span>                <span class="c1"># Log session start</span>
+                <span class="n">log_end</span>             <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;log_end&#39;</span><span class="p">],</span>                  <span class="c1"># Log session end</span>
+
+                <span class="n">disabled</span>            <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;disabled&#39;</span><span class="p">]</span>                  <span class="c1"># Rule is disabled</span>
+            <span class="p">))</span>
+        <span class="c1"># for Panorama, we keep Target-related attributes found in the source &#39;rules.py&#39; files</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">R</span><span class="p">(</span>
+                <span class="n">name</span>                <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>                     <span class="c1"># Name of the rule</span>
+                <span class="n">uuid</span>                <span class="o">=</span><span class="n">uuid</span><span class="p">,</span>                             <span class="c1"># rule UUID</span>
+                <span class="nb">type</span>                <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>                     <span class="c1"># Rule type (universal|interzone|intrazone)</span>
+                <span class="n">description</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>              <span class="c1"># Description</span>
+                <span class="n">tag</span>                 <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">],</span>                      <span class="c1"># Tag(s)</span>
+                <span class="n">group_tag</span>           <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;group_tag&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">settings</span><span class="o">.</span><span class="n">USE_FOLDER_NAMES_AS_GROUP_TAGS</span> <span class="k">else</span> <span class="n">group_tag</span><span class="p">,</span>  <span class="c1"># Group Tag</span>
+
+                <span class="n">fromzone</span>            <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;fromzone&#39;</span><span class="p">],</span>                 <span class="c1"># Source Zone(s)</span>
+                <span class="n">source</span>              <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>                   <span class="c1"># Source Address(es)</span>
+                <span class="n">negate_source</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;negate_source&#39;</span><span class="p">],</span>            <span class="c1"># Negate Source</span>
+                <span class="n">source_user</span>         <span class="o">=</span><span class="n">source_user</span><span class="p">,</span>                       <span class="c1"># Source User (with optional prefix)</span>
+
+                <span class="n">tozone</span>              <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;tozone&#39;</span><span class="p">],</span>                   <span class="c1"># Destination Zone(s)</span>
+                <span class="n">destination</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;destination&#39;</span><span class="p">],</span>              <span class="c1"># Destination Address(es)</span>
+                <span class="n">negate_destination</span>  <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;negate_destination&#39;</span><span class="p">],</span>       <span class="c1"># Negate destination</span>
+                <span class="n">application</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;application&#39;</span><span class="p">],</span>              <span class="c1"># Application(s)</span>
+                <span class="n">service</span>             <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">],</span>                  <span class="c1"># Service(s)</span>
+                <span class="n">category</span>            <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">],</span>                 <span class="c1"># URL categories</span>
+
+                <span class="n">action</span>              <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">],</span>                   <span class="c1"># Action</span>
+
+                <span class="n">group</span>               <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">],</span>                    <span class="c1"># Profile Group</span>
+                <span class="n">virus</span>               <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;virus&#39;</span><span class="p">],</span>                    <span class="c1"># Antivirus Security Profile</span>
+                <span class="n">spyware</span>             <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;spyware&#39;</span><span class="p">],</span>                  <span class="c1"># Anti-Spyware Security Profile</span>
+                <span class="n">vulnerability</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;vulnerability&#39;</span><span class="p">],</span>            <span class="c1"># Vulnerability Protection Security Profile</span>
+                <span class="n">url_filtering</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;url_filtering&#39;</span><span class="p">],</span>            <span class="c1"># URL Filtering Security Profile</span>
+                <span class="n">file_blocking</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;file_blocking&#39;</span><span class="p">],</span>            <span class="c1"># File Blocking Security Profile</span>
+                <span class="n">wildfire_analysis</span>   <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;wildfire_analysis&#39;</span><span class="p">],</span>        <span class="c1"># Wildfire Analysis Security Profile</span>
+                <span class="n">data_filtering</span>      <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;data_filtering&#39;</span><span class="p">],</span>           <span class="c1"># Data Filtering Security Profile</span>
+
+                <span class="n">log_setting</span>         <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;log_setting&#39;</span><span class="p">],</span>              <span class="c1"># Log Forwarding Profile</span>
+                <span class="n">log_start</span>           <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;log_start&#39;</span><span class="p">],</span>                <span class="c1"># Log session start</span>
+                <span class="n">log_end</span>             <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;log_end&#39;</span><span class="p">],</span>                  <span class="c1"># Log session end</span>
+
+                <span class="n">target</span>              <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span>                   <span class="c1"># Target devices</span>
+                <span class="n">negate_target</span>       <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;negate_target&#39;</span><span class="p">],</span>            <span class="c1"># Target is negated</span>
+                <span class="n">disabled</span>            <span class="o">=</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;disabled&#39;</span><span class="p">]</span>                  <span class="c1"># Rule is disabled</span>
+            <span class="p">))</span>
+        <span class="c1"># No need for &quot;done&quot; print statement as we&#39;re using a table</span>
+
+    <span class="c1"># In this section you can create some custom logic to meet requirements of specific applications</span>
+    <span class="c1">#</span>
+    <span class="c1"># The example rule below shows how we could create a rule allowing Git communication with GitHub</span>
+    <span class="c1"># provided that the Management category is a managed one as per the business requirements.</span>
+    <span class="c1">#</span>
+    <span class="c1"># The rule accounts both for Git-over-HTTPS (App-ID signatures ssl, git and github-base)</span>
+    <span class="c1"># and Git-over-SSH (App-ID signatures ssh and github-base). Obviously, we do not want to allow</span>
+    <span class="c1"># SSH to any public external IP-address therefore we limit the destinations to an address group AG-github_git</span>
+    <span class="c1"># that in turn is dynamically built based on the information published by GitHub at the time of the policy</span>
+    <span class="c1"># creation along with all other address objects</span>
+    <span class="c1">#</span>
+    <span class="n">uuid</span> <span class="o">=</span> <span class="n">security_rules_uuids</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;github-git&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># 1st step: we retrieve the UserID information for the Management category that GitHub belongs to</span>
+    <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">app_categories</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">category</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;management&#39;</span> <span class="ow">and</span> <span class="n">category</span><span class="p">[</span><span class="s2">&quot;Action&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">settings</span><span class="o">.</span><span class="n">APP_ACTION_MANAGE</span><span class="p">:</span>
+            <span class="n">category_management_group</span> <span class="o">=</span> <span class="n">domain_prefix</span> <span class="o">+</span> <span class="n">category</span><span class="p">[</span><span class="s2">&quot;UserID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+            <span class="c1"># Add GitHub Git rule to the table if verbose output is enabled</span>
+            <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span>
+                <span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span>
+                    <span class="n">group_tags</span><span class="p">[</span><span class="s2">&quot;business-apps&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                    <span class="s1">&#39;github-git&#39;</span>
+                <span class="p">)</span>
+            <span class="c1"># 2nd step: we create the rule</span>
+            <span class="n">rules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">R</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;github-git&#39;</span><span class="p">,</span>
+                           <span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span>
+                           <span class="n">source_user</span><span class="o">=</span><span class="n">category_management_group</span><span class="p">,</span>
+                           <span class="n">group</span><span class="o">=</span><span class="s1">&#39;PG-apps-regular&#39;</span><span class="p">,</span> <span class="n">fromzone</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">ZONE_INSIDE</span><span class="p">,</span>
+                           <span class="n">tozone</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">ZONE_OUTSIDE</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">DEFAULT_INSIDE_ADDRESS</span><span class="p">,</span>
+                           <span class="n">destination</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AG-github_git&#39;</span><span class="p">],</span>
+                           <span class="n">application</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ssh&#39;</span><span class="p">,</span> <span class="s1">&#39;github-base&#39;</span><span class="p">,</span> <span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;ssl&#39;</span><span class="p">],</span> <span class="n">service</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;application-default&#39;</span><span class="p">],</span>
+                           <span class="n">action</span><span class="o">=</span><span class="s1">&#39;allow&#39;</span><span class="p">,</span>
+                           <span class="n">tag</span><span class="o">=</span><span class="n">group_tags</span><span class="p">[</span><span class="s2">&quot;business-apps&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                           <span class="n">group_tag</span><span class="o">=</span><span class="n">group_tags</span><span class="p">[</span><span class="s2">&quot;business-apps&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                           <span class="n">log_setting</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">LFP_DEFAULT</span><span class="p">,</span> <span class="n">log_start</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">log_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                           <span class="n">description</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;This rule allows to use Git over SSH and HTTPS with GitHub&#39;</span><span class="p">))</span>
+
+    <span class="c1"># Now we create a deduplicated set of tags used in the PRE section of the policy</span>
+    <span class="n">all_pre_group_tags</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">USE_FOLDER_NAMES_AS_GROUP_TAGS</span><span class="p">:</span>
+        <span class="n">all_pre_group_tags</span> <span class="o">=</span> <span class="n">all_group_tags</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">complete_list_of_pre_rules</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;group_tag&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;group_tag&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_pre_group_tags</span><span class="p">:</span>
+                    <span class="n">all_pre_group_tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;group_tag&#39;</span><span class="p">])</span>
+
+    <span class="n">all_pre_group_tags_deduped</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">all_pre_group_tags</span><span class="p">)</span>
+
+    <span class="c1"># Display the table if verbose output is enabled</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="c1"># This is the end of the PRE rule base</span>
+    <span class="c1"># Now we return the list of created rules to the caller of this function</span>
+    <span class="k">return</span> <span class="n">rules</span><span class="p">,</span> <span class="n">all_pre_group_tags_deduped</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nikolay Matveev
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Nikolay Matveev; Companion book copyright 2025, Packt Publishing Ltd. - All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

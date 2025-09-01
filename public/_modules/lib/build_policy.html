@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lib.build_policy &#8212; NGFW from Policy to Code 1.0.10 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/external-links.css?v=abeb5452" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=f08afc62"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/lib/build_policy';</script>
+    <script src="../../_static/open-external-links.js?v=d6647550"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://www.packtpub.com/en-gb/product/palo-alto-networks-from-policy-to-code-9781835881293">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/book-cover.png" class="logo__image only-light" alt="This project has a companion book published by Packt Publishing in August, 2025. Click here for more details (opens in the same window)."/>
+    <script>document.write(`<img src="../../_static/book-cover.png" class="logo__image only-dark" alt="This project has a companion book published by Packt Publishing in August, 2025. Click here for more details (opens in the same window)."/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../customization.html">Customization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../defaults.html">Defaults</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../input_data_formats.html">Input Data Formats</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/service_objects.html">Service Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/edls.html">External Dynamic Lists (EDLs)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/address_objects.html">Address Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_url_categories.html">Custom URL Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/application_groups.html">Application Groups</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../object_types/security_profiles.html">Security Profiles</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/antivirus_profiles.html">Antivirus Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/anti_spyware_profiles.html">Anti-spyware Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/vulnerability_protection_profiles.html">Vulnerability Protection Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/url_filtering_profiles.html">URL Filtering Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/file_blocking_profiles.html">File Blocking Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/data_filtering_profiles.html">Data Filtering Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../object_types/security_profiles/wildfire_analysis_profiles.html">WildFire Analysis Profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/tags.html">Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/decryption_profiles.html">Decryption Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_applications.html">Custom Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_vulnerability_signatures.html">Custom Vulnerability Signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/custom_spyware_signatures.html">Custom Spyware Signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../object_types/data_patterns.html">Data Patterns</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../response_pages.html">Response Pages</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">How to Use</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../scm_integration.html">Strata Cloud Manager (SCM)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../scm_api_comparison/index.html">Comparative Analysis: API Capabilities of Strata Cloud Manager vs Panorama</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/introduction.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/feature_parity.html">Feature Parity in Policy Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/api_structure.html">API Structure and Endpoint Differences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/authentication.html">Authentication and Access Control Differences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/deployment_model.html">Deployment Model: Commit vs Push Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/sdk_support.html">SDK Support and Tooling Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/migration_considerations.html">Migration Considerations and Code Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_api_comparison/references.html">References</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../scm_integration_details/index.html">SCM Integration Details</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/current_components.html">Current Panorama-Focused Deployment Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/changes_needed.html">Changes Needed to Support SCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/integration_strategy.html">Integration Strategy (Panorama + SCM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/key_differences.html">Key Differences to Address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../scm_integration_details/summary.html">Summary</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../code.html">Source Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/auxiliary_functions.html">Auxiliary Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/build_policy.html">Build Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/category_parser.html">Category Parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/security_policy_pre.html">Security Policy Pre</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lib/security_policy_post.html">Security Policy Post</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for lib.build_policy</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Core module for building and deploying firewall policies to PAN-OS devices.</span>
+
+<span class="sd">This module orchestrates the entire policy deployment process, including:</span>
+
+<span class="sd">- Setting up connections to Panorama or Firewall devices</span>
+<span class="sd">- Managing configuration and commit locks</span>
+<span class="sd">- Deleting objects</span>
+<span class="sd">- Creating and configuring all required objects (tags, filters, groups, profiles etc.)</span>
+<span class="sd">- Building and deploying policy rules</span>
+<span class="sd">- Handling address objects and groups</span>
+<span class="sd">- Managing security profiles and profile groups</span>
+
+<span class="sd">It serves as the main entry point for policy deployment operations and</span>
+<span class="sd">coordinates the functionality provided by other modules.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.firewall</span><span class="w"> </span><span class="kn">import</span> <span class="n">Firewall</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.policies</span><span class="w">                     </span><span class="kn">import</span> <span class="n">SecurityRule</span><span class="p">,</span> <span class="n">DecryptionRule</span><span class="p">,</span> <span class="n">NatRule</span><span class="p">,</span> <span class="n">AuthenticationRule</span><span class="p">,</span> <span class="n">PolicyBasedForwarding</span><span class="p">,</span> <span class="n">ApplicationOverride</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w">                               </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.rich_output</span><span class="w">                    </span><span class="kn">import</span> <span class="n">console</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rich.panel</span><span class="w">                         </span><span class="kn">import</span> <span class="n">Panel</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.panorama</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGroup</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">,</span> <span class="n">Template</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.device</span><span class="w">   </span><span class="kn">import</span> <span class="n">Vsys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.policies</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreRulebase</span><span class="p">,</span> <span class="n">PostRulebase</span><span class="p">,</span> <span class="n">Rulebase</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.objects</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">Tag</span><span class="p">,</span> <span class="n">ApplicationFilter</span><span class="p">,</span> <span class="n">ApplicationGroup</span><span class="p">,</span> <span class="n">Edl</span><span class="p">,</span> <span class="n">CustomUrlCategory</span><span class="p">,</span> <span class="n">ServiceObject</span><span class="p">,</span> <span class="n">ServiceGroup</span><span class="p">,</span>
+                           <span class="n">LogForwardingProfile</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">panos.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">PanDeviceXapiError</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">settings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.security_policy_pre</span><span class="w">            </span><span class="kn">import</span> <span class="n">security_policy_pre</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.security_policy_post</span><span class="w">           </span><span class="kn">import</span> <span class="n">security_policy_post</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.decryption_policy</span><span class="w">              </span><span class="kn">import</span> <span class="n">decryption_policy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.manage_tags</span><span class="w">                    </span><span class="kn">import</span> <span class="n">create_tags</span><span class="p">,</span> <span class="n">tag_applications</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.application_filters</span><span class="w">            </span><span class="kn">import</span> <span class="n">create_application_filters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.application_groups</span><span class="w">             </span><span class="kn">import</span> <span class="n">create_application_groups</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.security_profile_groups</span><span class="w">        </span><span class="kn">import</span> <span class="n">create_security_profile_groups</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.edls</span><span class="w">                           </span><span class="kn">import</span> <span class="n">create_edls</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.url_categories</span><span class="w">                 </span><span class="kn">import</span> <span class="n">create_custom_url_categories</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.address_objects_staging</span><span class="w">        </span><span class="kn">import</span> <span class="n">handle_address_objects_and_groups</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.service_objects</span><span class="w">                </span><span class="kn">import</span> <span class="n">create_service_objects</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.security_profile_url_filtering</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_url_filtering_static_profiles</span><span class="p">,</span> <span class="n">create_url_filtering_auto_profiles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.log_forwarding_profiles</span><span class="w">        </span><span class="kn">import</span> <span class="n">create_log_forwarding_profiles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.service_now</span><span class="w">                    </span><span class="kn">import</span> <span class="n">generate_categories_for_servicenow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.auxiliary_functions</span><span class="w">            </span><span class="kn">import</span> <span class="p">(</span><span class="n">delete_objects</span><span class="p">,</span> <span class="n">delete_non_sdk_objects</span><span class="p">,</span> <span class="n">create_non_sdk_objects</span><span class="p">,</span>
+                                                <span class="n">execute_multi_config_api_call</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">lib.custom_objects</span><span class="w">                 </span><span class="kn">import</span> <span class="n">import_custom_signatures</span><span class="p">,</span> <span class="n">import_custom_response_pages</span>
+
+
+<div class="viewcode-block" id="discover_and_delete_policy_rules">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.discover_and_delete_policy_rules">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">discover_and_delete_policy_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">rule_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetches and deletes policy rules of a specific type on a Palo Alto Networks device.</span>
+
+<span class="sd">    This function performs operations like fetching existing rules for a given</span>
+<span class="sd">    target, displaying them, optionally deleting them, and returning the</span>
+<span class="sd">    relevant rules and their UUIDs. The behavior varies depending on whether</span>
+<span class="sd">    the device is a standalone device or Panorama, as well as on the configuration</span>
+<span class="sd">    settings provided.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        panos_device: The Palo Alto Networks device on which the rules are set.</span>
+<span class="sd">            It can either be a Firewall or a Panorama instance.</span>
+<span class="sd">        target: The target object for which the policy rules will be managed.</span>
+<span class="sd">            This can be either a Vsys or a DeviceGroup object.</span>
+<span class="sd">        rule_type: The type of policy rule to manage. Supported types include</span>
+<span class="sd">            &#39;security&#39;, &#39;decryption&#39;, &#39;nat&#39;, &#39;authentication&#39;, &#39;override&#39;, and &#39;pbf&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing two elements:</span>
+<span class="sd">            - A list of current rules gathered from the target and, optionally, deleted.</span>
+<span class="sd">            - A dictionary mapping rule names to their UUIDs for rules</span>
+<span class="sd">              that support UUIDs.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If an unsupported rule type is specified.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rule_classes</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;security&#39;</span><span class="p">:</span> <span class="n">SecurityRule</span><span class="p">,</span>
+        <span class="s1">&#39;decryption&#39;</span><span class="p">:</span> <span class="n">DecryptionRule</span><span class="p">,</span>
+        <span class="s1">&#39;nat&#39;</span><span class="p">:</span> <span class="n">NatRule</span><span class="p">,</span>
+        <span class="s1">&#39;authentication&#39;</span><span class="p">:</span> <span class="n">AuthenticationRule</span><span class="p">,</span>
+        <span class="s1">&#39;override&#39;</span><span class="p">:</span> <span class="n">ApplicationOverride</span><span class="p">,</span>
+        <span class="s1">&#39;pbf&#39;</span><span class="p">:</span> <span class="n">PolicyBasedForwarding</span>
+    <span class="p">}</span>
+
+    <span class="n">rule_class</span> <span class="o">=</span> <span class="n">rule_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">rule_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">rule_class</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported rule type: </span><span class="si">{</span><span class="n">rule_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get friendly name for output</span>
+    <span class="n">friendly_name</span> <span class="o">=</span> <span class="n">rule_type</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+    <span class="c1"># Get current rules</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Looking for existing </span><span class="si">{</span><span class="n">friendly_name</span><span class="si">}</span><span class="s1"> policy rules...&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="n">current_rules</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_rules_pre</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_rules_post</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="n">current_rules_pre</span>  <span class="o">=</span> <span class="n">rule_class</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pre&#39;</span><span class="p">))</span>
+        <span class="n">current_rules_post</span> <span class="o">=</span> <span class="n">rule_class</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span>
+        <span class="n">current_rules</span>      <span class="o">=</span> <span class="n">current_rules_pre</span> <span class="o">+</span> <span class="n">current_rules_post</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">current_rules</span><span class="p">)</span><span class="si">}</span><span class="s1"> rule(s)&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">current_rules</span> <span class="o">=</span> <span class="n">rule_class</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">current_rules</span><span class="p">)</span><span class="si">}</span><span class="s1"> rule(s)&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Store UUIDs if the policy type supports that (ApplicationOverride class does not)</span>
+    <span class="n">rule_uuids</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">rule_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;security&#39;</span><span class="p">,</span> <span class="s1">&#39;decryption&#39;</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">,</span> <span class="s1">&#39;pbf&#39;</span><span class="p">,</span> <span class="s1">&#39;authentication&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Existing </span><span class="si">{</span><span class="n">friendly_name</span><span class="si">}</span><span class="s2"> rules:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">prerule</span> <span class="ow">in</span> <span class="n">current_rules_pre</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">prerule</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">rule_uuids</span><span class="p">[</span><span class="n">prerule</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">prerule</span><span class="o">.</span><span class="n">uuid</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_rules_post</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">64</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">postrule</span> <span class="ow">in</span> <span class="n">current_rules_post</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">postrule</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">rule_uuids</span><span class="p">[</span><span class="n">postrule</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">postrule</span><span class="o">.</span><span class="n">uuid</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">current_rules</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">rule_uuids</span><span class="p">[</span><span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">uuid</span>
+    <span class="k">elif</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERBOSE_OUTPUT</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_rules_pre</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">prerule</span> <span class="ow">in</span> <span class="n">current_rules_pre</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">prerule</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_rules_post</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">64</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">postrule</span> <span class="ow">in</span> <span class="n">current_rules_post</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">postrule</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_rules</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">current_rules</span><span class="p">:</span> <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Delete rules if needed</span>
+    <span class="c1"># (if there is no explicit flag DELETE_CURRENT_&lt;rule type&gt;_POLICY = True, the rules won&#39;t be deleted)</span>
+    <span class="n">delete_flag</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;DELETE_CURRENT_</span><span class="si">{</span><span class="n">rule_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">_POLICY&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">current_rules</span> <span class="ow">and</span> <span class="n">delete_flag</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">BULK_RULE_DELETION</span><span class="p">:</span>
+            <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_rules</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+                <span class="n">rule_class</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pre&#39;</span><span class="p">))</span>
+                <span class="n">rule_class</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rule_class</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deleting existing </span><span class="si">{</span><span class="n">friendly_name</span><span class="si">}</span><span class="s2"> rules one by one (this may take a while)...&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">current_rules</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Deleting </span><span class="si">{</span><span class="n">friendly_name</span><span class="si">}</span><span class="s2"> rules&quot;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">):</span>
+                <span class="n">rule</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">current_rules</span><span class="p">,</span> <span class="n">rule_uuids</span></div>
+
+
+
+<div class="viewcode-block" id="create_security_rules">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.create_security_rules">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_security_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">app_categories_requirements</span><span class="p">,</span> <span class="n">url_categories_requirements</span><span class="p">,</span> <span class="n">rule_uuids</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create security policy rules&quot;&quot;&quot;</span>
+    <span class="n">policy_rules_pre</span><span class="p">,</span>  <span class="n">security_pre_group_tags</span> <span class="o">=</span> <span class="n">security_policy_pre</span><span class="p">(</span><span class="n">app_categories_requirements</span><span class="p">,</span> <span class="n">rule_uuids</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+    <span class="n">policy_rules_post</span><span class="p">,</span> <span class="n">security_post_group_tags</span> <span class="o">=</span> <span class="n">security_policy_post</span><span class="p">(</span><span class="n">app_categories_requirements</span><span class="p">,</span> <span class="n">url_categories_requirements</span><span class="p">,</span> <span class="n">rule_uuids</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">policy_rules_pre</span><span class="p">,</span> <span class="n">policy_rules_post</span></div>
+
+
+
+<div class="viewcode-block" id="create_decryption_rules">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.create_decryption_rules">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_decryption_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create decryption policy rules&quot;&quot;&quot;</span>
+    <span class="n">decryption_rules_pre</span><span class="p">,</span> <span class="n">decryption_pre_group_tags</span> <span class="o">=</span> <span class="n">decryption_policy</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">DECRYPTION_RULES_PRE_FOLDER</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+    <span class="n">decryption_rules_post</span><span class="p">,</span> <span class="n">decryption_post_group_tags</span> <span class="o">=</span> <span class="n">decryption_policy</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">DECRYPTION_RULES_POST_FOLDER</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decryption_rules_pre</span><span class="p">,</span> <span class="n">decryption_rules_post</span></div>
+
+
+
+<div class="viewcode-block" id="create_nat_rules">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.create_nat_rules">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_nat_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create NAT policy rules - placeholder for future implementation&quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement NAT rule creation logic</span>
+    <span class="c1"># When implemented, it should call nat_policy with target_environment</span>
+    <span class="c1"># Example: nat_rules_pre, nat_pre_group_tags = nat_policy(panos_device, &quot;path/to/nat/rules/pre&quot;, target_environment)</span>
+    <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span></div>
+
+
+
+<div class="viewcode-block" id="create_authentication_rules">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.create_authentication_rules">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_authentication_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create authentication policy rules - placeholder for future implementation&quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement authentication rule creation logic</span>
+    <span class="c1"># When implemented, it should use target_environment to determine domain prefix</span>
+    <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span></div>
+
+
+
+<div class="viewcode-block" id="create_override_rules">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.create_override_rules">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_override_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create application override policy rules - placeholder for future implementation&quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement application override rule creation logic</span>
+    <span class="c1"># When implemented, it should use target_environment to determine domain prefix</span>
+    <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span></div>
+
+
+
+<div class="viewcode-block" id="create_pbf_rules">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.create_pbf_rules">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_pbf_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create Policy-Based Forwarding policy rules - placeholder for future implementation&quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Implement Policy-Based Forwarding rule creation logic</span>
+    <span class="c1"># When implemented, it should use target_environment to determine domain prefix</span>
+    <span class="k">return</span> <span class="p">[],</span> <span class="p">[]</span></div>
+
+
+
+<div class="viewcode-block" id="build_policy">
+<a class="viewcode-back" href="../../lib/build_policy.html#lib.build_policy.build_policy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_policy</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">policy_container</span><span class="p">,</span> <span class="n">policy_template</span><span class="p">,</span> <span class="n">app_categories_requirements</span><span class="p">,</span> <span class="n">url_categories_requirements</span><span class="p">,</span> <span class="n">current_url_categories</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs and manages security and decryption policies, address objects, and address groups on a PAN-OS device.</span>
+<span class="sd">    (Panorama + Device Group or Firewall + VSYS)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        panos_device:                   Firewall or Panorama device object.</span>
+<span class="sd">        policy_container:               The name of the device group or VSYS where the policies will be applied.</span>
+<span class="sd">        policy_template:                The name of Panorama template where custom objects will be imported into</span>
+<span class="sd">        app_categories_requirements:    Requirements for each app subcategory.</span>
+<span class="sd">        url_categories_requirements:    Requirements for each URL-category.</span>
+<span class="sd">        current_url_categories:         The current list of URL categories retrieved from Panorama</span>
+<span class="sd">        target_environment:             The target environment for applying the policies (prod|lab etc.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get system info</span>
+    <span class="n">panos_device</span><span class="o">.</span><span class="n">refresh_system_info</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">PRIVACY_MODE</span><span class="p">:</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">Panel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">panos_device</span><span class="o">.</span><span class="n">platform</span><span class="si">}</span><span class="s2"> (PAN-OS </span><span class="si">{</span><span class="n">panos_device</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">, Content v</span><span class="si">{</span><span class="n">panos_device</span><span class="o">.</span><span class="n">content_version</span><span class="si">}</span><span class="s2">, S/N </span><span class="si">{</span><span class="n">panos_device</span><span class="o">.</span><span class="n">serial</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">Panel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connected to </span><span class="si">{</span><span class="n">panos_device</span><span class="o">.</span><span class="n">platform</span><span class="si">}</span><span class="s2"> (PAN-OS </span><span class="si">{</span><span class="n">panos_device</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">, Content v</span><span class="si">{</span><span class="n">panos_device</span><span class="o">.</span><span class="n">content_version</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">))</span>
+    <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">Panel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target for the policy: </span><span class="si">{</span><span class="n">policy_container</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+
+
+    <span class="c1"># Create Device Group or VSYS object</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="c1"># for Panorama the target is a DeviceGroup, and the target_template is a Template</span>
+        <span class="n">target</span>          <span class="o">=</span> <span class="n">DeviceGroup</span><span class="p">(</span><span class="n">policy_container</span><span class="p">)</span>
+        <span class="n">target_template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">policy_template</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># for a firewall both the target and the target_template must be the same object - a VSYS</span>
+        <span class="n">target</span>          <span class="o">=</span> <span class="n">Vsys</span><span class="p">(</span><span class="n">policy_container</span><span class="p">)</span>
+        <span class="n">target_template</span> <span class="o">=</span> <span class="n">target</span>
+
+    <span class="c1"># Associate the DG/VSYS/Template with the Panorama/Firewall object</span>
+    <span class="n">panos_device</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">panos_device</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">target_template</span><span class="p">)</span>
+
+    <span class="c1"># =================================================================================================================</span>
+    <span class="c1"># =================================================================================================================</span>
+    <span class="c1"># Set the target template for Panorama for commit and config locks to be taken</span>
+    <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setting the target &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;template...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tp_target_result</span>    <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;set&gt;&lt;system&gt;&lt;setting&gt;&lt;target&gt;&lt;template&gt;&lt;name&gt;</span><span class="si">{</span><span class="n">policy_template</span><span class="si">}</span><span class="s2">&lt;/name&gt;&lt;/template&gt;&lt;/target&gt;&lt;/setting&gt;&lt;/system&gt;&lt;/set&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while setting the policy target: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tp_target_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Set the target VSYS for firewall for commit and config locks to be taken</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;VSYS...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">vsys_target_result</span> <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;set&gt;&lt;system&gt;&lt;setting&gt;&lt;target-vsys&gt;</span><span class="si">{</span><span class="n">policy_template</span><span class="si">}</span><span class="s2">&lt;/target-vsys&gt;&lt;/setting&gt;&lt;/system&gt;&lt;/set&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while setting the policy target: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">vsys_target_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Take the config and commit lock for the set target (Template or VSYS))</span>
+    <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Taking CONFIG and COMMIT locks on the target...&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">config_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;config-lock&gt;&lt;add&gt;&lt;comment&gt;Policy revision </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_VERSION</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_DATE</span><span class="si">}</span><span class="s2">) rollout&lt;/comment&gt;&lt;/add&gt;&lt;/config-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">commit_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;commit-lock&gt;&lt;add&gt;&lt;comment&gt;Policy revision </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_VERSION</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_DATE</span><span class="si">}</span><span class="s2">) rollout&lt;/comment&gt;&lt;/add&gt;&lt;/commit-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;You already own a config lock for scope&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;Already have the lock, continuing...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># Maybe do something else or just carry on here</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error while taking the lock: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">config_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for config lock and [</span><span class="si">{</span><span class="n">commit_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for commit lock.&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># Now we set the target Device Group on Panorama for commit and config locks to be taken</span>
+    <span class="c1"># we do not need to do this for the VSYS as all possible locks have already been taken</span>
+    <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setting the target &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;device group...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dg_target_result</span>    <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;set&gt;&lt;system&gt;&lt;setting&gt;&lt;target&gt;&lt;device-group&gt;</span><span class="si">{</span><span class="n">policy_container</span><span class="si">}</span><span class="s2">&lt;/device-group&gt;&lt;/target&gt;&lt;/setting&gt;&lt;/system&gt;&lt;/set&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while setting the policy target: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dg_target_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Take the config and commit lock for the specified target</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Taking CONFIG and COMMIT locks on the target...&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;config-lock&gt;&lt;add&gt;&lt;comment&gt;Policy revision </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_VERSION</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_DATE</span><span class="si">}</span><span class="s2">) rollout&lt;/comment&gt;&lt;/add&gt;&lt;/config-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">commit_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;commit-lock&gt;&lt;add&gt;&lt;comment&gt;Policy revision </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_VERSION</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">POLICY_DATE</span><span class="si">}</span><span class="s2">) rollout&lt;/comment&gt;&lt;/add&gt;&lt;/commit-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;You already own a config lock for scope&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;Already have the lock, continuing...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error while taking the lock: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">console</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">config_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for config lock and [</span><span class="si">{</span><span class="n">commit_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for commit lock.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># By this point we should have 4 locks on Panorama (commit and config on Template and Device Group)</span>
+    <span class="c1"># and 2 locks on firewall (commit and config on VSYS)</span>
+    <span class="c1"># =================================================================================================================</span>
+    <span class="c1"># =================================================================================================================</span>
+
+    <span class="c1"># Setup rulebases</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="n">rulebase_pre</span> <span class="o">=</span> <span class="n">PreRulebase</span><span class="p">()</span>
+        <span class="n">rulebase_post</span> <span class="o">=</span> <span class="n">PostRulebase</span><span class="p">()</span>
+        <span class="n">target</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rulebase_pre</span><span class="p">)</span>
+        <span class="n">target</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rulebase_post</span><span class="p">)</span>
+        <span class="n">rulebases</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pre&#39;</span><span class="p">:</span> <span class="n">rulebase_pre</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">:</span> <span class="n">rulebase_post</span><span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rulebase</span> <span class="o">=</span> <span class="n">Rulebase</span><span class="p">()</span>
+        <span class="n">target</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rulebase</span><span class="p">)</span>
+        <span class="n">rulebases</span> <span class="o">=</span> <span class="n">rulebase</span>
+
+    <span class="c1"># Discover all policy types and delete them if required (controlled by DELETE_CURRENT_&lt;type&gt;_POLICY flags)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">security_rules_uuids</span>     <span class="o">=</span> <span class="n">discover_and_delete_policy_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">rulebases</span><span class="p">,</span> <span class="s1">&#39;security&#39;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">decryption_rules_uuids</span>   <span class="o">=</span> <span class="n">discover_and_delete_policy_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">rulebases</span><span class="p">,</span> <span class="s1">&#39;decryption&#39;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">nat_rules_uuids</span>          <span class="o">=</span> <span class="n">discover_and_delete_policy_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">rulebases</span><span class="p">,</span> <span class="s1">&#39;nat&#39;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">auth_rules_uuids</span>         <span class="o">=</span> <span class="n">discover_and_delete_policy_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">rulebases</span><span class="p">,</span> <span class="s1">&#39;authentication&#39;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">pbf_rules_uuids</span>          <span class="o">=</span> <span class="n">discover_and_delete_policy_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">rulebases</span><span class="p">,</span> <span class="s1">&#39;pbf&#39;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span>                        <span class="o">=</span> <span class="n">discover_and_delete_policy_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">rulebases</span><span class="p">,</span> <span class="s1">&#39;override&#39;</span><span class="p">)</span>
+
+    <span class="c1"># =====================================================================================================</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proceeding with the policy creation...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># The numbering below corresponds to the numbering in the section Firewall policy creation algorithm</span>
+    <span class="c1"># in Chapter 8 of the project companion book</span>
+
+    <span class="c1"># 1) Before we deal with any object types we need to ensure that all tags these objects may reference are created</span>
+    <span class="k">with</span> <span class="n">console</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="s2">&quot;Retrieving current tags...&quot;</span><span class="p">,</span> <span class="n">spinner</span><span class="o">=</span><span class="s2">&quot;dots&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">status_spinner</span><span class="p">:</span>
+        <span class="n">current_tags</span> <span class="o">=</span> <span class="n">Tag</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">status_spinner</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;Retrieving current tags...completed&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">BULK_TAG_DELETION</span><span class="p">:</span>
+        <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_tags</span><span class="p">,</span> <span class="s2">&quot;soft&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">current_tags</span> <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">current_tags</span> <span class="ow">or</span> <span class="p">[],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Deleting tags&quot;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">tag</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to delete the tag [</span><span class="si">{</span><span class="n">tag</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEBUG_OUTPUT</span><span class="p">:</span>
+                    <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="c1"># now, as all old tasgs are deleted, we proceed with (re)creating tags from code</span>
+    <span class="n">create_tags</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+
+    <span class="c1"># 2,3) Delete Application Groups and Filters</span>
+    <span class="c1">#</span>
+    <span class="c1"># Groups must be deleted first as they may contain filters</span>
+    <span class="c1"># Some groups may contain nested application groups. If we attempt to delete</span>
+    <span class="c1"># nested application group before we delete their parents (even within the same multi-config operation)</span>
+    <span class="c1"># the whole operation will fail. The workaround is to identify these container groups and delete them first.</span>
+    <span class="c1">#</span>
+    <span class="c1"># There is no recursion beyond one nested level in the algorythm below.</span>
+    <span class="c1"># For example, if you have a group within a group within another group, the deletion may fail on one of them.</span>
+    <span class="c1">#</span>
+    <span class="c1"># a) enumerate all container application groups</span>
+    <span class="k">with</span> <span class="n">console</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="s2">&quot;Retrieving current application groups...&quot;</span><span class="p">,</span> <span class="n">spinner</span><span class="o">=</span><span class="s2">&quot;dots&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">status_spinner</span><span class="p">:</span>
+        <span class="n">current_application_groups</span> <span class="o">=</span> <span class="n">ApplicationGroup</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">status_spinner</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;Retrieving application groups...completed&quot;</span><span class="p">)</span>
+    <span class="n">application_groups</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># dictionary</span>
+
+    <span class="c1"># b) store their names and values in a dictionary</span>
+    <span class="k">for</span> <span class="n">application_group</span> <span class="ow">in</span> <span class="n">current_application_groups</span><span class="p">:</span>
+        <span class="n">application_groups</span><span class="p">[</span><span class="n">application_group</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">application_group</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="c1"># c) identify names of the application groups that contain other application groups</span>
+    <span class="n">container_application_group_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span> <span class="c1"># set</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">application_groups</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">application_groups</span><span class="p">[</span><span class="n">name</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">application_groups</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">container_application_group_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># d) find application group objects with these names</span>
+    <span class="n">container_application_groups</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">container_application_group_names</span><span class="p">:</span>
+        <span class="n">container_application_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ApplicationGroup</span><span class="p">))</span>
+
+    <span class="c1"># e) delete them</span>
+    <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">container_application_groups</span><span class="p">)</span>
+
+    <span class="c1"># f) delete the remaining (non-container) app groups and filters</span>
+    <span class="n">current_application_groups</span> <span class="o">=</span> <span class="n">ApplicationGroup</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">current_application_filters</span> <span class="o">=</span> <span class="n">ApplicationFilter</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_application_groups</span><span class="p">)</span>
+    <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_application_filters</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">application_group</span>  <span class="ow">in</span> <span class="n">current_application_groups</span>  <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">application_group</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">application_filter</span> <span class="ow">in</span> <span class="n">current_application_filters</span> <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">application_filter</span><span class="p">)</span>
+
+    <span class="c1"># 4,5,6) Now we need to delete security profiles (amongst other objects) because they may reference an address object</span>
+    <span class="c1"># or EDL that we may need to delete at the next steps</span>
+    <span class="n">delete_non_sdk_objects</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">objects_to_delete</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;application-tag&quot;</span><span class="p">,</span> <span class="s2">&quot;profile-group&quot;</span><span class="p">,</span> <span class="s2">&quot;vulnerability&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;virus&quot;</span><span class="p">,</span> <span class="s2">&quot;spyware&quot;</span><span class="p">,</span> <span class="s2">&quot;wildfire-analysis&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;url-filtering&quot;</span><span class="p">,</span> <span class="s2">&quot;file-blocking&quot;</span><span class="p">,</span> <span class="s2">&quot;data-filtering&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;data-objects&quot;</span><span class="p">,</span> <span class="s2">&quot;decryption&quot;</span><span class="p">))</span>
+
+    <span class="c1"># 7) delete and (re)create Log Forwarding Profiles (LFP)</span>
+    <span class="n">current_log_forwarding_profiles</span> <span class="o">=</span> <span class="n">LogForwardingProfile</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">BULK_LFP_DELETION</span><span class="p">:</span>
+        <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_log_forwarding_profiles</span><span class="p">,</span> <span class="s2">&quot;soft&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">log_forwarding_profile</span> <span class="ow">in</span> <span class="n">current_log_forwarding_profiles</span> <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">log_forwarding_profile</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">log_forwarding_profile</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">current_log_forwarding_profiles</span> <span class="ow">or</span> <span class="p">[],</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Deleting log forwarding profiles&quot;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">colour</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">log_forwarding_profile</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to delete the Log Forwarding Profile [</span><span class="si">{</span><span class="n">log_forwarding_profile</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">DEBUG_OUTPUT</span><span class="p">:</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="n">create_log_forwarding_profiles</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+
+    <span class="c1"># 8-9) Then we &quot;synchronize&quot; objects in the code and on the device.</span>
+    <span class="c1"># We do not simply delete and recreate address objects as there can be tens of thousands of them</span>
+    <span class="c1"># we establish the delta and work with it: extra objects found on the device are deleted and</span>
+    <span class="c1"># missing objects are created</span>
+    <span class="n">handle_address_objects_and_groups</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+
+    <span class="c1"># We already ensured that required tags and address objects are in place</span>
+    <span class="c1"># Now, it&#39;s time for more complex objects</span>
+
+    <span class="c1"># 10) Delete and then (re)import custom application, vulnerability and spyware signatures</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">IMPORT_APP_VULN_SPYWARE_SIGNATURES</span><span class="p">:</span>
+        <span class="n">delete_non_sdk_objects</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">objects_to_delete</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;application&quot;</span><span class="p">,</span> <span class="s2">&quot;threat-vulnerability&quot;</span><span class="p">,</span> <span class="s2">&quot;threat-spyware&quot;</span><span class="p">))</span>
+        <span class="n">import_custom_signatures</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+
+    <span class="c1"># 11) Tag the imported and standard application signatures</span>
+    <span class="n">tag_applications</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+
+    <span class="c1"># 12-13) create app filters and groups</span>
+    <span class="c1"># filters must be created before groups because they are referenced in the groups</span>
+    <span class="c1"># groups may contain custom applications imported at the previous step</span>
+    <span class="n">create_application_filters</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">app_categories_requirements</span><span class="p">)</span>
+    <span class="n">create_application_groups</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">app_categories_requirements</span><span class="p">)</span>
+
+    <span class="c1"># 14) Import custom response pages</span>
+    <span class="c1"># (target_template here is either a Template or Vsys class instance)</span>
+    <span class="n">import_custom_response_pages</span><span class="p">(</span><span class="n">target_template</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+
+
+    <span class="c1"># 15) delete and (re)create all EDLs</span>
+    <span class="n">current_edls</span> <span class="o">=</span> <span class="n">Edl</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_edls</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">edl</span> <span class="ow">in</span> <span class="n">current_edls</span> <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">edl</span><span class="p">)</span>
+    <span class="n">create_edls</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+    <span class="c1">#                                 ^^^^^^^^^^^^^^^^^^</span>
+    <span class="c1"># target_environment parameter is effectively a string that substitutes</span>
+    <span class="c1"># the substring &quot;&lt;target_environment&gt;&quot; in the definitions of the EDLs</span>
+    <span class="c1"># in the file [ngfw/objects/external dynamic lists/edls.csv]</span>
+    <span class="c1"># This is used to host two (or more!) EDL sets with EDLs named identically but</span>
+    <span class="c1"># with different URL specific to each environment. This allows you to have one</span>
+    <span class="c1"># EDL hosting environment, one firewall policy, but several sets of EDLs (one per environment).</span>
+    <span class="c1"># Thus, you can have a Lab firewall with a policy identical to your Prod and be able to test the policy</span>
+    <span class="c1"># elements referencing the EDLs by changing the Lab instances of the EDLs instead of Prod.</span>
+
+    <span class="c1"># 16) delete and (re)create all custom URL categories</span>
+    <span class="n">current_custom_url_categories</span> <span class="o">=</span> <span class="n">CustomUrlCategory</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_custom_url_categories</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">custom_url_category</span> <span class="ow">in</span> <span class="n">current_custom_url_categories</span> <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">custom_url_category</span><span class="p">)</span>
+    <span class="n">create_custom_url_categories</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">url_categories_requirements</span><span class="p">)</span>
+
+    <span class="c1"># 17) delete and (re)create all service objects and groups</span>
+    <span class="n">current_service_groups</span> <span class="o">=</span> <span class="n">ServiceGroup</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_service_groups</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">service_group</span> <span class="ow">in</span> <span class="n">current_service_groups</span> <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">service_group</span><span class="p">)</span>
+
+    <span class="c1"># service groups must be deleted before the service object</span>
+    <span class="n">current_service_objects</span> <span class="o">=</span> <span class="n">ServiceObject</span><span class="o">.</span><span class="n">refreshall</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">delete_objects</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">current_service_objects</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">service_object</span> <span class="ow">in</span> <span class="n">current_service_objects</span> <span class="ow">or</span> <span class="p">[]:</span> <span class="n">target</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">service_object</span><span class="p">)</span>
+
+    <span class="n">create_service_objects</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+
+    <span class="c1"># 18,19) create all security profiles</span>
+    <span class="c1"># we already deleted existing objects of these types earlier</span>
+    <span class="c1"># create_data_objects(target, panos_device)</span>
+    <span class="c1"># create_data_filtering_profiles(target, panos_device)</span>
+
+    <span class="n">create_non_sdk_objects</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">,</span> <span class="n">objects_to_create</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;data-patterns&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;spyware-profiles&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;av-profiles&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;decryption-profiles&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;vulnerability-profiles&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;file-profiles&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;wf-profiles&quot;</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;data-profiles&quot;</span><span class="p">))</span>
+
+    <span class="c1">#  create URL filtering profiles based on static definitions in JSON files</span>
+    <span class="c1">#</span>
+    <span class="c1">#  As we proceed with creating them, we use the list of categories known to the PAN-OS device to perform</span>
+    <span class="c1">#  some basic sanity checks of the files (ensure that actions are not defined twice for the same category,</span>
+    <span class="c1">#  and ensure correct spelling of categories)</span>
+    <span class="c1">#</span>
+    <span class="n">create_url_filtering_static_profiles</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">current_url_categories</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+    <span class="n">create_url_filtering_auto_profiles</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">url_categories_requirements</span><span class="p">,</span> <span class="n">current_url_categories</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>
+
+    <span class="c1"># 20) create security profile groups</span>
+    <span class="n">create_security_profile_groups</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">panos_device</span><span class="p">)</span>  <span class="c1"># creation of security profile groups</span>
+
+    <span class="c1"># 21) create policy rules</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CREATING POLICY RULES...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Initialize policy rule lists</span>
+    <span class="n">policy_rules_pre</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">policy_rules_post</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Stage security rules (always created in the original code)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Staging security policy rules:&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">CREATE_SECURITY_POLICY</span><span class="p">:</span>
+        <span class="n">sec_pre</span><span class="p">,</span> <span class="n">sec_post</span> <span class="o">=</span> <span class="n">create_security_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">app_categories_requirements</span><span class="p">,</span> <span class="n">url_categories_requirements</span><span class="p">,</span> <span class="n">security_rules_uuids</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+        <span class="n">policy_rules_pre</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sec_pre</span><span class="p">)</span>
+        <span class="n">policy_rules_post</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sec_post</span><span class="p">)</span>
+
+    <span class="c1"># Stage decryption policy rules (if required)</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">)</span> <span class="ow">and</span> <span class="n">settings</span><span class="o">.</span><span class="n">CREATE_DECRYPTION_POLICY_PANORAMA</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Firewall</span><span class="p">)</span> <span class="ow">and</span> <span class="n">settings</span><span class="o">.</span><span class="n">CREATE_DECRYPTION_POLICY_FIREWALL</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Staging decryption policy rules:&quot;</span><span class="p">)</span>
+        <span class="n">dec_pre</span><span class="p">,</span> <span class="n">dec_post</span> <span class="o">=</span> <span class="n">create_decryption_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+        <span class="n">policy_rules_pre</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">dec_pre</span><span class="p">)</span>
+        <span class="n">policy_rules_post</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">dec_post</span><span class="p">)</span>
+
+    <span class="c1"># Stage NAT rules if required</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">CREATE_NAT_POLICY</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Staging NAT policy rules:&quot;</span><span class="p">)</span>
+        <span class="n">nat_pre</span><span class="p">,</span> <span class="n">nat_post</span> <span class="o">=</span> <span class="n">create_nat_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+        <span class="n">policy_rules_pre</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">nat_pre</span><span class="p">)</span>
+        <span class="n">policy_rules_post</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">nat_post</span><span class="p">)</span>
+
+    <span class="c1"># Stage authentication rules if required</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">CREATE_AUTHENTICATION_POLICY</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Staging authentication policy rules:&quot;</span><span class="p">)</span>
+        <span class="n">auth_pre</span><span class="p">,</span> <span class="n">auth_post</span> <span class="o">=</span> <span class="n">create_authentication_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+        <span class="n">policy_rules_pre</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">auth_pre</span><span class="p">)</span>
+        <span class="n">policy_rules_post</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">auth_post</span><span class="p">)</span>
+
+    <span class="c1"># Stage application override rules if required</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">CREATE_OVERRIDE_POLICY</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Staging application override policy rules:&quot;</span><span class="p">)</span>
+        <span class="n">override_pre</span><span class="p">,</span> <span class="n">override_post</span> <span class="o">=</span> <span class="n">create_override_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+        <span class="n">policy_rules_pre</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">override_pre</span><span class="p">)</span>
+        <span class="n">policy_rules_post</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">override_post</span><span class="p">)</span>
+
+    <span class="c1"># Stage Policy-Based Forwarding rules if required</span>
+    <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">CREATE_PBF_POLICY</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Staging PBF policy rules:&quot;</span><span class="p">)</span>
+        <span class="n">bpf_pre</span><span class="p">,</span> <span class="n">pbf_post</span> <span class="o">=</span> <span class="n">create_pbf_rules</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">target_environment</span><span class="p">)</span>
+        <span class="n">policy_rules_pre</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">bpf_pre</span><span class="p">)</span>
+        <span class="n">policy_rules_post</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pbf_post</span><span class="p">)</span>
+
+    <span class="c1"># Attach policy rules to the rulebase</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Staging policy rules...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">policy_rules_pre</span><span class="p">:</span>   <span class="n">rulebase_pre</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">policy_rules_post</span><span class="p">:</span>  <span class="n">rulebase_post</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">policy_rules_pre</span><span class="p">:</span>   <span class="n">rulebase</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">policy_rules_post</span><span class="p">:</span>  <span class="n">rulebase</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+    <span class="c1"># Now we create Multi-Config Element XML for all staged rules</span>
+    <span class="c1"># as we build the XML we also collect all source_user values</span>
+    <span class="n">action_id</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">source_users</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">multi_config_xml</span> <span class="o">=</span> <span class="s1">&#39;&lt;multi-config&gt;&#39;</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">policy_rules_pre</span> <span class="o">+</span> <span class="n">policy_rules_post</span><span class="p">:</span>
+        <span class="c1"># First, we collect the User-ID value used in the rule.</span>
+        <span class="c1"># This is required for future reference.</span>
+        <span class="c1"># NOTE: Source User field is different in the rules of different types (&quot;source_user&quot; vs &quot;source_users&quot;)</span>
+        <span class="c1"># hence the need for the IF statement</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">SecurityRule</span><span class="p">):</span>
+            <span class="n">source_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">source_user</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">DecryptionRule</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">PolicyBasedForwarding</span><span class="p">):</span>
+            <span class="n">source_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">source_users</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>  <span class="c1"># Note: the attribute source_userS here is different</span>
+                                                            <span class="c1"># from the equivalent attribute source_user in the Security rule</span>
+        <span class="c1"># Second, we grab the Element definition of the rule</span>
+        <span class="n">element</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">element_str</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="c1">#  Third, we construct XML for the whole sub-operation</span>
+        <span class="n">multi_config_xml</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;edit id=&quot;</span><span class="si">{</span><span class="n">action_id</span><span class="si">}</span><span class="s1">&quot; xpath=&quot;</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">xpath</span><span class="p">()</span><span class="si">}</span><span class="s1">&quot;&gt;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s1">&lt;/edit&gt;&#39;</span>
+        <span class="n">action_id</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">multi_config_xml</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/multi-config&gt;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># creation of the policy rules</span>
+    <span class="n">execute_multi_config_api_call</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">multi_config_xml</span><span class="p">,</span> <span class="s2">&quot;Creating the staged rules...&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building new policy: COMPLETED&quot;</span><span class="p">)</span>
+
+    <span class="c1"># =================================================================================================================</span>
+    <span class="c1"># =================================================================================================================</span>
+    <span class="c1"># 22) Now, we remove all locks</span>
+    <span class="c1"># First, we do this for templates and VSYSes</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Setting the target &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;template for lock removal...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tp_target_result</span>    <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;set&gt;&lt;system&gt;&lt;setting&gt;&lt;target&gt;&lt;template&gt;&lt;name&gt;</span><span class="si">{</span><span class="n">policy_template</span><span class="si">}</span><span class="s2">&lt;/name&gt;&lt;/template&gt;&lt;/target&gt;&lt;/setting&gt;&lt;/system&gt;&lt;/set&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while setting the operation target: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tp_target_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Set the target VSYS for firewall for commit and config locks to be taken</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VSYS for lock removal...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">vsys_target_result</span> <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;set&gt;&lt;system&gt;&lt;setting&gt;&lt;target-vsys&gt;</span><span class="si">{</span><span class="n">policy_template</span><span class="si">}</span><span class="s2">&lt;/target-vsys&gt;&lt;/setting&gt;&lt;/system&gt;&lt;/set&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while setting the operation target: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">vsys_target_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Remove the config and commit lock for the set target (Template or VSYS))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Removing CONFIG and COMMIT locks from the target...&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">config_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;config-lock&gt;&lt;remove&gt;&lt;/remove&gt;&lt;/config-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">commit_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;commit-lock&gt;&lt;remove&gt;&lt;/remove&gt;&lt;/commit-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while removing the lock: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">config_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for config lock removal and [</span><span class="si">{</span><span class="n">commit_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for commit lock removal.&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># Now we set the target Device Group on Panorama for commit and config locks to be removed</span>
+    <span class="c1"># we do not need to do this for the VSYS as all possible locks have already been removed</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">panos_device</span><span class="p">,</span> <span class="n">Panorama</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Setting the target device group for lock removal...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dg_target_result</span>    <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;set&gt;&lt;system&gt;&lt;setting&gt;&lt;target&gt;&lt;device-group&gt;</span><span class="si">{</span><span class="n">policy_container</span><span class="si">}</span><span class="s2">&lt;/device-group&gt;&lt;/target&gt;&lt;/setting&gt;&lt;/system&gt;&lt;/set&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while setting the operation target: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dg_target_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Take the config and commit lock for the specified target</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Removing CONFIG and COMMIT locks from the target...&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;config-lock&gt;&lt;remove&gt;&lt;/remove&gt;&lt;/config-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">commit_lock_result</span>  <span class="o">=</span> <span class="n">panos_device</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;request&gt;&lt;commit-lock&gt;&lt;remove&gt;&lt;/remove&gt;&lt;/commit-lock&gt;&lt;/request&gt;&quot;</span><span class="p">,</span> <span class="n">cmd_xml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PanDeviceXapiError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error while removing the lock: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">config_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for config lock removal and [</span><span class="si">{</span><span class="n">commit_lock_result</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] for commit lock removal.&quot;</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1"># Now all set locks should be removed</span>
+    <span class="c1"># ================================================================================================================</span>
+    <span class="c1"># ================================================================================================================</span>
+    <span class="c1"># Deduplicate and sort source_users (also remove None entries if found before turning into set)</span>
+    <span class="n">source_users</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">source_users</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]))</span>
+
+    <span class="c1"># Remove specific entries: &quot;any&quot;, &quot;pre-logon&quot;, &quot;known-user&quot;, &quot;unknown&quot; from the source_users list, if found</span>
+    <span class="n">source_users</span> <span class="o">=</span> <span class="p">[</span><span class="n">user</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">source_users</span> <span class="k">if</span> <span class="n">user</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="s2">&quot;pre-logon&quot;</span><span class="p">,</span> <span class="s2">&quot;known-user&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">}]</span>
+
+    <span class="c1"># Print deduplicated and sorted users</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Users and groups used in the policy (deduplicated and sorted):&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">source_users</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">64</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The users and/or user groups listed above have been referenced in the policy. &quot;</span>
+          <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">They must be provided by the User-ID subsystem (i.e. be provided via AD &quot;</span>
+          <span class="s2">&quot;integration or created in the Local User Database).&quot;</span><span class="p">)</span>
+
+    <span class="n">generate_categories_for_servicenow</span><span class="p">(</span><span class="n">app_categories_requirements</span><span class="p">,</span> <span class="n">url_categories_requirements</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Nikolay Matveev
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Nikolay Matveev; Companion book copyright 2025, Packt Publishing Ltd. - All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
