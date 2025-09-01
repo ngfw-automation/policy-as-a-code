@@ -1,0 +1,22 @@
+digraph G {
+    rankdir=TB;
+    node [shape=record, fontname="Segoe UI Emoji", style=filled, fillcolor=lightgrey];
+
+    // Node definitions
+    fw        [label="🧱 Firewall"];
+    panorama  [label="📡 Panorama"];
+    script    [label="🤖 Script"];
+    admin     [label="👮‍♂️ Admin"];
+    bizreqs   [label="📄 Business Req"];
+    csv       [label="📊 CSV File"];
+    config    [label="🛠️ Script Config"];
+    jsonyaml  [label="🧾 JSON/YAML"];
+    stakeholder [label="🧑‍💼 Stakeholder"];
+    policy    [label="📜 FW Policy"];
+
+    // Diagram:
+    stakeholder -> bizreqs -> admin -> csv -> script -> panorama -> policy -> fw ;
+    admin -> config -> script;
+    admin -> jsonyaml -> script;
+}
+

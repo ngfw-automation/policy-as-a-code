@@ -1,0 +1,43 @@
+digraph G {
+    rankdir=LR;
+    node [shape=Mrecord, fontname="Segoe UI Emoji", style=filled, fillcolor=lightgrey, fontsize=14];
+
+    // Node definitions with custom tooltips
+    fw1       [label="🧱\nPanorama-managed\nfirewall(s)", 
+               tooltip="Next-generation firewalls managed centrally through Panorama platform for unified policy deployment and monitoring"];
+    fw2       [label="🧱\nStandalone\nfirewall(s)", 
+               tooltip="Individual standalone firewalls configured directly without central management - require separate policy deployment"];
+    panorama  [label="📡\nPanorama", 
+               tooltip="Palo Alto Networks centralized management platform for firewall orchestration, policy distribution, and monitoring"];
+    targets   [label=<🎯Deployment targets:<BR/><B><FONT FACE="Courier New">requirements/policy_targets.json</FONT></B>>, 
+               tooltip="JSON configuration file defining which firewalls and device groups should receive policy deployments"];
+    script    [label=<🤖<BR/>Deployment<BR/>script:<BR/><B><FONT FACE="Courier New">main.py</FONT></B>>, 
+               tooltip="Main Python automation script that orchestrates the entire policy deployment process across all firewall targets"];
+
+    csv [label=<
+    <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD ALIGN="CENTER">📊 Dynamic policy rules for</TD></TR>
+    <TR><TD ALIGN="CENTER">generic URL/App-ID categories</TD></TR>
+    <TR><TD ALIGN="LEFT"><B><FONT FACE="Courier New">requirements/categories_app.csv</FONT></B></TD></TR>
+    <TR><TD ALIGN="LEFT"><B><FONT FACE="Courier New">requirements/categories_url.csv</FONT></B></TD></TR>
+    </TABLE>
+    >, 
+    tooltip="CSV files containing application and URL category definitions used to dynamically generate firewall security policies"];
+
+    config    [label=<🛠️<BR/>Configuration<BR/>module:<BR/><B><FONT FACE="Courier New">settings.py</FONT></B>>, 
+               tooltip="Python configuration module containing API credentials, server URLs, deployment settings, and operational parameters"];
+    objects   [label=<🧾Profiles, addresses,<BR/>services, tags, and<BR/>other objects:<BR/><B><FONT FACE="Courier New">ngfw/objects/</FONT></B>>, 
+               tooltip="Directory containing firewall object definitions including security profiles, addresses and address groups, service objects and groups, EDLs, tags, custom signatures, data patterns, URL categories, decryption profiles etc."];
+    static_policies  [label=<🧾Static policy rules:<BR/><B><FONT FACE="Courier New">ngfw/policies/</FONT></B>>, 
+                      tooltip="Directory containing predefined static firewall policy rules that remain constant across deployments"];
+
+    // Diagram:
+    static_policies -> script;
+    csv -> script -> panorama -> fw1;
+    targets  -> script;
+    script   -> fw2
+    config   -> script;
+    objects  -> script;
+
+}
+
