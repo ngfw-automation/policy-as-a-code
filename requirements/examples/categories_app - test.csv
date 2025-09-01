@@ -1,0 +1,37 @@
+Category,Action,UserID,Parents,Tags,Risk,ExtraApps,Description
+audio-streaming,do not manage,,media,,,,"Applications for audio-streaming services, internet radio, and similar protocols"
+auth-service,do not manage,,,[Web App],,,"Authentication services, protocols, and related application functions"
+content-management,do not manage,,,,,,"Content-management systems, knowledge management software, online form builders, and website builder applications and services"
+customer-service,do not manage,,,,,,"Help desk, chatbots, and live chat systems, contact centers, and other applications related to customer service"
+database,deny,,,,,,"Cloud and on-premises database applications, services, and protocols"
+design,do not manage,,saas,,,,"Graphical and visual design, creative presentations, infographics, and similar software and services"
+email,manage,UG-email,"saas, collaboration",[Web App],,,"Online and on-premises email software and SaaS services, as well s email-related protocols"
+encrypted-tunnel,deny,,,,,,"VPN services, software, and protocols, as well as encrypted traffic that can tunnel other apps"
+erp-crm,do not manage,,,[Web App],,,SaaS and on-premises enterprise resource planning (ERP) and customer relationship management (CRM) systems and software
+file-sharing,manage,UG-file-sharing,"general-internet, saas",[Web App],,,"File storage and sharing applications, protocols, and cloud or SaaS services and their functions"
+gaming,deny,,media,,,,Online games and game-related services
+general-business,do not manage,,"business-systems, saas",[Web App],"1,2,3,4",,Business related applications that do not fit into other subcategories
+hr,do not manage,,,,,,SaaS and on-premises human resources (HR) systems and HR support software
+ics-protocols,deny,,,,,,"Industrial control and operational technology (OT) communication protocols and applications, programmable logic controller (PLC) engineering software, and supervisory control and data acquisition (SCADA) systems and related applications"
+infrastructure,manage,UG-infrastructure,,,,,"LAN, WAN, and cloud infrastructure protocols and applications"
+instant-messaging,do not manage,,"collaboration, saas",,,,Instant messaging and chat services and applications
+internet-conferencing,do not manage,,"collaboration, saas",,,,Internet conferencing and business-grade video meeting software and services
+internet-utility,do not manage,,,[Web App],"1,2","google-play, google-earth, google-surveys, grammarly, tableau-public, virus-total, apple-appstore","General internet utilities, software, and protocols that don’t fit into other internet subcategories"
+ip-protocol,deny,,,,,,Internet Protocol (IP) stack basic network protocols
+it-infrastructure,deny,,,,,,"Monitoring software, AIOps, data warehouse solutions"
+it-management,do not manage,,saas,[Web App],,,Information technology (IT) and IT workforce management software and SaaS services
+management,manage,UG-management,,[Web App],"1,2,3",,"Information technology (IT) cloud and on-premises assets, configurations, and services management"
+marketing,do not manage,,"business-systems, saas",[Web App],,,Marketing and marketing-research and related support software and SaaS services
+medical,deny,,,,,,Medical and hospital devices and systems protocols and applications
+office-programs,do not manage,,"business-systems, saas",[Web App],,,"Document, document flow, and office collaboration software and SaaS applications"
+photo-video,do not manage,,"media, saas",[Web App],"1,2,3,4",,"Photo and video software, streaming services and related protocols and applications"
+proxy,deny,,,,,,Proxy protocols and software and internet anonymizers and proxy-avoidance tools
+remote-access,deny,,saas,,,,"Remote-access, remote-control, and remote-assist software and protocols"
+routing,deny,,,,,,Networking routing protocols
+social-business,do not manage,,"business-systems, saas",[Web App],,,"Business social networking and collaboration tools, software, software features, and SaaS services"
+social-networking,do not manage,,"collaboration, saas",[Web App],"1,2,3,4",,Social networks and social networking tools and software features
+software-development,do not manage,,"business-systems, saas",[Web App],,,Application developing and deployment software and SaaS services
+software-update,do not manage,,"business-systems, saas",[Web App],,,"Applications that require network connectivity for update purposes only, software-update functional applications, and update management systems"
+storage-backup,manage,UG-file-sharing,,[Web App],,,"Backup and backup storage on-premises and SaaS systems, applications, and related communication protocols"
+voip-video,do not manage,,"business-systems, saas",[Web App],"1,2,3",,"Voice-over-IP (VoIP) applications, services, and related protocols"
+web-posting,do not manage,,,[Web App],,,Applications and application functions that allow posting or editing posted information on the web

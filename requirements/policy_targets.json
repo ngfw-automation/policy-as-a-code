@@ -1,0 +1,18 @@
+{
+    "LAB Panorama": {
+        "target_environment":         "lab",
+        "panos_address":              "lab-panorama.example.com",
+        "deployment_type":            "panorama",
+        "firewall_vsys":              "",
+        "panorama_device_group":      "nextgen",
+        "panorama_template":          "functional-nextgen"
+    },
+    "LAB Firewall": {
+        "target_environment":         "lab",
+        "panos_address":              "192.168.1.1",
+        "deployment_type":            "firewall",
+        "firewall_vsys":              "vsys1",
+        "panorama_device_group":      "",
+        "panorama_template":          ""
+    }
+}
