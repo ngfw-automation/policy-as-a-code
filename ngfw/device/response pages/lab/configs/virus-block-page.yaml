@@ -1,0 +1,23 @@
+page_id: virus_block_page
+title: "Virus/Spyware Download Blocked"
+
+default_heading: "Malicious Content on Website (Virus/Spyware)"
+default_message: |
+  Our security system has identified a file on the website you tried to access
+  as malicious. If you believe this website is incorrectly flagged and is needed
+  for business use, please
+  <a href="${servicedesk_base}${servicedesk_form_id.virus_block}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}">
+  report misclassification</a>.
+
+conditional_blocks: []
+
+fallback:
+  heading: "Malicious Content on Website (Virus/Spyware)"
+  message: |
+    Our security system has identified a file on the website you tried to access
+    as malicious. If you believe this website is incorrectly flagged, please
+    <a href="${servicedesk_base}${servicedesk_form_id.virus_block}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}">
+    report misclassification</a>.
+
+servicedesk_form_id:
+  virus_block: "e70385178772ed10cfdb7446dabb359c"

@@ -1,0 +1,14 @@
+entry:
+  '@name': AIP-Sensitive-Word
+  pattern-type:
+    file-properties:
+      pattern:
+        entry:
+        - '@name': AIP Word - Sensitive
+          file-type: aip-encrypted-docx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 11111111-1111-1111-1111-111111111111
+        - '@name': Word - Sensitive
+          file-type: docx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 11111111-1111-1111-1111-111111111111

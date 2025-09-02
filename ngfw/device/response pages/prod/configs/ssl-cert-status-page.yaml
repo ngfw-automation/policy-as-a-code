@@ -1,0 +1,22 @@
+page_id: ssl_cert_status_page
+title: "Certificate Error"
+
+default_heading: "Certificate Error"
+default_message: |
+  Our security system has detected a certificate error with the website you are
+  trying to access. If you need to reach this site, please
+  <a href="${servicedesk_base}${servicedesk_form_id.ssl_cert}&url=${url}&rule=${rule}&time=${timenow.toISOString()}">
+  submit a request</a>.
+
+conditional_blocks: []
+
+fallback:
+  heading: "Certificate Error"
+  message: |
+    A certificate error prevented access. If you believe this site is safe, please
+    <a href="${servicedesk_base}${servicedesk_form_id.ssl_cert}&url=${url}&rule=${rule}&time=${timenow.toISOString()}">
+    contact IT Support</a>.
+
+servicedesk_form_id:
+  ssl_cert: "h7777777777777777777777777777777"
+

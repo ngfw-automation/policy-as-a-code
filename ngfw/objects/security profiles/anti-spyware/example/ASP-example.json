@@ -1,0 +1,154 @@
+{
+    "name":			"ASP-example",
+	"description":	"This is example profile. DO NOT use it in Production without prior review and testing",
+	"rules":		[
+		{
+			"name":				"Block All High-to-Critical",
+			"action":			"drop",
+			"severity":			["critical", "high"],
+			"threat-name":		"any",
+			"category":			"any",
+			"packet-capture":	"extended-capture"
+		},
+		{
+			"name":				"Block Med-to-Critical Hacktools",
+			"action":			"reset-both",
+			"severity":			["critical", "high", "medium"],
+			"threat-name":		"any",
+			"category":			"hacktool",
+			"packet-capture":	"extended-capture"
+		},
+		{
+			"name":				"Default all other severity",
+			"action":			"default",
+			"severity":			["medium", "low", "informational"],
+			"threat-name":		"any",
+			"category":			"any",
+			"packet-capture":	"disable"			
+		}	
+	],
+	"botnet-domains":	{
+		"dns-security-categories":	[
+			{
+				"name":				"pan-dns-sec-adtracking",
+				"action":			"allow",
+				"packet-capture":	"disable",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-cc",
+				"action":			"sinkhole",
+				"packet-capture":	"extended-capture",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-ddns",
+				"action":			"allow",
+				"packet-capture":	"disable",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-grayware",
+				"action":			"sinkhole",
+				"packet-capture":	"extended-capture",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-malware",
+				"action":			"sinkhole",
+				"packet-capture":	"extended-capture",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-parked",
+				"action":			"allow",
+				"packet-capture":	"disable",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-phishing",
+				"action":			"sinkhole",
+				"packet-capture":	"extended-capture",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-proxy",
+				"action":			"sinkhole",
+				"packet-capture":	"extended-capture",
+				"log-level":		"default"
+			},
+			{
+				"name":				"pan-dns-sec-recent",
+				"action":			"allow",
+				"packet-capture":	"disable",
+				"log-level":		"default"
+			}
+		],
+		"sinkhole":		{
+				"ipv4-address":		"72.5.65.115",
+				"ipv6-address":		"::1"
+		},
+		"lists":		[
+			{
+				"name":				"default-paloalto-dns",
+				"action":			"sinkhole",
+				"packet-capture":	"extended-capture"
+			}
+		],
+		"whitelist":	["example.com", "*.example.com"]
+			
+	},
+	"mica-engine-spyware-enabled":	[
+			{
+				"name":						"HTTP Command and Control detector",
+				"inline-policy-action":		"drop"	
+			},
+			{
+				"name":						"HTTP2 Command and Control detector",
+				"inline-policy-action":		"drop"	
+			},
+			{
+				"name":						"SSL Command and Control detector",
+				"inline-policy-action":		"reset-client"	
+			},
+			{
+				"name":						"Unknown-TCP Command and Control detector",
+				"inline-policy-action":		"reset-server"	
+			},
+			{
+				"name":						"Unknown-UDP Command and Control detector",
+				"inline-policy-action":		"drop"	
+			}			
+	],
+	"inline-exception-edl-url":		[],
+	"inline-exception-ip-address":	[],
+	"cloud-inline-analysis":		"yes",
+	"threat-exception":				[
+		{
+			"name":				"10219",
+			"action":			"reset-client",
+			"packet-capture":	"single-packet"
+		},
+		{
+			"name":				"10218",
+			"action":			"reset-server",
+			"packet-capture":	"disable"
+		},
+		{
+			"name":				"10230",
+			"action":			"reset-both",
+			"packet-capture":	"extended-capture"
+		},
+		{
+			"name":				"10273",
+			"action":			"block-ip",
+			"track-by":			"source",
+			"duration":			"10",
+			"packet-capture":	"extended-capture"
+		},
+		{
+			"name":				"10279",
+			"action":			"allow"
+		}
+	]
+}

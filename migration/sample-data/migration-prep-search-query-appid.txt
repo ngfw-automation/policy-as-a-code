@@ -1,0 +1,2 @@
+((!(addr.dst in '10.0.0.0/8') and !(addr.dst in '192.168.0.0/16') and !(addr.dst in '172.16.0.0/12')) and ((addr.src in '10.0.0.0/8') or (addr.src in '192.168.0.0/16') or (addr.src in '172.16.0.0/12'))) 
+ and (srcuser neq '') and (session_end_reason neq threat) and (action eq allow) and (bytes geq 50000) and (( device_name eq 'firewall-to-be-migrated-1' ) or ( device_name eq 'firewall-to-be-migrated-2' )) 

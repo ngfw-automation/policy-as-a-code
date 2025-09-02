@@ -1,0 +1,88 @@
+page_id: application_block_page
+title: "Web Application Blocked"
+
+default_heading: "Web page blocked"
+default_message: |
+  This website has been blocked according to our security policy.  
+  If you need access for business purposes, please submit a request below.  
+  <br><br>
+  <a href='${servicedesk_base}${servicedesk_form_id.unknown}&reason=business-need&url=${url}&user=${usr}&details=${app}&rule=${rule}&time=${timenow.toISOString()}'>
+  Submit a request</a> with IT Support for assistance.
+
+servicedesk_form_id:
+  non_authorized_user:      a1111111111111111111111111111111
+  non_sanctioned_app:       b2222222222222222222222222222222
+  blocked_app_category:     c3333333333333333333333333333333
+  non_authenticated_user:   d4444444444444444444444444444444
+  unknown:                  e5555555555555555555555555555555
+  misclassified_app_or_url: f6666666666666666666666666666666
+
+conditional_blocks:
+  - match: rule
+    operator: starts_with
+    value: not-authorized-for-
+    heading: "Approval required"
+    message: |
+      This website falls under the “{category}” category and needs approval.  
+      If you need access, please
+      <a href='${servicedesk_base}${servicedesk_form_id.non_authorized_user}&url=${url}&category=${category}&details=${app}&rule=${rule}&time=${timenow.toISOString()}'>
+      submit a request</a>.
+
+  - match: rule
+    operator: includes
+    value: non-sanctioned-
+    heading: "Non-sanctioned web application"
+    message: |
+      This {category} web application is not authorised for business use.  
+      If you require it, please
+      <a href='${servicedesk_base}${servicedesk_form_id.non_sanctioned_app}&url=${url}&category=${category}&details=${app}&rule=${rule}&time=${timenow.toISOString()}'>
+      submit a request</a> for review.
+
+  - match: rule
+    operator: includes
+    value: blocked-category-
+    heading: "Non-sanctioned web application category"
+    message: |
+      This site belongs to a web application category that is not sanctioned.  
+      If you believe it is required, please
+      <a href='${servicedesk_base}${servicedesk_form_id.blocked_app_category}&url=${url}&category=${category}&details=${app}&rule=${rule}&time=${timenow.toISOString()}'>
+      submit a request</a> for review.
+
+  - match: rule
+    operator: includes
+    value: non-authenticated-
+    heading: "Not authenticated"
+    message: |
+      We couldn't verify your identity, which is required to access this site.  
+      Please
+      <a href='${servicedesk_base}${servicedesk_form_id.non_authenticated_user}&url=${url}&category=${category}&details=${app}&rule=${rule}&time=${timenow.toISOString()}'>
+      contact IT Support</a>.
+
+  - match: rule
+    operator: regex
+    value: "(incident-response-compromised-host-isolation|incident-response-block-ip-source)"
+    heading: "Blocked – Device Isolated"
+    message: |
+      Our security system has identified a critical security issue and isolated
+      your computer from the Internet to prevent any damage to company data. 
+      A ticket has been opened and confirmation e-mail from the Service Portal 
+      has been sent to your inbox for tracking.
+
+  - match: rule
+    operator: regex
+    value: "(incident-response-block-ip-destination|incident-response-block-url|incident-response-palo-dns-sinkhole|bad-ip-destinations|bad-url-destinations)"
+    heading: "Malicious Content on Website"
+    message: |
+      Our security system has identified potential risks on this website and
+      blocked it for your protection.  
+      If you believe this site is safe and necessary, please
+      <a href='${servicedesk_base}${servicedesk_form_id.misclassified_app_or_url}&url=${url}&category=${category}&details=${app}&rule=${rule}&time=${timenow.toISOString()}'>
+      report misclassification</a>.
+
+fallback:
+  heading: "Blocked"
+  message: |
+    We're unable to provide specific details about why this website was blocked.  
+    If you need access for work, please
+    <a href='${servicedesk_base}${servicedesk_form_id.unknown}&url=${url}&category=${category}&details=${app}&rule=${rule}&time=${timenow.toISOString()}'>
+    contact IT Support</a> for assistance.

@@ -1,0 +1,19 @@
+{
+    "entry": {
+        "@name": "WFP-default",
+        "rules": {
+            "entry": {
+                "@name": "Analyse all downloads",
+                "application": {
+                    "member": "any"
+                },
+                "file-type": {
+                    "member": "any"
+                },
+                "direction": "download",
+                "analysis": "public-cloud"
+            }
+        },
+        "description": "WildFire profile applied to regular outbound traffic"
+    }
+}

@@ -1,0 +1,36 @@
+HTTP Headers:
+=============
+content-type: application/json
+
+HTTP Method:
+============
+POST
+
+Payload:
+========
+{
+    "short description":   "Host Isolated - C&C detected ($src, $srcuser)",
+    "description":         "Internal host exhibited C&C behaviour that matched a $severity severity command-and-control IPS signature. Action taken was $action and the host was isolated from the Internet as a precaution. This is a critical incident that must be investigated ASAP.",
+    "time received":       "$time_received",
+    "time generated":      "$time_generated",
+    "device_name":         "$device_name",
+    "content version":     "$contentver",
+    "session id":          "$sessionid",
+    "source zone":         "$from",
+    "source address":      "$src",
+    "source port":         "$sport",
+    "source user":         "$srcuser",
+    "destination zone":    "$to",
+    "destination address": "$dst",
+    "destination port":    "$dport",
+    "url category":        "$category",
+    "protocol":            "$proto",
+    "policy rule":         "$rule",
+    "application":         "$app",
+    "threat id":           "$threatid",
+    "thr_category":        "$thr_category",
+    "severity":            "$severity",
+    "action":              "$action",
+	"panorama traffic log filter": "((sessionid eq $sessionid) and (addr.src in $src) and ( addr.dst in $dst) and (device_name eq $device_name))"
+}
+

@@ -1,0 +1,35 @@
+[
+    {
+        "name": "APG-web-browsing",
+        "value": ["web-browsing", "ssl", "google-base", "google-app-engine", "soap", "websocket"]
+    },
+    {
+        "name": "APG-web-browsing-risky",
+        "value": ["web-browsing", "ssl", "google-base", "google-app-engine", "soap"]
+    },
+    {
+        "name": "APG-endpoint-software-updates",
+        "value": ["ms-update", "google-update", "java-update", "ms-product-activation", "adobe-update",
+          "windows-push-notifications", "apple-push-notifications", "paloalto-updates", "apple-appstore",
+          "ms-store", "apple-update"]
+    },
+    {
+        "name": "APG-office365-core-web",
+        "value": ["ms-office365", "office365-enterprise-access", "ms-delve", "ms-onedrive", "ms-onenote", "sway"]
+    },
+    {
+        "name": "APG-office365-dep-http",
+        "value": ["http-audio", "http-video", "silverlight", "soap", "ssl", "web-browsing", "websocket"]
+    },
+    {
+        "name": "APG-office365-dep-non-http",
+        "value": ["rtcp", "rtp-base", "stun", "websocket"]
+    },
+    {
+        "name": "APG-palo-alto-services",
+        "value": ["paloalto-logging-service", "paloalto-device-telemetry", "paloalto-wildfire-cloud",
+          "paloalto-dns-security", "paloalto-iot-security", "paloalto-shared-services", "paloalto-updates",
+          "paloalto-cloud-identity", "pan-db-cloud", "ocsp", "paloalto-aurl-idl", "google-base",
+          "paloalto-ace", "paloalto-ace-kcs"]
+    }
+]

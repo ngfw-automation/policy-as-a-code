@@ -1,0 +1,7 @@
+((!(addr.dst in '10.0.0.0/8') and !(addr.dst in '192.168.0.0/16') and !(addr.dst in '172.16.0.0/12')) and ((addr.src in '10.0.0.0/8') or (addr.src in '192.168.0.0/16') or (addr.src in '172.16.0.0/12'))) 
+and (action eq alert) 
+and (user.src neq '') 
+and ((app eq web-browsing) or (app eq ssl) or (app eq google-base) or (app eq google-app-engine) or (app eq soap) or (app eq websocket)) 
+and !(url contains zoom) 
+and !(url contains skype) 
+and (( device_name eq 'firewall-to-be-migrated-1' ) or ( device_name eq 'firewall-to-be-migrated-2' )) 

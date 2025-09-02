@@ -1,0 +1,51 @@
+{
+    "name": "DP-compatible_decryption",
+    "ssl-forward-proxy": {
+        "block-expired-certificate": "yes",
+        "block-untrusted-issuer": "yes",
+        "block-unknown-cert": "no",
+        "block-timeout-cert": "no",
+        "restrict-cert-exts": "no",
+        "auto-include-altname": "yes",
+        "block-unsupported-version": "no",
+        "block-unsupported-cipher": "no",
+        "block-client-cert": "no",
+        "block-if-no-resource": "no",
+        "block-tls13-downgrade-no-resource": "no",
+        "strip-alpn": "yes"
+    },
+    "ssl-inbound-proxy": {
+        "block-unsupported-version": "no",
+        "block-unsupported-cipher": "no",
+        "block-if-no-resource": "no",
+        "block-tls13-downgrade-no-resource": "no"
+    },
+    "ssl-protocol-settings": {
+        "enc-algo-chacha20-poly1305": "yes",
+        "auth-algo-md5": "yes",
+        "min-version": "sslv3",
+        "max-version": "tls1-2",
+        "keyxchg-algo-rsa": "yes",
+        "keyxchg-algo-dhe": "yes",
+        "keyxchg-algo-ecdhe": "yes",
+        "enc-algo-3des": "yes",
+        "enc-algo-rc4": "yes",
+        "enc-algo-aes-128-cbc": "yes",
+        "enc-algo-aes-256-cbc": "yes",
+        "enc-algo-aes-128-gcm": "yes",
+        "enc-algo-aes-256-gcm": "yes",
+        "auth-algo-sha1": "yes",
+        "auth-algo-sha256": "yes",
+        "auth-algo-sha384": "yes"
+    },
+    "ssl-no-proxy": {
+        "block-expired-certificate": "no",
+        "block-untrusted-issuer": "no"
+    },
+    "ssh-proxy": {
+        "block-unsupported-version": "no",
+        "block-unsupported-alg": "no",
+        "block-ssh-errors": "no",
+        "block-if-no-resource": "no"
+    }
+}

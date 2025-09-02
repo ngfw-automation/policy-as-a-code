@@ -1,0 +1,22 @@
+{% extends "base.html.j2" %}
+
+{# --- extra <head> script required by PAN-OS ------------------------- #}
+{% block head_extra %}
+<script>
+  function pwdCheck() {
+    if (document.getElementById("pwd")) {
+      document.getElementById("continueText").innerHTML =
+        "If you require access to this page, have an IT Service Desk representative enter the override password here:";
+    }
+  }
+</script>
+{% endblock %}
+
+{# --- suppress the User / Category / Destination box for this page --- #}
+{% block summary %}{% endblock %}
+
+{# --- body: Continue form wrapper ------------------------------------ #}
+{% block extra_body %}
+<span id="continueText">{{ override_message | safe }}</span>
+<pan_form/>
+{% endblock %}

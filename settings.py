@@ -2,7 +2,7 @@
 This file defines global variables/constants for the `main.py` and other modules in the /lib folder.
 """
 POLICY_VERSION     = '1.0.10'
-POLICY_DATE        = '17 August 2025'
+POLICY_DATE        = '29 August 2025'
 
 # Minimum required versions for key modules
 MIN_PAN_OS_PYTHON_VERSION = "1.12.1"
@@ -25,7 +25,7 @@ RICH_TRACEBACKS_SHOW_VARS  = False  # show the local variables in each frame
 DEFAULT_ADMIN_USERNAME  = "admin"
 
 # Firewall address used to assess the policy, run tests and reports
-DEFAULT_FIREWALL = "192.168.0.1"
+DEFAULT_FIREWALL = "192.168.50.103"
 
 # Default vsys name - referenced only in policy-test.py
 DEFAULT_VSYS = "vsys1"
@@ -323,19 +323,3 @@ USE_FOLDER_NAMES_AS_GROUP_TAGS                  = False
 CREATE_CONSECUTIVE_TAG_FOR_SITE_SPECIFIC_RULES  = True
 CREATE_CONSECUTIVE_TAGS_FOR_POST_RULES          = True
 
-# ========================================================
-#          Color-related settings
-# ========================================================
-
-# These standard color names can be converted to color codes by the color_code() method
-# of the Tag class (for example panos.objects.Tag.color_code("red"))
-
-color_names = [
-    'red', 'green', 'blue', 'yellow', 'copper', 'orange', 'purple', 'gray',
-    'light green', 'cyan', 'light gray', 'blue gray', 'lime', 'black', 'gold',
-    'brown', 'olive', 'maroon', 'red-orange', 'yellow-orange', 'forest green',
-    'turquoise blue', 'azure blue', 'cerulean blue', 'midnight blue', 'medium blue',
-    'cobalt blue', 'violet blue', 'blue violet', 'medium violet', 'medium rose',
-    'lavender', 'orchid', 'thistle', 'peach', 'salmon', 'magenta', 'red violet',
-    'mahogany', 'burnt sienna', 'chestnut'
-]

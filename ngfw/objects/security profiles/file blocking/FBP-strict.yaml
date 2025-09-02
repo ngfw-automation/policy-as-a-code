@@ -1,0 +1,58 @@
+entry:
+  '@name': FBP-strict
+  rules:
+    entry:
+    - '@name': Block high risk file types
+      application:
+        member: any
+      file-type:
+        member:
+        - 7z
+        - bat
+        - cab
+        - chm
+        - class
+        - cpl
+        - dll
+        - exe
+        - flash
+        - hlp
+        - hta
+        - jar
+        - msi
+        - Multi-Level-Encoding
+        - ocx
+        - PE
+        - pif
+        - rar
+        - scr
+        - tar
+        - torrent
+        - vbe
+        - wsf
+        - powershell
+      action: block
+      direction: both
+    - '@name': Block encrypted RAR
+      application:
+        member: any
+      file-type:
+        member: encrypted-rar
+      action: block
+      direction: both
+    - '@name': Block encrypted ZIP upload
+      application:
+        member: any
+      file-type:
+        member: encrypted-zip
+      action: block
+      direction: upload
+    - '@name': Log all other file types
+      application:
+        member: any
+      file-type:
+        member: any
+      action: alert
+      direction: both
+  description: File blocking profile applied to controlled URL categories with Medium
+    and High risk

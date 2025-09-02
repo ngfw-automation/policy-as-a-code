@@ -1,0 +1,26 @@
+﻿Description,FQDN,DNS Security Policy
+Ad Tracking,test-cname-cloaking.testpanw.com,Ad Tracking Domains
+CNAME Cloaking,test-adtracking.testpanw.com,Ad Tracking Domains
+C2,test-c2.testpanw.com,Command and Control Domains
+DNS Tunneling,test-dnstun.testpanw.com,Command and Control Domains
+DNS Infiltration,test-dns-infiltration.testpanw.com,Command and Control Domains
+Domain Generation Algorithms (DGA),test-dga.testpanw.com,Command and Control Domains
+NSNS Attacks,test-nxns.testpanw.com,Command and Control Domains
+DNS rebinding,test-dns-rebinding.testpanw.com,Command and Control Domains
+Grayware,test-grayware.testpanw.com,Grayware Domains
+Fast Flux,test-fastflux.testpanw.com,Grayware Domains
+Malicious NRDs,test-malicious-nrd.testpanw.com,Grayware Domains
+Dangling,test-dangling-domain.testpanw.com,Grayware Domains
+Wildcard Abuse,test-wildcard-abuse.testpanw.com,Grayware Domains
+Strategical Ageing,test-strategically-aged.testpanw.com,Grayware Domains
+Stockpile,test-stockpile-domain.testpanw.com,Grayware Domains
+Cybersquatting,test-squatting.testpanw.com,Grayware Domains
+Subdomain Reputation,test-subdomain-reputation.testpanw.com,Grayware Domains
+Malware,test-malware.testpanw.com,Malware Domains
+Ransomware,test-ransomware.testpanw.com,Malware Domains
+Compromised DNS,test-compromised-dns.testpanw.com,Malware Domains
+Newly Registered Domains (NRDs),test-nrd.testpanw.com,Newly Registered Domains
+Dynamic DNS,test-ddns.testpanw.com,Newly Registered Domains
+Parked domains,test-parked.testpanw.com,Parked Domains
+Phishing domains,test-phishing.testpanw.com,Phishing Domains
+Proxy and anonymization,test-proxy.testpanw.com,Proxy Avoidance and Anonymizers

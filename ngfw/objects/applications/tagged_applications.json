@@ -1,0 +1,10 @@
+[
+    {
+        "tag_name": "ACME-sanctioned",
+        "tagged_applications": ["calendly"]
+    },
+    {
+        "tag_name": "Sanctioned",
+        "tagged_applications": ["calendly"]
+    }
+]

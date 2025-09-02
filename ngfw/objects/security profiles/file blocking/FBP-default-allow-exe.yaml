@@ -1,0 +1,46 @@
+entry:
+  '@name': FBP-default-allow-exe
+  rules:
+    entry:
+    - '@name': Block high risk file types
+      application:
+        member: any
+      file-type:
+        member:
+        - 7z
+        - chm
+        - cpl
+        - hlp
+        - hta
+        - ocx
+        - pif
+        - rar
+        - scr
+        - torrent
+        - vbe
+        - wsf
+      action: block
+      direction: both
+    - '@name': Pause encrypted RAR
+      application:
+        member: any
+      file-type:
+        member: encrypted-rar
+      action: continue
+      direction: both
+    - '@name': Pause encrypted ZIP upload
+      application:
+        member: any
+      file-type:
+        member: encrypted-zip
+      action: continue
+      direction: upload
+    - '@name': Log all other file types
+      application:
+        member: any
+      file-type:
+        member: any
+      action: alert
+      direction: both
+  description: File blocking profile applied to controlled URL categories where executable
+    files can be downloaded from

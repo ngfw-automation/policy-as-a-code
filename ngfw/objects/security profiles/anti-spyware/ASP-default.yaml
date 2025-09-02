@@ -1,0 +1,107 @@
+entry:
+  "@name": "ASP-default"
+  rules: # This section corresponds to rules on the "Signature Policies" tab of the profile
+    entry:
+      - "@name": "Block All High-to-Critical"
+        severity:
+          member: ["critical", "high"]
+        threat-name: "any"
+        action:
+          drop: null
+        category: "any"
+        packet-capture: "extended-capture"
+      - "@name": "Block Med-to-Critical Hacktools"
+        severity:
+          member: ["critical", "high", "medium"]
+        threat-name: "any"
+        action:
+          reset-both: null
+        category: "hacktool"
+        packet-capture: "extended-capture"
+      - "@name": "Default all other severity"
+        severity:
+          member: ["medium", "low", "informational"]
+        threat-name: "any"
+        action:
+          default: null
+        category: "any"
+        packet-capture: "disable"
+  threat-exception: null  # This section corresponds to exceptions on the "Signature Exceptions" tab of the profile
+  botnet-domains:         # This section corresponds to policies on the "DNS Policies" tab of the profile
+    dns-security-categories:
+      entry:
+        - "@name": "pan-dns-sec-adtracking" # AD Tracking Domains
+          action: "allow"
+          log-level: "default"
+          packet-capture: "disable"
+        - "@name": "pan-dns-sec-cc"         # Command and Control Domains
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-ddns"       # Dynamic DNS Hosted Domains
+          action: "allow"
+          log-level: "default"
+          packet-capture: "single-packet"
+        - "@name": "pan-dns-sec-grayware"   # Grayware Domains
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-malware"    # Malware Domains
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-parked"     # Parked Domains
+          action: "allow"
+          log-level: "default"
+          packet-capture: "disable"
+        - "@name": "pan-dns-sec-phishing"   # Phishing Domains
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-proxy"      # Proxy Avoidance and Anonymizers
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-recent"     # Newly Registered Domains
+          action: "allow"
+          log-level: "default"
+          packet-capture: "disable"
+    sinkhole:
+      ipv4-address: "198.135.184.22"        # Sinkhole IPv4 address
+      ipv6-address: "::1"
+    lists:
+      entry:
+        "@name": "default-paloalto-dns"     # "default-paloalto-dns" blocklist
+        action:
+          sinkhole: null
+        packet-capture: "extended-capture"
+    whitelist:                              # DNS Exceptions tab: DNS Domain/FQDN Allow List
+      entry:
+        - "@name": "example.com"
+        - "@name": "*.example.com"
+        - "@name": "example.net"
+        - "@name": "*.example.net"
+        - "@name": "internal"
+        - "@name": "*.internal"
+  mica-engine-spyware-enabled:              # Inline Cloud Analysis tab of the profile
+    entry:
+      - "@name": "HTTP Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "HTTP2 Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "SSL Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "Unknown-TCP Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "Unknown-UDP Command and Control detector"
+        inline-policy-action: "alert"
+  inline-exception-edl-url:             # Exclude from Inline CLoud Analysis (URL EDLs)
+    member:
+      - "UCL-acme-generic-app"
+      - "EDL-URL-m365_worldwide_any_all"
+  inline-exception-ip-address:          # Exclude from Inline CLoud Analysis (IP EDLs)
+    member:
+      - "EDL-IP-m365_worldwide_any_all"
+      - "EDL-IP-break_glass_dst"
+  description: "Spyware profile applied to controlled URL categories with Low risk, and to controlled Apps"
+  cloud-inline-analysis: "no"           # Enable Inline CLoud Analysis feature (requires a license)

@@ -1,0 +1,22 @@
+{
+    "name":				"WFP-example",
+	"description":		"This example WildFire profile is for demonstration purposes only. DO NOT USE IN PRODUCTION ENVIRONMENTS.",
+	"disable override":	"no",
+	"rules":		[
+		{
+			"name":						"Test rule 1",
+			"applications":				["any"],
+			"file types":				["MacOSX", "apk", "archive", "email-link", "flash",  "jar", "linux", "ms-office", "pdf", "pe", "script"],
+			"direction":				"download",
+			"analysis":					"public-cloud"
+		},
+		{
+			"name":						"Test rule 2",
+			"applications":				["web-browsing", "facebook-base"],
+			"file types":				["any"],
+			"direction":				"upload",
+			"analysis":					"public-cloud"
+		}
+	]
+}
+

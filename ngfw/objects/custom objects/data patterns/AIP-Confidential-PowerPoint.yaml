@@ -1,0 +1,14 @@
+entry:
+  '@name': AIP-Confidential-PowerPoint
+  pattern-type:
+    file-properties:
+      pattern:
+        entry:
+        - '@name': AIP PowerPoint - Confidential
+          file-type: aip-encrypted-pptx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 33333333-3333-3333-3333-333333333333
+        - '@name': PowerPoint - Confidential
+          file-type: pptx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 33333333-3333-3333-3333-333333333333
