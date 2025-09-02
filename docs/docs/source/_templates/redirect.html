@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="0; url={{ pathto('introduction') }}">
+    <script>
+        window.location.href = "{{ pathto('introduction') }}";
+    </script>
+    <title>{{ project }} - Redirecting...</title>
+</head>
+<body>
+    <p>Redirecting to <a href="{{ pathto('introduction') }}">{{ project }} documentation</a>...</p>
+</body>
+</html>

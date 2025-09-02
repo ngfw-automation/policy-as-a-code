@@ -27,4 +27,4 @@ RUN addgroup -S nonroot && adduser -S nonroot -G nonroot
 USER nonroot
 
 # Run the main Python script when the container starts
-#CMD ["python", "main.py"]
+CMD ["python", "main.py"]

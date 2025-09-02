@@ -1,0 +1,5 @@
+sphinx==8.3.0
+sphinx-rtd-theme==3.0.2
+sphinx-book-theme
+sphinx-plotly-directive
+plotly>=5.18.0
