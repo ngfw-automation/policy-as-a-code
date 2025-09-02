@@ -1,0 +1,81 @@
+{
+    "entry": {
+        "@name": 					   "AVP-default",
+        "decoder": {
+            "entry": [
+                {
+                    "@name":           "smtp",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "smb",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "pop3",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "imap",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "http2",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "http",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "ftp",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                }
+            ]
+        },
+        "mlav-engine-filebased-enabled": {
+            "entry": [
+                {
+                    "@name":               "Windows Executables",
+                    "mlav-policy-action":  "enable(alert-only)"
+                },
+                {
+                    "@name":               "PowerShell Script 1",
+                    "mlav-policy-action":  "enable(alert-only)"
+                },
+                {
+                    "@name":               "PowerShell Script 2",
+                    "mlav-policy-action":  "enable(alert-only)"
+                },
+                {
+                    "@name":               "Executable Linked Format",
+                    "mlav-policy-action":  "enable(alert-only)"
+                },
+                {
+                    "@name":               "MSOffice",
+                    "mlav-policy-action":  "enable(alert-only)"
+                },
+                {
+                    "@name":               "Shell",
+                    "mlav-policy-action":  "enable(alert-only)"
+                }
+            ]
+        },
+        "description":     "Antivirus profile for regular traffic (non-web apps and URLs not classified as High or Medium risk)",
+        "packet-capture":  "yes"
+    }
+}

@@ -1,0 +1,107 @@
+entry:
+  "@name": "ASP-default"
+  rules:
+    entry:
+      - "@name": "Block All High-to-Critical"
+        severity:
+          member: ["critical", "high"]
+        threat-name: "any"
+        action:
+          drop: null
+        category: "any"
+        packet-capture: "extended-capture"
+      - "@name": "Block Med-to-Critical Hacktools"
+        severity:
+          member: ["critical", "high", "medium"]
+        threat-name: "any"
+        action:
+          reset-both: null
+        category: "hacktool"
+        packet-capture: "extended-capture"
+      - "@name": "Default all other severity"
+        severity:
+          member: ["medium", "low", "informational"]
+        threat-name: "any"
+        action:
+          default: null
+        category: "any"
+        packet-capture: "disable"
+  threat-exception: null
+  botnet-domains:
+    dns-security-categories:
+      entry:
+        - "@name": "pan-dns-sec-adtracking"
+          action: "allow"
+          log-level: "default"
+          packet-capture: "disable"
+        - "@name": "pan-dns-sec-cc"
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-ddns"
+          action: "allow"
+          log-level: "default"
+          packet-capture: "single-packet"
+        - "@name": "pan-dns-sec-grayware"
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-malware"
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-parked"
+          action: "allow"
+          log-level: "default"
+          packet-capture: "disable"
+        - "@name": "pan-dns-sec-phishing"
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-proxy"
+          action: "sinkhole"
+          log-level: "default"
+          packet-capture: "extended-capture"
+        - "@name": "pan-dns-sec-recent"
+          action: "allow"
+          log-level: "default"
+          packet-capture: "disable"
+    sinkhole:
+      ipv4-address: "198.135.184.22"
+      ipv6-address: "::1"
+    lists:
+      entry:
+        "@name": "default-paloalto-dns"
+        action:
+          sinkhole: null
+        packet-capture: "extended-capture"
+    whitelist:
+      entry:
+        - "@name": "example.com"
+        - "@name": "*.example.com"
+        - "@name": "example.net"
+        - "@name": "*.example.net"
+        - "@name": "internal"
+        - "@name": "*.internal"
+  mica-engine-spyware-enabled:
+    entry:
+      - "@name": "HTTP Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "HTTP2 Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "SSL Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "Unknown-TCP Command and Control detector"
+        inline-policy-action: "alert"
+      - "@name": "Unknown-UDP Command and Control detector"
+        inline-policy-action: "alert"
+  inline-exception-edl-url:
+    member:
+      - "UCL-acme-generic-app"
+      - "EDL-URL-m365_worldwide_any_all"
+  inline-exception-ip-address:
+    member:
+      - "EDL-IP-m365_worldwide_any_all"
+      - "EDL-IP-break_glass_dst"
+  description: "Spyware profile applied to controlled URL categories with Low risk, and to controlled Apps"
+  cloud-inline-analysis: "no"

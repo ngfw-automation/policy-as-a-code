@@ -1,0 +1,81 @@
+{
+    "entry": {
+        "@name":                        "AVP-strict",
+        "decoder": {
+            "entry": [
+                {
+                    "@name":           "smtp",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "smb",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "pop3",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "imap",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "http2",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "http",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                },
+                {
+                    "@name":           "ftp",
+                    "action":          "reset-both",
+                    "wildfire-action": "reset-both",
+                    "mlav-action":     "default"
+                }
+            ]
+        },
+        "mlav-engine-filebased-enabled": {
+            "entry": [
+                {
+                    "@name":              "Windows Executables",
+                    "mlav-policy-action": "enable"
+                },
+                {
+                    "@name":              "PowerShell Script 1",
+                    "mlav-policy-action": "enable"
+                },
+                {
+                    "@name":              "PowerShell Script 2",
+                    "mlav-policy-action": "enable"
+                },
+                {
+                    "@name":              "Executable Linked Format",
+                    "mlav-policy-action": "enable"
+                },
+                {
+                    "@name":              "MSOffice",
+                    "mlav-policy-action": "enable"
+                },
+                {
+                    "@name":              "Shell",
+                    "mlav-policy-action": "enable"
+                }
+            ]
+        },
+        "description":                  "Antivirus profile applied to URLs with Medium and High risk",
+        "packet-capture":               "yes"
+    }
+}

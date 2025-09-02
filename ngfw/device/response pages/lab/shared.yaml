@@ -1,0 +1,53 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  Environment-wide shared values
+# ─────────────────────────────────────────────────────────────────────────────
+firm_name: ACME
+infosec_label: Cyber Security
+
+# Base URL for ServiceNow forms (individual form IDs live in each page YAML)
+servicedesk_base: https://acme.dev.service-now.com/sp?id=sc_cat_item&sys_id=
+
+# Only used if you later add JS redirects
+redirect_base: https://example-sandbox.com/browser
+
+# Help text shown under the status line
+timestamp_message_suffix: >-
+  This is a non-production system
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  Global CSS
+# ─────────────────────────────────────────────────────────────────────────────
+css: |
+  /* ——— Reset & colours ——— */
+  body      { margin:0; background:#f0f2f5; font-family:Arial,Helvetica,sans-serif; }
+  a         { color:#0066cc; text-decoration:none; }
+  a:hover   { text-decoration:underline; }
+  a:focus   { outline:2px solid #0066cc; outline-offset:2px; }
+
+  /* ——— Container ——— */
+  #content  { max-width:880px; margin:3rem auto 0; background:#ffffff; border:1px solid #dfe3e8;
+              border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,.05); }
+
+  /* ——— Header banner ——— */
+  .banner   { background:#2d3e5f; color:#fff; padding:1.1rem 1.4rem;
+              border-top-left-radius:8px; border-top-right-radius:8px;
+              margin-bottom:1.6rem; }
+  .brand    { font-size:1.8rem; font-weight:600; letter-spacing:.05em; display:block; line-height:1; }
+  .infosec  { font-size:.9rem; opacity:.8; }
+
+  /* ——— Main response area ——— */
+  .response   { padding:0 1.4rem .6rem 1.4rem; }
+  h1          { color:#2d3e5f; font-size:1.7rem; margin:0 0 .9rem 0; }
+  #warningText{ margin:0 0 .6rem 0; line-height:1.55; }
+
+  /* ——— Summary panel ——— */
+  .summary    { background:#eef2f6; border-radius:4px; padding:.9rem 1.2rem;
+                font-size:.95rem; margin:.6rem 1.4rem 1.2rem 1.4rem; }
+  .summary b  { color:#2d3e5f; font-weight:600; }
+
+  /* ——— Footer (status + help) ——— */
+  .footer-text{ font-size:.8rem; color:#555; margin:.6rem 1.4rem 1.4rem 1.4rem;
+                text-align:center; line-height:1.35; }
+
+  /* ——— Palo Alto injected Continue form ——— */
+  pan_form    { display:block; margin:1.6rem 0; }

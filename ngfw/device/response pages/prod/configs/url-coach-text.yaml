@@ -1,0 +1,21 @@
+page_id: url_coach_text
+title: "Access paused"
+
+default_heading: "Access paused"
+default_message: |
+  Access is temporarily blocked because your request falls under a policy that
+  requires explicit acknowledgement or an administrator override.
+
+# Message above the password field (overrides span#continueText)
+override_message: |
+  If you require access to this page, have an administrator enter the override
+  password here:
+
+# No summary tokens on this page, so no conditional blocks needed
+conditional_blocks: []
+
+fallback:
+  heading: "Access paused"
+  message: |
+    Access is temporarily blocked because your request falls under a policy
+    that requires explicit acknowledgement or an administrator override.

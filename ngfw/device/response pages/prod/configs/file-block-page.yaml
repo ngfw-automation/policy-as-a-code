@@ -1,0 +1,22 @@
+page_id: file_block_page
+title: "File Transfer Blocked"
+
+default_heading: "File Transfer Blocked"
+default_message: |
+  The file you are trying to download or upload may be risky and has been blocked
+  by our security system. If you need this file for business purposes, please
+  <a href="${servicedesk_base}${servicedesk_form_id.file_block}&url=${url}&rule=${rule}&time=${timenow.toISOString()}">
+  submit a request</a>.
+
+conditional_blocks: []
+
+fallback:
+  heading: "File Transfer Blocked"
+  message: |
+    The file you are trying to download or upload is blocked by policy. If you
+    believe this is in error, please
+    <a href="${servicedesk_base}${servicedesk_form_id.file_block}&url=${url}&rule=${rule}&time=${timenow.toISOString()}">
+    contact IT Support</a>.
+
+servicedesk_form_id:
+  file_block: "g7777777777777777777777777777777"

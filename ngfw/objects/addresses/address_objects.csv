@@ -1,0 +1,13 @@
+Name,Type,Address,Tags,Description,Group Name,Group Tags,Group Description
+N-all-multicast-addresses_224.0.0.0_4,IP Netmask,224.0.0.0/4,,All IPv4 multicast addresses ,,,
+H-lab_firewall_mng-192.168.50.103_32,IP Netmask,192.168.50.103/32,,Management interface of the lab firewall,AG-all-palo-alto-devices,,"Management interfaces of firewalls, Panoramas and log collectors"
+H-lab_panorama_mng-192.168.50.102_32,IP Netmask,192.168.50.102/32,,Management interface of the lab Panorama,AG-all-palo-alto-devices,,
+N-rfc_1918-10.0.0.0_8,IP Netmask,10.0.0.0/8,,,AG-internal_network,,This group represents the internal network of your organization
+N-rfc_1918-172.16.0.0_12,IP Netmask,172.16.0.0/12,,,AG-internal_network,,
+N-rfc_1918-192.168.0.0_16,IP Netmask,192.168.0.0/16,,,AG-internal_network,,
+H-dns-sinkhole-198.135.184.22_32,IP Netmask,198.135.184.22/32,,,,,
+FQDN-time.apple.com,FQDN,time.apple.com,,Default time source for Apple MacOS/iOS,,,
+FQDN-time.windows.com,FQDN,time.windows.com,,Default time source for Microsoft Windows,,,
+H-open_dns-208.67.222.222_32,IP Netmask,208.67.222.222/32,,,,,
+H-open_dns-208.67.220.220_32,IP Netmask,208.67.220.220/32,,,,,
+FQDN-tacupload.paloaltonetworks.com,FQDN,tacupload.paloaltonetworks.com,,Palo Alto Networks TAC server for direct upload of files from firewalls (core files etc.)

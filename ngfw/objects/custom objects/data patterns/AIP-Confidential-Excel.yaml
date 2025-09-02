@@ -1,0 +1,14 @@
+entry:
+  '@name': AIP-Confidential-Excel
+  pattern-type:
+    file-properties:
+      pattern:
+        entry:
+        - '@name': AIP Excel - Confidential
+          file-type: aip-encrypted-xlsx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 33333333-3333-3333-3333-333333333333
+        - '@name': Excel - Confidential
+          file-type: xlsx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 33333333-3333-3333-3333-333333333333

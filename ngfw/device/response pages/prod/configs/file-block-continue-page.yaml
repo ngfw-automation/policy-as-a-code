@@ -1,0 +1,17 @@
+page_id: file_block_continue_page
+title: "File Transfer Paused"
+
+default_heading: "File Transfer Paused"
+default_message: |
+  The file you are trying to download or upload may be risky and has been blocked
+  by our security system. If you need to transfer this file for business purposes,
+  please click **Continue** below.
+
+# no special conditions
+conditional_blocks: []
+
+fallback:
+  heading: "File Transfer Paused"
+  message: |
+    Transfer paused pending review. If you require this transfer, click
+    **Continue** or contact IT Support.

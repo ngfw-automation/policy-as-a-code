@@ -1,0 +1,14 @@
+entry:
+  '@name': AIP-General-Excel
+  pattern-type:
+    file-properties:
+      pattern:
+        entry:
+        - '@name': AIP Excel - General
+          file-type: aip-encrypted-xlsx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 22222222-2222-2222-2222-222222222222
+        - '@name': Excel - General
+          file-type: xlsx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 22222222-2222-2222-2222-222222222222

@@ -1,0 +1,14 @@
+entry:
+  '@name': AIP-General-PowerPoint
+  pattern-type:
+    file-properties:
+      pattern:
+        entry:
+        - '@name': AIP PowerPoint - General
+          file-type: aip-encrypted-pptx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 22222222-2222-2222-2222-222222222222
+        - '@name': PowerPoint - General
+          file-type: pptx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 22222222-2222-2222-2222-222222222222

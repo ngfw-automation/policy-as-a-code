@@ -1,0 +1,176 @@
+{
+    "entry": {
+        "@name": "DFP-default",
+        "rules": {
+            "entry": [
+                {
+                    "@name": "rule0",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "any",
+                            "xlsx",
+                            "xls",
+                            "aip-encrypted-xlsx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-General-Excel",
+                    "log-severity": "informational"
+                },
+                {
+                    "@name": "rule1",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "any",
+                            "docx",
+                            "doc",
+                            "aip-encrypted-docx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-General-Word",
+                    "log-severity": "informational"
+                },
+                {
+                    "@name": "rule2",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "any",
+                            "pptx",
+                            "ppt",
+                            "aip-encrypted-pptx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-General-PowerPoint",
+                    "log-severity": "informational"
+                },
+                {
+                    "@name": "rule3",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "xlsx",
+                            "xls",
+                            "aip-encrypted-xlsx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-Sensitive-Excel",
+                    "log-severity": "low"
+                },
+                {
+                    "@name": "rule4",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "docx",
+                            "doc",
+                            "aip-encrypted-docx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-Sensitive-Word",
+                    "log-severity": "low"
+                },
+                {
+                    "@name": "rule5",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "pptx",
+                            "ppt",
+                            "aip-encrypted-pptx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-Sensitive-PowerPoint",
+                    "log-severity": "low"
+                },
+                {
+                    "@name": "rule6",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "xlsx",
+                            "xls",
+                            "aip-encrypted-xlsx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-Confidential-Excel",
+                    "log-severity": "medium"
+                },
+                {
+                    "@name": "rule7",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "docx",
+                            "doc",
+                            "aip-encrypted-docx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-Confidential-Word",
+                    "log-severity": "medium"
+                },
+                {
+                    "@name": "rule8",
+                    "application": {
+                        "member": "any"
+                    },
+                    "file-type": {
+                        "member": [
+                            "pptx",
+                            "ppt",
+                            "aip-encrypted-pptx"
+                        ]
+                    },
+                    "direction": "both",
+                    "alert-threshold": "1",
+                    "block-threshold": "0",
+                    "data-object": "AIP-Confidential-PowerPoint",
+                    "log-severity": "medium"
+                }
+            ]
+        },
+        "data-capture": "yes",
+        "description": "This profiles provides detection capabilities for Excel/Word/PowerPoint documents with AIP sensitivity labels"
+    }
+}

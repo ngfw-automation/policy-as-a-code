@@ -1,0 +1,15 @@
+Name,Type,Description,Sites
+UCL-acme-generic-app,List,This category covers all URLs in ACME domains and subdomains,example.com/
+UCL-acme-generic-app,List,,*.example.com/
+UCL-acme-generic-app,List,,example.net/
+UCL-acme-generic-app,List,,*.example.net/
+UCL-restricted_file_download,List,Websites where all authenticated users are allowed to download files of restricted types,^.vo.msecnd.net/stable/
+UCL-restricted_file_download,List,,*.cdn.office.net/pr/^/Office/Data/^/
+UCL-restricted_file_download,List,,download.lenovo.com/pccbbs/
+UCL-palo-alto-dependencies,List,URLs required for firewall-related services,*.paloaltonetworks.com/
+UCL-palo-alto-dependencies,List,,assets.zoom.us/
+UCM-comp-inet-info_low-risk,Match,,computer-and-internet-info
+UCM-comp-inet-info_low-risk,Match,,low-risk
+UCM-content-delivery_low-risk,Match,,content-delivery-networks
+UCM-content-delivery_low-risk,Match,,low-risk
+UCL-m365-worldwide-any-optimize,List,This category includes URLs from M365 Worldwide Any Optimize category,https://saasedl.paloaltonetworks.com/feeds/m365/worldwide/any/optimize/url

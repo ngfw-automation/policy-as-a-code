@@ -1,0 +1,76 @@
+page_id: url_block_page
+title: "Web Page Blocked"
+default_heading: "Web page blocked (unknown reason)"
+default_message: |
+  This website has been blocked according to our security policy.  
+  If you need access for business purposes, please use the link below.  
+  <br><br>
+  <a href='${servicedesk_base}${servicedesk_form_id.unknown}&reason=business-need&url=${url}&user=${usr}&time=${timenow.toISOString()}'>
+  Submit a request</a> with IT Support for assistance.
+
+servicedesk_form_id:
+  non_authorized_regular:       a1111111111111111111111111111111
+  non_authorized_sensitive:     b1111111111111111111111111111111
+  non_authorized_aup_violation: c1111111111111111111111111111111
+  misclassified:                f6666666666666666666666666666666
+  unknown:                      e5555555555555555555555555555555
+
+conditional_blocks:
+  # Web-mail - on-negotiable Compliance requirement
+  - match: category
+    operator: includes
+    value: web-based-email
+    heading: "Compliance warning"
+    message: |
+      For your security and data protection, access to personal web-mail sites
+      is prohibited on company devices.  
+      Please use approved corporate e-mail for business communication and
+      personal devices for personal matters.
+
+  # Malicious (cyber risks)
+  - match: category
+    operator: regex
+    value: "(malware|phishing|ransomware|real-time-detection|scanning-activity|compromised-website|command-and-control)"
+    heading: "Malicious Content on Website"
+    message: |
+      For your protection, our security system has identified this site as malicious and blocked it.  
+      If you believe this is a mistake, please
+      <a href='${servicedesk_base}${servicedesk_form_id.misclassified}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}'>
+      report misclassification</a>.
+
+  # Non-cyber/Compliance risk
+  - match: category
+    operator: regex
+    value: "(copyright-infringement|encrypted-dns|peer-to-peer|proxy-avoidance-and-anonymizers)"
+    heading: "Not authorized for business use"
+    message: |
+      For your protection, our security system has identified this site as non-compliant with the Acceptable Use Policy and blocked it.  
+      To request access, please <a href='${servicedesk_base}${servicedesk_form_id.non_authorized_aup_violation}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}'>request approval</a>. 
+      If you believe this site is mis-categorised, you can 
+      <a href='${servicedesk_base}${servicedesk_form_id.misclassified}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}'>
+      report misclassification</a> (separate form).
+
+  # Non-malicious but risky
+  - match: category
+    operator: regex
+    value: "(grayware|hacking|parked|newly-registered-domain)"
+    heading: "Approval Required – Security Risks"
+    message: |
+      This website falls under a category that requires approval by Information Security before use.  
+      If you need access, please
+      <a href='${servicedesk_base}${servicedesk_form_id.non_authorized_sensitive}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}'>
+      request approval</a>.  
+      If you believe this site is mis-categorised, you can
+      <a href='${servicedesk_base}${servicedesk_form_id.misclassified}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}'>
+      report misclassification</a> (separate form).
+
+fallback:
+  heading: "Approval required"
+  message: |
+    This website falls under a category that requires approval before use.  
+    To request access, please
+    <a href='${servicedesk_base}${servicedesk_form_id.non_authorized_regular}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}'>
+    request approval</a>.  
+    If you believe this site is mis-categorised, you can
+    <a href='${servicedesk_base}${servicedesk_form_id.misclassified}&url=${url}&category=${category}&rule=${rule}&time=${timenow.toISOString()}'>
+    report misclassification</a> (separate form).

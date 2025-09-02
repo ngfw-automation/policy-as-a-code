@@ -1,0 +1,14 @@
+entry:
+  '@name': AIP-Confidential-Word
+  pattern-type:
+    file-properties:
+      pattern:
+        entry:
+        - '@name': AIP Word - Confidential
+          file-type: aip-encrypted-docx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 33333333-3333-3333-3333-333333333333
+        - '@name': Word - Confidential
+          file-type: docx
+          file-property: panav-rsp-office-dlp-msip-label
+          property-value: 33333333-3333-3333-3333-333333333333

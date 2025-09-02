@@ -1,0 +1,13 @@
+entry:
+  '@name': FBP-log-only
+  rules:
+    entry:
+      '@name': Log all file types
+      application:
+        member: any
+      file-type:
+        member: any
+      action: alert
+      direction: both
+  description: File blocking profile applied to highly trusted traffic only (for example,
+    m365, corporate apps, business critical partner apps)
