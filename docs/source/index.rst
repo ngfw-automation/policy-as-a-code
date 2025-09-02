@@ -9,6 +9,5 @@ Documentation contents
    installation
    customization
    troubleshooting
-   usage
    scm_integration
    code
