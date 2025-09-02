@@ -35,6 +35,7 @@ The resulting decryption policy is formed as follows:
 
 .. graphviz:: ../diagrams/decryption-policy-formation.dot
 
-When the policy is deployed directly to a firewall, its structure mirrors a Panorama deployment.
-Rules that would normally go into the ```PRE``` section of a Panorama device group are placed at the top of the firewall policy,
-while rules from the ```POST``` section are placed at the bottom of the firewall policy.
+.. note::
+   When the policy is deployed directly to a firewall, its structure mirrors a Panorama deployment.
+   Rules that would normally go into the ```PRE``` section of a Panorama device group are placed at the top of the firewall policy,
+   while rules from the ```POST``` section are placed at the bottom of the firewall policy.

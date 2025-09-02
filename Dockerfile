@@ -10,8 +10,17 @@ WORKDIR $APP_HOME
 COPY . ./
 
 # Install core dependencies.
-RUN apk add linux-headers wget gcc make zlib-dev libffi-dev openssl-dev musl-dev
-RUN apk update && apk upgrade --no-cache sqlite-libs
+RUN apk update && apk add --no-cache \
+    linux-headers \
+    wget \
+    gcc \
+    make \
+    zlib-dev \
+    libffi-dev \
+    openssl-dev \
+    musl-dev \
+    sqlite-libs \
+    nano
 
 # Upgrade pip to the latest version
 RUN pip install --upgrade pip
