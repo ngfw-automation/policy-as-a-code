@@ -105,7 +105,7 @@ YAML Example
       description: "Data filtering profile for regular traffic"
 
 Configuration Options
---------------------
+---------------------
 
 Data filtering profiles support the following configuration options:
 
@@ -124,12 +124,12 @@ Rules define how the firewall should handle different data patterns:
 - **action**: Action to take when a matching pattern is detected (alert, block)
 
 Other Settings
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 - **description**: A description of the data filtering profile
 
 Implementation Details
----------------------
+----------------------
 
 Data filtering profiles are processed by the ``create_non_sdk_objects`` function in the ``auxiliary_functions.py`` module. This function:
 

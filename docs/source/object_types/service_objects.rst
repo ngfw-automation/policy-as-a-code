@@ -49,7 +49,7 @@ Usage Examples
 ~~~~~~~~~~~~~~
 
 Basic Service Object
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
 To define a basic service object, you need to specify at least the Protocol and Destination Port:
 
@@ -60,7 +60,7 @@ To define a basic service object, you need to specify at least the Protocol and 
 This will create a service object named ``SVC-tcp-80`` for TCP port 80 with the description "HTTP web traffic".
 
 Named Service Object
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
 To create a service object with a custom name:
 

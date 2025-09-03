@@ -101,7 +101,7 @@ YAML Example
       description: "WildFire analysis profile for regular traffic"
 
 Configuration Options
---------------------
+---------------------
 
 WildFire analysis profiles support the following configuration options:
 
@@ -116,12 +116,12 @@ Rules define how the firewall should handle different file types for WildFire an
 - **analysis**: Type of analysis to perform (public-cloud, private-cloud, hybrid-cloud)
 
 Other Settings
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 - **description**: A description of the WildFire analysis profile
 
 Implementation Details
----------------------
+----------------------
 
 WildFire analysis profiles are processed by the ``create_non_sdk_objects`` function in the ``auxiliary_functions.py`` module. This function:
 
