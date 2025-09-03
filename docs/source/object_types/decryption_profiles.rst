@@ -135,7 +135,7 @@ Configuration Options
 Decryption profiles support the following configuration options:
 
 SSL Forward Proxy Settings
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Settings for SSL forward proxy (client to server) decryption:
 
@@ -192,7 +192,7 @@ Settings for SSH proxy:
 - **block-if-no-resource**: Block if no resources are available
 
 Implementation Details
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 Decryption profiles are processed by the ``create_non_sdk_objects`` function in the ``auxiliary_functions.py`` module. This function:
 

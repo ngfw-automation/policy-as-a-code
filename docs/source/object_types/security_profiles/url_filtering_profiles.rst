@@ -102,12 +102,12 @@ YAML Example
       description: "URL filtering profile for regular traffic"
 
 Configuration Options
---------------------
+---------------------
 
 URL filtering profiles support the following configuration options:
 
 Category Settings
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 URL filtering profiles can specify different actions for different URL categories:
 
@@ -117,7 +117,7 @@ URL filtering profiles can specify different actions for different URL categorie
 - **action**: Default action for uncategorized URLs (block, alert, allow, override)
 
 List Settings
-^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 URL filtering profiles can include custom allow and block lists:
 
@@ -127,7 +127,7 @@ URL filtering profiles can include custom allow and block lists:
   - **action**: Action to take for URLs in the allow list (block, alert, allow, override)
 
 Credential Enforcement
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 URL filtering profiles can enforce credential submission only to appropriate websites:
 
@@ -135,12 +135,12 @@ URL filtering profiles can enforce credential submission only to appropriate web
   - **mode**: Mode for credential enforcement (disabled, log, block)
 
 Other Settings
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 - **description**: A description of the URL filtering profile
 
 Implementation Details
----------------------
+----------------------
 
 URL filtering profiles are processed by the ``create_non_sdk_objects`` function in the ``auxiliary_functions.py`` module. This function:
 

@@ -1,5 +1,5 @@
 Antivirus Profiles
-=================
+==================
 
 Antivirus profiles define settings for virus detection and prevention. They specify how the firewall should handle potentially malicious files across different protocols.
 
@@ -97,12 +97,12 @@ YAML Example
       packet-capture: "yes"
 
 Configuration Options
---------------------
+---------------------
 
 Antivirus profiles support the following configuration options:
 
 Decoder Settings
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 Each decoder represents a protocol that the antivirus profile can scan:
 
@@ -121,7 +121,7 @@ For each decoder, you can configure:
 - **mlav-action**: Action to take when machine learning-based antivirus detects a malicious file
 
 MLAV Engine Settings
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
 The machine learning-based antivirus engine can be configured for different file types:
 
@@ -137,13 +137,13 @@ For each file type, you can configure:
 - **mlav-policy-action**: Action to take (disable, enable(alert-only), enable(block))
 
 Other Settings
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 - **description**: A description of the antivirus profile
 - **packet-capture**: Whether to capture packets when a virus is detected (yes, no)
 
 Implementation Details
----------------------
+----------------------
 
 Antivirus profiles are processed by the ``create_non_sdk_objects`` function in the ``auxiliary_functions.py`` module. This function:
 

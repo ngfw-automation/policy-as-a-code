@@ -1,5 +1,5 @@
 Anti-spyware Profiles
-====================
+=====================
 
 Anti-spyware profiles define settings for spyware detection and prevention. They specify how the firewall should handle potentially malicious spyware across different protocols.
 
@@ -120,7 +120,7 @@ YAML Example
       description: "Anti-spyware profile for regular traffic"
 
 Configuration Options
---------------------
+---------------------
 
 Anti-spyware profiles support the following configuration options:
 
@@ -136,7 +136,7 @@ Rules define how the firewall should handle different types of spyware threats:
 - **packet-capture**: Whether to capture packets when a threat is detected (disable, single-packet, extended-capture)
 
 Botnet Domains
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 The botnet-domains section configures how the firewall handles botnet command and control traffic:
 
@@ -148,12 +148,12 @@ The botnet-domains section configures how the firewall handles botnet command an
   - **ipv6-address**: IPv6 address for the sinkhole
 
 Other Settings
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 - **description**: A description of the anti-spyware profile
 
 Implementation Details
----------------------
+----------------------
 
 Anti-spyware profiles are processed by the ``create_non_sdk_objects`` function in the ``auxiliary_functions.py`` module. This function:
 

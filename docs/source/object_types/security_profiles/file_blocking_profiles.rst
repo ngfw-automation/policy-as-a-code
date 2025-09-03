@@ -101,7 +101,7 @@ YAML Example
       description: "File blocking profile for regular traffic"
 
 Configuration Options
---------------------
+---------------------
 
 File blocking profiles support the following configuration options:
 
@@ -116,12 +116,12 @@ Rules define how the firewall should handle different file types:
 - **action**: Action to take when a matching file is detected (alert, block, continue)
 
 Other Settings
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 - **description**: A description of the file blocking profile
 
 Implementation Details
----------------------
+----------------------
 
 File blocking profiles are processed by the ``create_non_sdk_objects`` function in the ``auxiliary_functions.py`` module. This function:
 

@@ -45,7 +45,7 @@ To support SCM **alongside** Panorama, a phased approach is advisable:
       the rule properties into a dict and call the SCM API. The code
       already has the raw rule data (from the CSV or JSON inputs) which
       can be repurposed. One must translate field names to the SCM API
-      format (e.g., PanOS XML uses ```` and ````
+      format (e.g., PanOS XML uses ``<source>`` and ``<destination>``
       for addresses, whereas the SCM JSON might expect keys like
       ``"sourceAddresses"`` etc. The SDK documentation can guide these
       mappings, or the SDK models can be used directly). Don't forget to
