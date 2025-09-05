@@ -80,14 +80,16 @@ section_rules = (
         "fromzone":     [settings.ZONE_INSIDE],
         "application":  ['paloalto-traps'],
         "group":        "PG-apps-trusted",
-        "description":  "Updates and other traffic related to Endpoint Detection and Response, and Antivirus software. [Update the rule to allow the EDR used in your organization]"
+        "description":  "Updates and other traffic related to Endpoint Detection and Response, and Antivirus software. "
+                        "[Update the rule to allow the EDR used in your organization]"
     },
     {
         "name":         "os-connectivity-checks",
         "fromzone":     [settings.ZONE_INSIDE],
         "source":       [settings.DEFAULT_INSIDE_ADDRESS],
         "application":  ['APP-windows-conn-check'],
-        "description":  'Checks allowing endpoint operating systems to detect Internet connection'
+        "description":  'Checks allowing endpoint operating systems to detect Internet connection. Add signatures for '
+                        'Linux and MacOS as required.'
     },
     {
         "name":         "fw-helper-apps",
@@ -102,10 +104,11 @@ section_rules = (
         "fromzone":     [settings.ZONE_INSIDE],
         "source_user":  "known-user",
         "application":  ["ping", "traceroute"],
-        "description":  "Common network troubleshooting tools used for basic connectivity checks. This rule covers Internet-bound troubleshooting."
+        "description":  "Common network troubleshooting tools used for basic connectivity checks. This rule covers "
+                        "Internet-bound network troubleshooting tools."
     },
     {
-        "name":         "enforce-tls-for-chrome-app",
+        "name":         "enforce-tls-for-chrome-app-based",
         "fromzone":     [settings.ZONE_INSIDE],
         "application":  "quic",
         "action":       "deny",
@@ -114,7 +117,7 @@ section_rules = (
                         "they are unable to communicate over UDP. This rule is based on App-ID"
     },
     {
-        "name":         "enforce-tls-for-chrome-svc",
+        "name":         "enforce-tls-for-chrome-svc-based",
         "fromzone":     [settings.ZONE_INSIDE],
         "application":  "any",
         "service":      ["SVC-udp-80", "SVC-udp-443"],
@@ -137,7 +140,7 @@ section_rules = (
         "application":  "ssl",
         "destination":  "any",
         "category":     "UCL-palo-alto-dependencies",
-        "description":  "Allows all firewalls, including Prisma Access gateways, to access externally hosted EDLs and "
+        "description":  "Allows all firewalls to access externally hosted EDLs and "
                         "various Palo services that do not have a purpose-built app signature"
     },
     {

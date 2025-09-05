@@ -58,7 +58,7 @@ section_rules = (
         "source":       "EDL-IP-break_glass_src",
         "description":  "Source IP-based rule intended to be a temporary bypass of security controls imposed by "
                         "the part of the policy below the 'break-glass' section. This rule can be engaged only "
-                        "in emergency."
+                        "in emergency. Ensure you have a clear understanding of the implications of using this rule. "
     },
     {
         "name":         "break-glass-ip-destination",

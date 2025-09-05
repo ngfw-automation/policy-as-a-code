@@ -55,14 +55,15 @@ section_rules = (
     {   
         "name":         "incident-response-block-ip-source",
         "source":       "EDL-IP-full_block_src",
-        "description":  "Source IP-based full block. Intended to be used by SecOps as part of incident response only"
+        "description":  "Source IP-based full block. Intended to be used by Security Operations as part of "
+                        "incident response only"
     },
     {   
         "name":         "incident-response-block-ip-destination",
         "source":       [settings.DEFAULT_INSIDE_ADDRESS],
         "destination":  "EDL-IP-full_block_dst",
-        "description":  "Destination IP-based full block. Intended to be used by SecOps as part of incident response "
-                        "only"
+        "description":  "Destination IP-based full block. Intended to be used by Security Operations "
+                        "as part of incident response only"
     },
     {   
         "name":         "incident-response-block-url",
@@ -70,9 +71,9 @@ section_rules = (
         "source":       [settings.DEFAULT_INSIDE_ADDRESS],
         "tozone":       settings.ZONE_OUTSIDE,
         "category":     "EDL-URL-full_block_dst",
-        "description":  "URL-based full block. Intended to be used by SecOps as part of incident response only. "
+        "description":  "URL-based full block. Intended to be used by Security Operations as part of incident response only. "
                         "Destination IP-based rule above is more preferable than this one when the destination "
-                        "has a fixed IP-address"
+                        "has a fixed IP-address (as it will block the connection at an earlier stage of the session)"
     },
     # ==================================================================================================================
     # Isolation of hosts which were tagged as compromised based on C&C traffic they produced
