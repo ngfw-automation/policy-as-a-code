@@ -59,37 +59,49 @@ section_rules = (
 
     # ==> Service Now
     { 
-        "name":         'servicenow-app',
+        "name":         'it-service-desk',
         "application":  'service-now',
-        "description":  'This rule provides access to ServiceNow for all endpoints including anonymous ones so that '
-                        'even users who experience UserID-related issues were able to raise a support case in '
-                        'ServiceNow.'
+        "description":  'This rule provides access to ServiceNow - a SaaS ticketing system used by ACME for all '
+                        'its IT Support related workflows. All endpoints including anonymous ones are allowed to '
+                        'access it, so that even users who experience UserID-related issues were able to raise a '
+                        'support case in. Update this rule to permission the system your organization uses. If your '
+                        'Service Desk system is internally hosted - delete this rule.'
     },
     # Download of restricted files (executables and various installation packages)
     {
         "name":         'download-of-restricted-file-types',
         "source_user":  'known-user',
-        "group":        'PG-apps-trusted',
+        "group":        'PG-apps-trusted',  # this profile group includes a File Filtering profile that allows executable files
         "category":     'UCL-restricted_file_download',
         "application":  ['APG-web-browsing'],
-        "description":  'This rule allows all users to download files of restricted types from selected websites'
+        "description":  'This rule allows ALL authenticated internal users to download files of restricted types from '
+                        'selected websites. You may want to include URLs specific for your organization (for example, '
+                        'URLs used to download endpoint software updates specific to the your desktop PC brand(s))'
     },
     {
         "name":         'download-of-restricted-file-types-user-edl-based',
         "source_user":  settings.GRP_PREDEFINED['grp_exe_download'].lower(),
-        "group":        'PG-apps-trusted',
+        "group":        'PG-apps-trusted',  # this profile group includes a File Filtering profile that allows executable files
         "category":     'EDL-URL-restricted_file_download',
         "application":  ['APG-web-browsing'],
         "description":  f'This rule allows the group {settings.GRP_PREDEFINED["grp_exe_download"]} to download '
-                        f'files of restricted types from selected websites'
+                        f'files of restricted types from selected websites. It addresses on-demand scenarios '
+                        f'for individual users or groups. Executable downloads may occur from websites not '
+                        f'covered by the generic apps in the specified application group. For example, many '
+                        f'Terraform providers are hosted on GitHub, so you must include github-base and '
+                        f'github-downloading. Conversely, the access provisioning workflow should follow '
+                        f'these steps: 1) identify the URL 2) add it to the EDL 3) ensure the relevant App-ID '
+                        f'is part of the rule 4) add the user to the referenced AD group'
+
     },
     # ===> Endpoint software updates
     {  
         "name":         'endpoint-software-updates',
         "application":  'APG-endpoint-software-updates',
         "group":        'PG-apps-trusted',
-        "description":  'Software updates for applications that we are happy to allow from all endpoints regardless '
-                        'the management posture of these applications'
+        "description":  'Software updates for applications that are permitted from all endpoints, regardless '
+                        'of the management posture of these applications. In other words, include only applications '
+                        'whose updates endpoints are allowed to download directly from the Internet.'
     },
     # Endpoint management
     {  
@@ -103,12 +115,5 @@ section_rules = (
         "application":  'jamf',
         "group":        'PG-apps-trusted',
         "description":  'Endpoint management for Apple Mac OS'
-    },
-    {
-        "name":         'google-storage-as-cdn',
-        "application":  ['google-cloud-storage-base', 'google-cloud-storage-download'],
-        "category":     'content-delivery-networks',
-        "description":  'Google Cloud Storage (RESTful online file storage web service) used as CDN by some web-sites '
-                        'to store their artifacts (pictures and other files)'
     }
 )

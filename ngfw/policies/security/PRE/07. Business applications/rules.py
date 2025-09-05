@@ -70,13 +70,39 @@ section_rules = (
     },
     # Business apps approved for use by all employees ACME-wide regardless of their category
     {
-        "name":         'calendly-app',
-        "application":  'calendly',
-
-        "description":  'Provides access to Calendly - SaaS-based application that provides cross-business meeting '
-                        'scheduling service'
+        "name":         'apps-pre-approved-for-all-acme-employees',
+        "application":  ['calendly', 'zoom'],
+        "description":  'This rule covers ACME business applications that are approved for use by all employees '
+                        'regardless of the category the apps belong to'
     },
-        # ==> Microsoft 365 (Office 365) for authenticated users <===
+    # Rules for GitHub
+    {
+        "name": 'github-core-features',
+        "application": ['github-base', 'github-downloading', 'github-uploading', 'github-editing', 'github-posting',
+                        'gist-downloading', 'gist-uploading', 'gist-editing', 'gist-posting', 'gist'],
+        "description": 'GitHub core features'
+    },
+    {
+        "name": 'github-ai-features',
+        "application": ['github-copilot', 'github-copilot-business',
+                        'github-copilot-chat', 'github-copilot-chat-business'],
+        "description": 'GitHub AI features'
+    },
+    {
+        "name": 'github-git-over-ssh',
+        "destination": ['AG-github_git'],
+        "application": ['ssh', 'github-base'],
+        "service":     'SVC-tcp-22',
+        "description": 'GitHub Git-over-SSH for ACME Software Developers who do not like to use Git-over-HTTPS'
+    },
+    {
+        "name": 'github-git-over-https',
+        "destination": ['AG-github_git'],
+        "application": ['git', 'github-base'],
+        "service":     'service-https',
+        "description": 'GitHub Git-over-SSH for ACME Software Developers who do not like to use Git-over-HTTPS'
+    },
+    # ==> Microsoft 365 (Office 365) for authenticated users <===
     {
         "name":         'm365-apps-optimize-and-allow-ip',
         "source_user":  'known-user',
@@ -85,6 +111,9 @@ section_rules = (
         "application":  ['APG-office365-core-web', 'APG-office365-dep-http', 'APG-office365-dep-non-http'],
         "description":  'Access to M365 Optimize and Allow categories of IP addresses.'
     },
+    # Descriptions in the following M365 rules are intentionally shortened to test
+    # the code that flags rules whose Description field does not match the expected pattern.
+    # Refer to the companion book for the complete context.
     {
         "name":         'm365-apps-allow-url',
         "source_user":  'known-user',
@@ -139,5 +168,12 @@ section_rules = (
         "application":  ['APG-office365-core-web'],
         "description":  'M365 applications provisioned based on AppID signatures only (this rule addresses the issue '
                         'of some apps such as PowerBI not being covered by M365 EDLs).'
+    },
+    {
+        "name":         'google-storage-as-cdn',
+        "application":  ['google-cloud-storage-base', 'google-cloud-storage-download'],
+        "category":     'content-delivery-networks',
+        "description":  'Google Cloud Storage (RESTful online file storage web service) used as CDN by some web-sites '
+                        'to store their artifacts (pictures and other files)'
     }
 )
