@@ -22,14 +22,14 @@ is generated based on the static rules defined in the subfolders of the ``ngfw/p
 Each subfolder represents a logical section of the policy. Each section is characterized by the following
 distinctive attributes:
 
-- Purpose (indicated by the Group Tag assigned to all rules in the section)
-- Rule defaults
+- *Purpose* (indicated by the Group Tag assigned to all rules in the section)
+- *Rule defaults*
 
-The policy rules in each section are defined in the corresponding rules.py file. It starts with defining default values
+The policy rules in each section are defined in the corresponding ``rules.py`` file. It starts with defining default values
 for all rule attributes. These defaults are followed by the actual rules that effectively describe the deviation from
 the section defaults.
 
-There are 7 sections in the default policy:
+There are 7 sections in the PRE section of the default policy:
 
 - **DNS Security** - Rules that secure DNS name resolution traffic by enforcing the use of approved DNS servers, blocking DNS over HTTPS (DoH) and DNS over TLS (DoT) to prevent DNS tunneling, and ensuring proper DNS security controls are in place.
 

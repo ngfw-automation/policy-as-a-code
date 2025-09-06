@@ -1,12 +1,12 @@
 Response Pages
 ==============
 
-This document explains how response pages are generated and customized in the NGFW system.
+This document explains how response pages are generated and customized.
 
 Overview
 --------
 
-Response pages are HTML pages displayed to users when the NGFW blocks access to content. 
+Response pages are HTML pages displayed to users when the firewall blocks access to content.
 These pages provide information about why the content was blocked and may offer options 
 for requesting access or reporting misclassifications.
 
