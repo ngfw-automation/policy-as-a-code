@@ -3,7 +3,8 @@
 Input Data Formats
 ==================
 
-This section explains the various input data formats used in the NGFW Policy as Code project. It covers all types of objects defined in the NGFW/OBJECTS folder.
+This section explains the various input data formats used in the NGFW Policy as Code project.
+It covers all types of objects defined in the ``ngfw/objects`` folder.
 
 .. toctree::
    :maxdepth: 1

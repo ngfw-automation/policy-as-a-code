@@ -3,37 +3,60 @@
 Defaults
 ========
 
-This document provides an overview of the `default` policy supplied with the project.
-URL categories and App subcategories and their associated actions in the firewall policy.
+This document provides an overview of the default policy supplied with the project, including 
+URL categories and App-ID subcategories and their associated actions in the firewall policy.
 
 .. warning::
 
-   You must review all these defaults and modify them to meet your specific requirements.
+   You **must** review all these defaults and modify them to meet your specific requirements.
 
+Security Policy Sections
+------------------------
 
-URL Categories and Actions
---------------------------
+PRE
+~~~
 
-The following Sankey diagram visualizes the relationship between URL categories, their associated UserIDs, approvers, and assigned actions in the firewall policy:
+The top part of the firewall security policy (that corresponds to the PRE section of the target Panorama device group)
+is generated based on the static rules defined in the subfolders of the ``ngfw/policies/security/PRE`` folder.
 
-- **Left side**: URL categories from the firewall policy
-- **Middle-left**: UserIDs associated with categories (either specific UserID or "known-user")
-- **Middle-right**: Approvers for categories with "manage" action
-- **Right side**: Actions assigned to these categories
-- **Colors**: Different actions are represented by different colors:
+Each subfolder represents a logical section of the policy. Each section is characterized by the following
+distinctive attributes:
 
-  - **Blue**: "manage" - Categories that require management approval
-  - **Red**: "deny" - Categories that are denied
-  - **Green**: "do not manage" - Categories that don't require management
-  - **Orange**: "continue" - Categories that are allowed to continue
-  - **Purple**: Approvers for managed categories
-  - **Cyan**: UserIDs associated with categories
+- Purpose (indicated by the Group Tag assigned to all rules in the section)
+- Rule defaults
 
-The width of the connections represents the number of categories with each action or approver. The flow is as follows:
-- For categories with "do not manage", "manage", and "continue" actions: Category > UserID > Approver > Action
-(If the Approver is not set, the node is labeled "no approver")
+The policy rules in each section are defined in the corresponding rules.py file. It starts with defining default values
+for all rule attributes. These defaults are followed by the actual rules that effectively describe the deviation from
+the section defaults.
 
-- For blocked categories (with "deny" action): Category > Action
+There are 7 sections in the default policy:
+
+- **DNS Security** - Rules that secure DNS name resolution traffic by enforcing the use of approved DNS servers, blocking DNS over HTTPS (DoH) and DNS over TLS (DoT) to prevent DNS tunneling, and ensuring proper DNS security controls are in place.
+
+- **Infrastructure essentials** - Rules that secure the minimal traffic required for proper functioning of firewalls and network infrastructure. This includes time synchronization services, certificate revocation checks (OCSP), endpoint detection and response (EDR) software, operating system connectivity checks, firewall helper applications, network troubleshooting tools, and communication between Palo Alto firewalls and cloud services.
+
+- **Break-glass** - Emergency bypass rules designed to temporarily circumvent security controls during critical situations. These rules use External Dynamic Lists (EDL) to provide source IP-based, destination IP-based, and URL-based bypasses that can be activated only in exceptional circumstances when immediate access is required.
+
+- **Incident response** - Rules designed for security operations teams to respond to active threats and security incidents. This section includes blocking rules for known malicious source and destination IPs, URL-based blocking for malicious websites, and automatic isolation of compromised hosts based on command and control (C&C) traffic detection using Dynamic Address Groups (DAG).
+
+- **Block lists** - Baseline security blocking rules that use threat intelligence feeds to deny connections to and from known malicious entities. This includes blocking traffic to/from Palo Alto Networks threat feeds (bulletproof hosting, high-risk IPs, known malicious IPs, and Tor exit nodes) as well as geo-location based blocking for sanctioned countries and regions.
+
+- **Infrastructure applications** - Rules that allow access to core organizational infrastructure applications necessary for basic business operations. This includes IT service desk systems (ServiceNow), controlled download of restricted file types from approved websites, endpoint software updates, and endpoint management platforms for Windows (Microsoft Intune) and macOS (Jamf).
+
+- **Business applications** - Rules that govern access to business-specific applications and services used by authenticated users. This includes organization-specific trusted web applications, legacy custom applications, pre-approved business tools, comprehensive GitHub access (including AI features and Git operations), Microsoft 365 suite access with various security categories, and content delivery network services.
+
+POST
+~~~~
+
+The bottom part of the firewall security policy (that corresponds to the POST section of the target Panorama device group)
+is dynamically generated based on the business requirements specified in the following two files:
+
+- ``requirements/categories_app.csv``
+- ``requirements/categories_url.csv``
+
+The following two diagrams visualize the relationship between App-ID or URL categories,
+their associated User-IDs, approvers, and assigned actions in the firewall policy:
+
 
 .. raw:: html
 
@@ -409,9 +432,9 @@ The width of the connections represents the number of categories with each actio
    # Create the Sankey diagram
    fig = go.Figure(data=[go.Sankey(
        node=dict(
-           pad=5,             # Minimal padding to save space
-           thickness=10,      # Reduced thickness further
-           line=dict(color="black", width=0.5),
+           pad=20,            # Increase padding for better readability
+           thickness=25,      # Increase thickness for wider displays
+           line=dict(color="black", width=0.8),
            label=node_labels,
            color=node_colors
        ),
@@ -421,19 +444,32 @@ The width of the connections represents the number of categories with each actio
            value=values,
            color=link_colors
        ),
-       arrangement="snap"     # More compact arrangement
+       arrangement="freeform",    # Change from "snap" to "freeform" for consistency
+       orientation="h",           # Add horizontal orientation
+       # Add domain configuration for better space utilization
+       domain=dict(x=[0.0, 1.0], y=[0.0, 1.0])  # Use full available space
    )])
 
    # Update layout
    fig.update_layout(
-       title_text="URL Categories and Their Actions",
-       font_size=8,           # Smaller font size
+       title=dict(
+           text="Policy treatment of URL categories",
+           x=0.5,  # Center horizontally (0=left, 0.5=center, 1=right)
+           xanchor='center'  # Anchor point for the x position
+       ),
+       font=dict(
+           size=14,           # Increase from 8 to 14 for better readability
+           family="Arial, sans-serif",
+           color="black"
+       ),
        height=2000,           # Increase height to accommodate all categories
-       width=600,             # Further reduced width to fit the page better
-       margin=dict(l=5, r=5, t=30, b=5),  # Minimal margins
+       # Remove fixed width to allow full page utilization
+       margin=dict(l=15, r=15, t=40, b=10),  # Slightly increase margins for larger font
        autosize=True,         # Allow the figure to be responsive
        paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
-       plot_bgcolor='rgba(0,0,0,0)'    # Transparent plot area
+       plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
+       showlegend=False,      # Ensure no legend interferes with width
+       template="plotly_white"  # Clean template for better appearance
    )
 
    # Save the figure as an HTML file for the "Open in new window" link
@@ -446,35 +482,24 @@ The width of the connections represents the number of categories with each actio
        fig.write_html(os.path.join(image_dir, 'url_categories_sankey.html'), 
                      include_plotlyjs='cdn',
                      full_html=True,
-                     config={'responsive': True})
+                     config={
+                         'responsive': True,
+                         'displayModeBar': True,
+                         'displaylogo': False,
+                         'toImageButtonOptions': {
+                             'format': 'png',
+                             'filename': 'url_categories_sankey',
+                             'height': 1000,
+                             'width': 1400,
+                             'scale': 1
+                         }
+                     })
    except Exception as e:
        print(f"Warning: Could not save HTML: {e}")
 
    fig
 
 
-
-App Categories and Actions
---------------------------
-
-The following Sankey diagram visualizes the relationship between App subcategories, their associated UserIDs, approvers, and assigned actions in the firewall policy:
-
-- **Left side**: App subcategories from the firewall policy
-- **Middle-left**: UserIDs associated with subcategories (either specific UserID or "known-user")
-- **Middle-right**: Approvers for subcategories with "manage" action
-- **Right side**: Actions assigned to these subcategories
-- **Colors**: Different actions are represented by different colors:
-  - **Blue**: "manage" - Subcategories that require management approval
-  - **Red**: "deny" - Subcategories that are denied
-  - **Green**: "do not manage" - Subcategories that don't require management
-  - **Purple**: Approvers for managed subcategories
-  - **Cyan**: UserIDs associated with subcategories
-
-The width of the connections represents the number of subcategories with each action or approver. The flow is as follows:
-- For subcategories with "do not manage", "manage", and "continue" actions: SubCategory > UserID > Approver > Action
-(If the Approver is not set, the node is labeled "no approver")
-
-- For blocked subcategories (with "deny" action): SubCategory > Action
 
 .. raw:: html
 
@@ -848,9 +873,9 @@ The width of the connections represents the number of subcategories with each ac
    # Create the Sankey diagram
    fig = go.Figure(data=[go.Sankey(
        node=dict(
-           pad=5,             # Minimal padding to save space
-           thickness=10,      # Reduced thickness further
-           line=dict(color="black", width=0.5),
+           pad=20,            # Increase padding for better readability
+           thickness=25,      # Increase thickness for wider displays
+           line=dict(color="black", width=0.8),
            label=node_labels,
            color=node_colors
        ),
@@ -861,21 +886,32 @@ The width of the connections represents the number of subcategories with each ac
            color=link_colors
        ),
        arrangement="freeform",  # Allow more flexible arrangement
-       orientation="h"          # Horizontal orientation
+       orientation="h",         # Horizontal orientation
+       # Add domain configuration for better space utilization
+       domain=dict(x=[0.0, 1.0], y=[0.0, 1.0])  # Use full available space
    )])
 
    # Update layout
    fig.update_layout(
-       title_text="App Subcategories and Their Actions",
-       font_size=8,           # Smaller font size
+       title=dict(
+           text="Policy treatment of App-ID subcategories",
+           x=0.5,  # Center horizontally (0=left, 0.5=center, 1=right)
+           xanchor='center'  # Anchor point for the x position
+       ),
+       font=dict(
+           size=14,           # Increase from 8 to 14 for better readability
+           family="Arial, sans-serif",
+           color="black"
+       ),
        height=1200,           # Increased height to match graph size and eliminate canvas scrollbar
-       width=600,             # Width matching the URL Categories diagram
-       margin=dict(l=5, r=5, t=30, b=5),  # Minimal margins
+       # Remove fixed width to allow full page utilization
+       margin=dict(l=15, r=15, t=40, b=10),  # Slightly increase margins for larger font
        autosize=True,         # Allow the figure to be responsive
        paper_bgcolor='rgba(0,0,0,0)',  # Transparent background
        plot_bgcolor='rgba(0,0,0,0)',   # Transparent plot area
-       xaxis=dict(scaleanchor="y", constrain="domain"),  # Maintain aspect ratio
-       yaxis=dict(constrain="domain")  # Constrain to domain
+       showlegend=False,      # Ensure no legend interferes with width
+       template="plotly_white"  # Clean template for better appearance
+       # Remove xaxis and yaxis constraints that may interfere with width responsiveness
    )
 
    # Save the figure as an HTML file for the "Open in new window" link
@@ -888,7 +924,18 @@ The width of the connections represents the number of subcategories with each ac
        fig.write_html(os.path.join(image_dir, 'app_categories_sankey.html'), 
                      include_plotlyjs='cdn',
                      full_html=True,
-                     config={'responsive': True})
+                     config={
+                         'responsive': True,
+                         'displayModeBar': True,
+                         'displaylogo': False,
+                         'toImageButtonOptions': {
+                             'format': 'png',
+                             'filename': 'app_categories_sankey',
+                             'height': 1000,
+                             'width': 1400,
+                             'scale': 1
+                         }
+                     })
    except Exception as e:
        print(f"Warning: Could not save HTML: {e}")
 
@@ -926,7 +973,7 @@ This section describes the naming conventions used for all objects referenced by
      - ``SVC-udp-53``
    * - Application group
      - ``APG-``
-     - ``APG-web-browsing``
+     - ``APG-file-sharing``
    * - Custom application
      - ``APP-``
      - ``APP-windows-conn-check``
