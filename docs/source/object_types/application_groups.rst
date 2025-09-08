@@ -12,7 +12,7 @@ Application groups are defined in the JSON file located at:
 
    ngfw/objects/application groups/app_groups.json
 
-This path is defined in the Settings module as ``APPLICATION_GROUPS_FILENAME``.
+This path is defined in the ``settings.py`` module as ``APPLICATION_GROUPS_FILENAME``.
 
 File Format
 ~~~~~~~~~~~
@@ -24,33 +24,19 @@ Example JSON Structure
 
 .. code-block:: json
 
-   {
-     "application_groups": [
-       {
-         "name": "AG-collaboration-apps",
-         "description": "Applications used for collaboration",
-         "applications": [
-           "ms-teams",
-           "webex",
-           "zoom"
-         ]
-       },
-       {
-         "name": "AG-web-browsing",
-         "description": "Web browsing applications",
-         "applications": [
-           "web-browsing",
-           "ssl"
-         ]
-       }
-     ]
-   }
+    {
+        "name": "APG-web-browsing-risky",
+        "value": [
+          "web-browsing",
+          "ssl",
+          "google-base",
+          "google-app-engine",
+          "soap"
+        ]
+    }
 
 Implementation Details
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The application groups defined in this JSON file are processed by functions in the ``application_groups.py`` module. This module:
-
-1. Parses the JSON file to extract application group definitions
-2. Creates application group objects using the Palo Alto Networks SDK
-3. Deploys the application groups to the PAN-OS device using multi-config API calls
+The application groups defined in this JSON file are processed by functions
+in the ``lib/application_groups.py`` module.

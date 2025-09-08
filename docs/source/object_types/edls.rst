@@ -12,7 +12,7 @@ EDLs are defined in the CSV file located at:
 
    ngfw/objects/external dynamic lists/edls.csv
 
-This path is defined in the Settings module as ``EDLS_FILENAME``.
+This path is defined in the ``settings.py`` module as ``EDLS_FILENAME``.
 
 File Format
 ~~~~~~~~~~~

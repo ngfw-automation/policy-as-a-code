@@ -17,7 +17,7 @@ Security profiles are defined in JSON or YAML files located in various subdirect
 
    ngfw/objects/security profiles/
 
-The paths to these subdirectories are defined in the Settings module:
+The paths to these subdirectories are defined in the ``settings.py`` module:
 
 - ``SECURITY_PROFILES_DATA_FILTERING_FOLDER``
 - ``SECURITY_PROFILES_VULNERABILITY_FOLDER``

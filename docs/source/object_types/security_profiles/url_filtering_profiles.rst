@@ -12,7 +12,7 @@ URL filtering profiles are defined in JSON or YAML files located in:
 
    ngfw/objects/security profiles/url-filtering/
 
-This path is defined in the Settings module as ``SECURITY_PROFILES_URL_FILTERING_FOLDER``.
+This path is defined in the ``settings.py`` module as ``SECURITY_PROFILES_URL_FILTERING_FOLDER``.
 
 File Format
 -----------

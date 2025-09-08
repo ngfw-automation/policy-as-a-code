@@ -5,7 +5,13 @@
     },
     {
         "name": "APG-web-browsing-risky",
-        "value": ["web-browsing", "ssl", "google-base", "google-app-engine", "soap"]
+        "value": [
+          "web-browsing",
+          "ssl",
+          "google-base",
+          "google-app-engine",
+          "soap"
+        ]
     },
     {
         "name": "APG-endpoint-software-updates",

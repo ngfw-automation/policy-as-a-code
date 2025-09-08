@@ -12,7 +12,7 @@ Service objects are defined in the CSV file located at:
 
    ngfw/objects/services/service_objects.csv
 
-This path is defined in the Settings module as ``SERVICE_OBJECTS_FILENAME``.
+This path is defined in the ``settings.py`` module as ``SERVICE_OBJECTS_FILENAME``.
 
 File Format
 ~~~~~~~~~~~

@@ -12,29 +12,37 @@ Custom URL categories are defined in the CSV file located at:
 
    ngfw/objects/custom objects/url category/custom-url-categories.csv
 
-This path is defined in the Settings module as ``CUSTOM_URL_CATEGORIES_FILENAME``.
+This path is defined in the ``settings.py`` module as ``CUSTOM_URL_CATEGORIES_FILENAME``.
 
 File Format
 ~~~~~~~~~~~
 
-The ``custom-url-categories.csv`` file defines custom URL categories that will be created on the Palo Alto Networks firewall. Each row in the CSV file represents a URL or pattern that belongs to a custom URL category.
+Each row in the CSV file represents a URL or pattern that belongs to a custom URL category.
 
-CSV Columns
-^^^^^^^^^^^
+.. list-table:: CSV Columns
+   :header-rows: 1
+   :widths: 18 46 10 26
 
-+------------------+---------------------------------------------------------------+----------+------------------------------------------+
-| Column Name      | Description                                                   | Required | Example                                  |
-+==================+===============================================================+==========+==========================================+
-| Name             | Name of the custom URL category                               | Yes      | ``UCL-acme-generic-app``                 |
-+------------------+---------------------------------------------------------------+----------+------------------------------------------+
-| Type             | Type of category (List or Match)                              | Yes      | ``List``                                 |
-+------------------+---------------------------------------------------------------+----------+------------------------------------------+
-| Description      | Optional description for the category                         | No       | ``This category covers all URLs in ACME  |
-|                  |                                                               |          | domains and subdomains``                 |
-+------------------+---------------------------------------------------------------+----------+------------------------------------------+
-| Sites            | URL, pattern, or predefined category to include               | Yes      | ``example.com/``,                        |
-|                  |                                                               |          | ``computer-and-internet-info``           |
-+------------------+---------------------------------------------------------------+----------+------------------------------------------+
+   * - Column Name
+     - Description
+     - Required
+     - Example
+   * - Name
+     - Name of the custom URL category
+     - Yes
+     - ``UCL-acme-generic-app``
+   * - Type
+     - Type of category (List or Match)
+     - Yes
+     - ``List``
+   * - Description
+     - Optional description for the category
+     - No
+     - ``This category covers all URLs in ACME domains and subdomains``
+   * - Sites
+     - URL, pattern, predefined category, or HTTPS link to a remote text file (one entry per line; HTTPS only)
+     - Yes
+     - ``example.com/``, ``computer-and-internet-info``, ``https://saasedl.paloaltonetworks.com/feeds/m365/worldwide/any/optimize/url``
 
 Usage Examples
 ~~~~~~~~~~~~~~
@@ -79,18 +87,41 @@ You can add multiple URLs to the same category by repeating the category name in
    UCL-acme-generic-app,List,,example.net/
    UCL-acme-generic-app,List,,*.example.net/
 
-Implementation Details
-~~~~~~~~~~~~~~~~~~~~~~
+Remote URL Lists (HTTPS only)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The custom URL categories defined in this CSV file are processed by the ``create_custom_url_categories`` function in the ``url_categories.py`` module. This function:
+You can populate a URL List category from a remote text file served over HTTPS. Put the HTTPS link into the Sites column; the tool downloads it, reads non-empty lines, lowercases and trims them, and uses them as the category entries.
 
-1. Parses the CSV file using the ``parse_metadata_from_csv`` function
-2. Builds a deduplicated list of custom categories based on their names and types
-3. Processes each category:
-   - Extracts the description (using the last non-empty description for each category)
-   - Builds a list of URLs or categories for each custom category
-   - Handles remote HTTP/HTTPS sources for URL lists
-4. Creates custom URL category objects using the Palo Alto Networks SDK:
-   - URL List type categories with specific URLs or patterns
-   - Category Match type categories referencing predefined PAN-OS URL categories
-5. Deploys the custom URL categories to the PAN-OS device using multi-config API calls
+.. code-block:: text
+
+   UCL-m365-worldwide-any-optimize,List,This category includes URLs from M365 Worldwide Any Optimize category,https://saasedl.paloaltonetworks.com/feeds/m365/worldwide/any/optimize/url
+
+Notes:
+
+- HTTPS is required. HTTP is not fetched and will be treated as a literal string.
+- TLS verification uses settings.CERTIFICATE_BUNDLE_FILENAME.
+- If both inline Sites and an HTTPS link are provided for the same Name, the HTTPS list replaces the inline entries.
+- If multiple HTTPS links are listed for the same Name, the last one wins.
+
+.. tip::
+   Remote lists are great when you maintain URLs externally or consume vendor feeds that
+   change rarely and therefore do not have to consume precious EDL capacity.
+
+   Make sure the URL is reachable from the system running this tool and rerun deployment
+   when the remote list changes.
+
+Implementation Notes
+~~~~~~~~~~~~~~~~~~~~
+
+Processed by ``create_custom_url_categories`` in ``lib/url_categories.py``.
+
+- CSV parsing: ``parse_metadata_from_csv`` defined in ``settings.CUSTOM_URL_CATEGORIES_FILENAME``.
+- Deduplication: by Name only (first Type wins). Keep Type consistent across rows for the same Name.
+- Description: last non-empty Description for a Name is used.
+- Sites handling:
+
+  - Inline entries are lowercased and trimmed; duplicates are not removed.
+  - HTTPS URL in Sites downloads a remote list (TLS verified via ``settings.CERTIFICATE_BUNDLE_FILENAME``); non-empty lines are lowercased and replace any previously collected inline entries. If multiple HTTPS sources exist, the last one wins. HTTP is not fetched.
+
+- Accepted Type values (case-insensitive): List or URL List; Match or Category Match.
+- Deployment: objects created and pushed via a multi-config API call.

@@ -1,7 +1,8 @@
 Decryption Profiles
 ===================
 
-Decryption profiles define settings for SSL decryption, such as which SSL/TLS versions and cipher suites to support.
+Decryption profiles define settings for SSL decryption, such as which SSL/TLS versions
+and cipher suites to support.
 
 File Location
 ~~~~~~~~~~~~~
@@ -10,14 +11,15 @@ Decryption profiles are defined in JSON or YAML files located in:
 
 .. code-block:: text
 
-   ngfw/objects/decryption/decryption profile/
+   ngfw/objects/decryption/decryption profile
 
-This path is defined in the Settings module as ``DECRYPTION_PROFILES_FOLDER``.
+This path is defined in the ``settings.py`` module as ``DECRYPTION_PROFILES_FOLDER``.
 
 File Format
 ~~~~~~~~~~~
 
-Decryption profiles can be defined in either JSON or YAML format. Each file represents a single decryption profile with settings for SSL/TLS protocols, cipher suites, and proxy behavior.
+Decryption profiles can be defined in either JSON or YAML format. Each file represents
+a single decryption profile with settings for SSL/TLS protocols, cipher suites, and proxy behavior.
 
 JSON Example
 ~~~~~~~~~~~~

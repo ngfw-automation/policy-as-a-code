@@ -12,7 +12,7 @@ File blocking profiles are defined in JSON or YAML files located in:
 
    ngfw/objects/security profiles/file blocking/
 
-This path is defined in the Settings module as ``SECURITY_PROFILES_FILE_BLOCKING_FOLDER``.
+This path is defined in the ``settings.py`` module as ``SECURITY_PROFILES_FILE_BLOCKING_FOLDER``.
 
 File Format
 -----------
