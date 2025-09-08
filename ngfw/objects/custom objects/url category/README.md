@@ -116,30 +116,26 @@ UCM-content-delivery_low-risk,Match,,content-delivery-networks
 UCM-content-delivery_low-risk,Match,,low-risk
 ```
 
-## Implementation Details
+## Implementation Notes (concise)
 
-The custom URL categories defined in this CSV file are processed by the `create_custom_url_categories` function in the `url_categories.py` module. This function:
+Processed by `create_custom_url_categories` in `lib/url_categories.py`.
 
-1. Parses the CSV file using the `parse_metadata_from_csv` function
-2. Builds a deduplicated list of custom categories based on their names and types
-3. Processes each category:
-   - Extracts the description (using the last non-empty description for each category)
-   - Builds a list of URLs or categories for each custom category
-   - Handles remote HTTP/HTTPS sources for URL lists
-4. Creates custom URL category objects using the Palo Alto Networks SDK:
-   - URL List type categories with specific URLs or patterns
-   - Category Match type categories referencing predefined PAN-OS URL categories
-5. Deploys the custom URL categories to the PAN-OS device using multi-config API calls
-
-Additionally, the module can create dynamic custom URL categories based on business requirements, such as risk-based category matching profiles (medium and high risk).
+- CSV parsing: `parse_metadata_from_csv` using `settings.CUSTOM_URL_CATEGORIES_FILENAME`.
+- Deduplication: by Name only (first Type wins). Keep Type consistent across rows with the same Name.
+- Description: last non-empty Description per Name is used.
+- Sites handling:
+  - Inline entries are lowercased/trimmed; duplicates are not removed.
+  - HTTPS URL in Sites downloads a remote list (TLS verified via `settings.CERTIFICATE_BUNDLE_FILENAME`); non-empty lines are lowercased and replace inline entries. If multiple HTTPS sources exist, the last one wins. HTTP is not fetched.
+- Accepted Type values (case-insensitive): List or URL List; Match or Category Match.
+- Deployment: objects are pushed via a multi-config API call.
 
 ## Validation Rules
 
-- Custom URL category names should follow the naming conventions described above
-- Category types must be one of: List (or URL List), Match (or Category Match)
-- For URL List categories, the Sites column should contain valid URLs or patterns
-- For Category Match categories, the Sites column should contain valid predefined PAN-OS URL categories
-- Remote URL lists must be accessible via HTTP/HTTPS from the firewall
+- Use the naming conventions described above.
+- Type must be one of: List (URL List) or Match (Category Match).
+- For URL List, Sites should be valid PAN-OS patterns (e.g., example.com, *.example.com/, ^.sub.example/...).
+- For Category Match, Sites should be valid PAN-OS URL category names.
+- Remote lists must be reachable over HTTPS (HTTP is treated as a literal string).
 
 ## Notes
 

@@ -1,7 +1,9 @@
 Anti-spyware Profiles
 =====================
 
-Anti-spyware profiles define settings for spyware detection and prevention. They specify how the firewall should handle potentially malicious spyware across different protocols.
+Anti-spyware profiles define settings for spyware detection and prevention.
+They specify how the firewall should handle potentially malicious spyware
+across different protocols.
 
 File Location
 -------------
@@ -12,7 +14,7 @@ Anti-spyware profiles are defined in JSON or YAML files located in:
 
    ngfw/objects/security profiles/anti-spyware/
 
-This path is defined in the Settings module as ``SECURITY_PROFILES_ANTISPYWARE_FOLDER``.
+This path is defined in the ``settings.py`` module as ``SECURITY_PROFILES_ANTISPYWARE_FOLDER``.
 
 File Format
 -----------

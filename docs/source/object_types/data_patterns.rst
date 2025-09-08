@@ -10,22 +10,33 @@ Data patterns are defined in files located in:
 
 .. code-block:: text
 
-   ngfw/objects/custom objects/data patterns/
+   ngfw/objects/custom objects/data patterns
 
-This path is defined in the Settings module as ``DATA_PATTERNS_FOLDER``.
+This path is defined in the ``settings.py`` module as ``DATA_PATTERNS_FOLDER``.
 
-Implementation Details
-~~~~~~~~~~~~~~~~~~~~~~
+File format
+~~~~~~~~~~~
 
-Data patterns are processed by functions in various modules to create data pattern objects using the Palo Alto Networks SDK. These functions:
+Applications must be defined in idividual JSON or YAML files.
+Create a data pattern in the PAN-OS administrative UI, export it as XML,
+convert to YAML or JSON and save to the
+``ngfw/objects/custom objects/data patterns`` folder.
 
-1. Parse the configuration files for data patterns
-2. Create data pattern objects with the appropriate settings
-3. Deploy the data patterns to the PAN-OS device using multi-config API calls
+Here is an example in the YAML format:
 
-Data patterns can be used to:
+.. code-block:: yaml
 
-- Define patterns for sensitive data that should be monitored or blocked
-- Create custom data filtering rules
-- Apply data filtering to specific applications or traffic
-- Protect against data leakage and exfiltration
+    entry:
+      '@name': AIP-Confidential-Excel
+      pattern-type:
+        file-properties:
+          pattern:
+            entry:
+            - '@name': AIP Excel - Confidential
+              file-type: aip-encrypted-xlsx
+              file-property: panav-rsp-office-dlp-msip-label
+              property-value: 33333333-3333-3333-3333-333333333333
+            - '@name': Excel - Confidential
+              file-type: xlsx
+              file-property: panav-rsp-office-dlp-msip-label
+              property-value: 33333333-3333-3333-3333-333333333333
