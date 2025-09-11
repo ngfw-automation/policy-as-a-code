@@ -84,3 +84,117 @@ Below are the instructions for Windows.
 
        docker run -it ngfw-policy-as-code
 
+
+Method 3: Customization with Docker Compose
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can also pull the latest pre-built image, customize the defaults and run it. This method does not require
+you to pull the repository with the source code or install *PyCharm*, *Python* and *Git*.
+
+Follow the steps below (all commands assume you run this in **PowerShell** on **Windows**):
+
+.. note::
+   These instructions assume you have `Docker Desktop <https://www.docker.com/products/docker-desktop/>`__ installed and working.
+
+Step 1. Create an empty folder
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Open PowerShell and create a new folder for your work:
+
+.. code-block:: powershell
+
+   mkdir C:\temp\palo
+   cd C:\temp\palo
+
+.. tip::
+   You can use any path you like instead of ``C:\temp\palo``.
+
+Step 2. Create the docker-compose.yaml
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Inside your new folder, create a file named ``docker-compose.yaml`` with the following content:
+
+.. code-block:: yaml
+
+   services:
+     app:
+       image: ngfwautomation/ngfw-policy-as-code:latest
+       working_dir: /app
+       stdin_open: true
+       tty: true
+       pull_policy: always
+       volumes:
+         # Inputs (editable on host)
+         - ./requirements:/app/requirements
+         - ./migration:/app/migration
+         - ./testing:/app/testing
+         - ./misc:/app/misc
+         - ./ngfw:/app/ngfw
+         - ./settings.py:/app/settings.py
+         # Logs and export
+         - ./logs:/app/logs
+         - ./export:/app/export
+         - ./export/servicedesk:/app/export/servicedesk
+
+.. warning::
+   Indentation is **critical** in YAML. Make sure spaces are used (not tabs).
+
+Step 3. Seed the folders
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The container comes with default input files. Before running, copy them to your host.
+
+.. code-block:: powershell
+
+   $cid = docker create ngfwautomation/ngfw-policy-as-code:latest
+
+   docker cp "${cid}:/app/requirements/." .\requirements
+   docker cp "${cid}:/app/migration/."    .\migration
+   docker cp "${cid}:/app/testing/."      .\testing
+   docker cp "${cid}:/app/misc/."         .\misc
+   docker cp "${cid}:/app/ngfw/."         .\ngfw
+   docker cp "${cid}:/app/settings.py"    .\settings.py
+
+   docker rm $cid
+
+After this step, your host will have ``requirements/``, ``migration/``, ``testing/``, ``misc/``, and ``settings.py``
+populated with defaults from the container image.
+
+Step 4. Edit configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:doc:`Customise <customization>` the project according to your requirements.
+
+.. important::
+    This step is **very important**, do not skip it.
+
+As a **minimum**:
+
+1. Edit targets in ``requirements/policy_targets.json`` (firewall or Panorama details).
+2. Edit the ``settings.py`` file to ensure that the *INSIDE* and *OUTSIDE* zones match the corresponding
+   zone names on your target firewall(s). These values are case-sensitive:
+
+.. code-block:: python
+
+    # =================================================================================
+    # Zone names referenced in the policy rules
+    # =================================================================================
+
+    ZONE_INSIDE             = 'INSIDE'
+    ZONE_OUTSIDE            = 'OUTSIDE'
+
+
+Step 5. Run the container
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Start the container with:
+
+.. code-block:: powershell
+
+   docker compose run -it app
+
+You will see an interactive menu of the policy deployment script.
+
+.. tip::
+   - To stop the container, press ``Ctrl+C``.
+
